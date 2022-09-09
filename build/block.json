@@ -5,12 +5,63 @@
   "version": "0.1.0",
   "title": "Advanced Icon",
   "category": "media",
-  "icon": "smiley",
   "description": "Display a SVG icon.",
-  "supports": {
-    "html": false
-  },
   "textdomain": "advanced-icon-block",
+  "attributes": {
+    "iconName": {
+      "type": "string",
+      "default": "pencil"
+    },
+    "iconLibrary": {
+      "type": "string",
+      "default": "wordpress"
+    },
+    "iconWidth": {
+      "type": "string",
+      "default": "36px"
+    },
+    "iconHeight": {
+      "type": "string",
+      "default": "36px"
+    },
+    "iconColor": {
+      "type": "string"
+    },
+    "customIconColor": {
+      "type": "string"
+    },
+    "iconColorValue": {
+      "type": "string"
+    },
+    "iconBackgroundColor": {
+      "type": "string"
+    },
+    "customIconBackgroundColor": {
+      "type": "string"
+    },
+    "iconBackgroundColorValue": {
+      "type": "string"
+    }
+  },
+  "usesContext": [
+    "postType",
+    "postId"
+  ],
+  "supports": {
+    "html": false,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "color": {
+      "gradients": true,
+      "link": true,
+      "__experimentalDefaultControls": {
+        "background": true,
+        "text": true
+      }
+    }
+  },
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"

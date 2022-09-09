@@ -1,1 +1,1 @@
-{"version":3,"file":"./style-index.css","mappings":";;;AAAA;EACC;AACD,C","sources":["webpack://advanced-icon-block/./src/style.scss"],"sourcesContent":[".wp-block-themezee-advanced-icon-block {\n\tborder: 1px dotted #21759b;\n}\n"],"names":[],"sourceRoot":""}
+{"version":3,"file":"./style-index.css","mappings":";;;AAEE;EACC;EACA;AADH,C","sources":["webpack://advanced-icon-block/./src/style.scss"],"sourcesContent":[".wp-block-themezee-advanced-icon-block {\n\t.icon-wrap {\n\t\tsvg {\n\t\t\twidth: inherit;\n\t\t\theight: inherit;\n\t\t}\n\t}\n}\n"],"names":[],"sourceRoot":""}

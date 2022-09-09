@@ -1,3 +1,8 @@
 .wp-block-themezee-advanced-icon-block {
-	border: 1px dotted #21759b;
+	.icon-wrap {
+		svg {
+			width: inherit;
+			height: inherit;
+		}
+	}
 }
