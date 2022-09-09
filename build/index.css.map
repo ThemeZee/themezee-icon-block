@@ -1,0 +1,1 @@
+{"version":3,"file":"index.css","mappings":";;;AAAA;EACC;AACD,C","sources":["webpack://advanced-icon-block/./src/editor.scss"],"sourcesContent":[".wp-block-themezee-advanced-icon-block {\n\tborder: 1px dotted #f00;\n}\n"],"names":[],"sourceRoot":""}

@@ -1,16 +1,16 @@
 <?php
 /**
  * Plugin Name:       Advanced Icon Block
- * Description:       Example block scaffolded with Create Block tool.
- * Requires at least: 5.9
+ * Description:       Display a SVG icon.
+ * Requires at least: 6.0
  * Requires PHP:      7.0
  * Version:           0.1.0
- * Author:            The WordPress Contributors
+ * Author:            ThemeZee
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       advanced-icon-block
  *
- * @package           create-block
+ * @package           Advanced Icon Block
  */
 
 /**
@@ -20,7 +20,7 @@
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function create_block_advanced_icon_block_block_init() {
+function register_themezee_advanced_icon_block_block() {
 	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', 'create_block_advanced_icon_block_block_init' );
+add_action( 'init', 'register_themezee_advanced_icon_block_block' );

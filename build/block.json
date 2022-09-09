@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "create-block/advanced-icon-block",
+  "name": "themezee/advanced-icon-block",
   "version": "0.1.0",
-  "title": "Advanced Icon Block",
-  "category": "widgets",
+  "title": "Advanced Icon",
+  "category": "media",
   "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "description": "Display a SVG icon.",
   "supports": {
     "html": false
   },
