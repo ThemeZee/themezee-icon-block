@@ -1,9 +1,9 @@
 .wp-block-themezee-advanced-icon-block-inserter__modal {
-	.icons-list {
+	.tz-icon-list {
 		display: flex;
 		flex-wrap: wrap;
 
-		.icons-list__item {
+		.tz-icon-list__item {
 			position: relative;
 			display: flex;
 			justify-content: center;
@@ -23,7 +23,7 @@
 				color: var(--wp-admin-theme-color) !important;
 			}
 
-			.icons-list__item-icon {
+			.tz-icon-list__item-icon {
 				svg {
 					width: inherit;
 					height: inherit;
@@ -42,11 +42,11 @@
 		}
 
 		&.show-icon-names {
-			.icons-list__item {
+			.tz-icon-list__item {
 				flex-direction: column;
 				width: 150px;
 
-				.icons-list__item-name {
+				.tz-icon-list__item-name {
 					margin-top: 12px;
 					font-size: 12px;
 				}
@@ -64,13 +64,13 @@
 		}
 	}
 
-	.icon-inserter {
+	.tz-icon-inserter {
 		align-items: stretch;
 		display: flex;
 		height: 100%;
 	}
 
-	.icon-inserter__sidebar {
+	.tz-icon-inserter__sidebar {
 		display: none;
 		flex-direction: column;
 		flex-shrink: 0;
@@ -91,7 +91,8 @@
 			}
 		}
 
-		&__library {
+		&__library,
+		&__settings {
 			// Override core component styles.
 			border: none;
 
@@ -113,7 +114,7 @@
 		}
 	}
 
-	.icon-inserter__content {
+	.tz-icon-inserter__content {
 		display: flex;
 		flex-direction: column;
 		flex-shrink: 0;
@@ -125,7 +126,7 @@
 			width: calc(100% - 281px);
 		}
 
-		.icon-inserter__content-header {
+		.tz-icon-inserter__content-header {
 			align-items: center;
 			display: flex;
 			justify-content: space-between;

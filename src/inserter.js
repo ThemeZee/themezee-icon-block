@@ -96,25 +96,25 @@ export default function InserterModal( props ) {
 
 	return (
 		<Modal
-			className="wp-block-themezee-icon-post-author-name-inserter__modal"
+			className="wp-block-themezee-advanced-icon-block-inserter__modal"
 			title={ __( 'Icon Library' ) }
 			onRequestClose={ () => setInserterOpen( false ) }
 			isFullScreen
 		>
 			<div
-				className={ classnames( 'icon-inserter', {
+				className={ classnames( 'tz-icon-inserter', {
 					'is-searching': searchInput,
 				} ) }
 			>
-				<div className="icon-inserter__sidebar">
-					<div className="icon-inserter__sidebar__search">
+				<div className="tz-icon-inserter__sidebar">
+					<div className="tz-icon-inserter__sidebar__search">
 						<SearchControl
 							value={ searchInput }
 							onChange={ filterIcons }
 						/>
 					</div>
 					<MenuGroup
-						className="icon-inserter__sidebar__library"
+						className="tz-icon-inserter__sidebar__library"
 					>
 						{ libraries.map( ( library ) => {
 							const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
@@ -130,7 +130,7 @@ export default function InserterModal( props ) {
 									isPressed={ isActive }
 								>
 									{ library.title }
-									<span className="icon__library__count">
+									<span className="tz-icon__library__count">
 										{ library.name === '__all' ? filteredIcons.length : libraryIcons.length }
 									</span>
 								</MenuItem>
@@ -138,7 +138,7 @@ export default function InserterModal( props ) {
 						} ) }
 					</MenuGroup>
 					<MenuGroup
-						className="icon-inserter__sidebar__library"
+						className="tz-icon-inserter__sidebar__settings"
 						label={ __( 'Settings' ) }
 					>
 						<RangeControl
@@ -161,8 +161,8 @@ export default function InserterModal( props ) {
 						
 					</MenuGroup>
 				</div>
-				<div className="icon-inserter__content">
-					<div className="icon-inserter__content-header">
+				<div className="tz-icon-inserter__content">
+					<div className="tz-icon-inserter__content-header">
 						<div className="search-results">
 							{ searchInput &&
 								sprintf(
@@ -177,10 +177,10 @@ export default function InserterModal( props ) {
 								) }
 						</div>
 					</div>
-					<div className="icon-inserter__content-grid">
+					<div className="tz-icon-inserter__content-grid">
 						{ ! isEmpty( renderedIcons ) && (
 							<div
-								className={ classnames( 'icons-list', {
+								className={ classnames( 'tz-icon-list', {
 									'show-icon-names': showIconNames,
 								} ) }
 							>
@@ -188,16 +188,16 @@ export default function InserterModal( props ) {
 									return (
 										<Button
 											key={ `icon-${ icon.library }-${ icon.name }` }
-											className={ classnames( 'icons-list__item', {
+											className={ classnames( 'tz-icon-list__item', {
 												'is-active': icon.name === attributes?.iconName && icon.library === attributes?.iconLibrary,
 											} ) }
 											onClick={ () => updateIconName( icon.name, icon.library ) }
 										>
-											<span className="icons-list__item-icon" style={ { width: `${iconSize}px`, height: `${iconSize}px` } }>
+											<span className="tz-icon-list__item-icon" style={ { width: `${iconSize}px`, height: `${iconSize}px` } }>
 												{ icon.icon }
 											</span>
 											{ showIconNames && (
-												<span className="icons-list__item-name">
+												<span className="tz-icon-list__item-name">
 													{ icon.name }
 												</span>
 											) }
