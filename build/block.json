@@ -23,30 +23,8 @@
     "iconHeight": {
       "type": "string",
       "default": "36px"
-    },
-    "iconColor": {
-      "type": "string"
-    },
-    "customIconColor": {
-      "type": "string"
-    },
-    "iconColorValue": {
-      "type": "string"
-    },
-    "iconBackgroundColor": {
-      "type": "string"
-    },
-    "customIconBackgroundColor": {
-      "type": "string"
-    },
-    "iconBackgroundColorValue": {
-      "type": "string"
     }
   },
-  "usesContext": [
-    "postType",
-    "postId"
-  ],
   "supports": {
     "html": false,
     "spacing": {
@@ -57,8 +35,9 @@
       "gradients": true,
       "link": true,
       "__experimentalDefaultControls": {
+        "text": true,
         "background": true,
-        "text": true
+        "link": false
       }
     }
   },

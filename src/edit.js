@@ -10,12 +10,8 @@ import { isEmpty } from 'lodash';
 import {
 	AlignmentControl,
 	BlockControls,
-	ContrastChecker,
 	InspectorControls,
 	useBlockProps,
-	__experimentalColorGradientSettingsDropdown as ColorGradientSettingsDropdown,
-	__experimentalUseMultipleOriginColorsAndGradients as useMultipleOriginColorsAndGradients,
-	withColors,
 } from '@wordpress/block-editor';
 import {
 	ToolbarButton,
@@ -24,7 +20,6 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';
-import { compose } from '@wordpress/compose';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { pencil as defaultIcon } from '@wordpress/icons';
@@ -46,20 +41,13 @@ import './editor.scss';
  */
 function Edit( {
 	attributes,
-	clientId,
-	iconColor,
-	iconBackgroundColor,
 	setAttributes,
-	setIconColor,
-	setIconBackgroundColor,
 } ) {
 	const {
 		iconName,
 		iconLibrary,
 		iconWidth,
 		iconHeight,
-		iconColorValue,
-		iconBackgroundColorValue,
 		textAlign,
 	} = attributes;
 
@@ -69,43 +57,6 @@ function Edit( {
 	const icons = iconsObject.icons;
 	const selectedIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
 	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
-
-	const colorSettings = [
-		{
-			// Use custom attribute as fallback to prevent loss of named color selection when
-			// switching themes to a new theme that does not have a matching named color.
-			value: iconColor.color || iconColorValue,
-			onChange: ( colorValue ) => {
-				setIconColor( colorValue );
-				setAttributes( { iconColorValue: colorValue } );
-			},
-			label: __( 'Icon color' ),
-			key: 'icon-color',
-			resetAllFilter: () => {
-				setIconColor( undefined );
-				setAttributes( { iconColorValue: undefined } );
-			},
-		},
-		{
-			// Use custom attribute as fallback to prevent loss of named color selection when
-			// switching themes to a new theme that does not have a matching named color.
-			value: iconBackgroundColor.color || iconBackgroundColorValue,
-			onChange: ( colorValue ) => {
-				setIconBackgroundColor( colorValue );
-				setAttributes( {
-					iconBackgroundColorValue: colorValue,
-				} );
-			},
-			label: __( 'Icon background' ),
-			key: 'icon-background-color',
-			resetAllFilter: () => {
-				setIconBackgroundColor( undefined );
-				setAttributes( { iconBackgroundColorValue: undefined } );
-			},
-		} 
-	];
-
-	const colorGradientSettings = useMultipleOriginColorsAndGradients();
 
 	const blockProps = useBlockProps( {
 		className: classnames( {
@@ -167,37 +118,6 @@ function Edit( {
 				</ToolsPanel>
 			</InspectorControls>
 
-			<InspectorControls __experimentalGroup="color">
-				{ colorSettings.map(
-					( { onChange, label, key, value, resetAllFilter } ) => (
-						<ColorGradientSettingsDropdown
-							key={ `${ key }-control` }
-							__experimentalHasMultipleOrigins
-							__experimentalIsRenderedInSidebar
-							settings={ [
-								{
-									colorValue: value,
-									label,
-									onColorChange: onChange,
-									isShownByDefault: true,
-									resetAllFilter,
-									enableAlpha: true,
-								},
-							] }
-							panelId={ clientId }
-							{ ...colorGradientSettings }
-						/>
-					)
-				) }
-				<ContrastChecker
-					{ ...{
-						textColor: iconColorValue,
-						backgroundColor: iconBackgroundColorValue,
-					} }
-					isLargeText={ false }
-				/>
-			</InspectorControls>
-
 			<div { ...blockProps }>
 				{ iconMarkup }
 			</div>
@@ -212,6 +132,4 @@ function Edit( {
 	);
 }
 
-export default compose( [
-	withColors( 'iconColor', 'iconBackgroundColor' ),
-] )( Edit );
+export default Edit;
