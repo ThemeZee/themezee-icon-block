@@ -12,6 +12,9 @@ import {
 	BlockControls,
 	InspectorControls,
 	useBlockProps,
+	__experimentalUseBorderProps as useBorderProps,
+	__experimentalUseColorProps as useColorProps,
+	__experimentalGetSpacingClassesAndStyles as useSpacingProps,
 } from '@wordpress/block-editor';
 import {
 	ToolbarButton,
@@ -53,31 +56,47 @@ function Edit( {
 
 	const [ isInserterOpen, setInserterOpen ] = useState( false );
 
-	const iconsObject = getIcons();
-	const icons = iconsObject.icons;
-	const selectedIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
-	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
-
 	const blockProps = useBlockProps( {
 		className: classnames( {
 			[ `has-text-align-${ textAlign }` ]: textAlign,
 		} ),
 	} );
 
-	const iconClasses = classnames( 'icon-wrap', {
-	[ `icon-name-${ iconName }` ]: iconName,
-	[ `icon-library-${ iconLibrary }` ]: iconLibrary,
-} );
+	const borderProps = useBorderProps( attributes );
+	const colorProps = useColorProps( attributes );
+	const spacingProps = useSpacingProps( attributes );
+
+	const containerClasses = classnames(
+		'icon-container',
+		colorProps.className,
+		borderProps.className,
+	);
+
+	const containerStyles = {
+		...borderProps.style,
+		...colorProps.style,
+		...spacingProps.style,
+	};
+
+	const iconClasses = classnames( 'icon', {
+		[ `icon-name-${ iconName }` ]: iconName,
+		[ `icon-library-${ iconLibrary }` ]: iconLibrary,
+	} );
 
 	const iconStyles = {
 		width: iconWidth,
 		height: iconHeight,
 	};
 
+	const iconsObject = getIcons();
+	const icons = iconsObject.icons;
+	const selectedIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
+	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
+
 	const iconMarkup = (
-		<span className={ iconClasses } style={ iconStyles }>
+		<figure className={ iconClasses } style={ iconStyles }>
 			{ iconSVG }
-		</span>
+		</figure>
 	);
 
 	return (
@@ -119,7 +138,9 @@ function Edit( {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				{ iconMarkup }
+				<div className={ containerClasses } style={ containerStyles }>
+					{ iconMarkup }
+				</div>
 			</div>
 
 			<InserterModal

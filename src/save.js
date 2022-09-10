@@ -7,7 +7,12 @@ import { isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	__experimentalGetBorderClassesAndStyles as getBorderClassesAndStyles,
+	__experimentalGetColorClassesAndStyles as getColorClassesAndStyles,
+	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
+} from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -31,12 +36,23 @@ export default function save( {attributes} ) {
 		iconHeight,
 	} = attributes;
 
-	const iconsObject = getIcons();
-	const icons = iconsObject.icons;
-	const selectedIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
-	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
+	const borderProps = getBorderClassesAndStyles( attributes );
+	const colorProps = getColorClassesAndStyles( attributes );
+	const spacingProps = getSpacingClassesAndStyles( attributes );
 
-	const iconClasses = classnames( 'icon-wrap', {
+	const containerClasses = classnames(
+		'icon-container',
+		colorProps.className,
+		borderProps.className,
+	);
+
+	const containerStyles = {
+		...borderProps.style,
+		...colorProps.style,
+		...spacingProps.style,
+	};
+
+	const iconClasses = classnames( 'icon', {
 		[ `icon-name-${ iconName }` ]: iconName,
 		[ `icon-library-${ iconLibrary }` ]: iconLibrary,
 	} );
@@ -46,15 +62,22 @@ export default function save( {attributes} ) {
 		height: iconHeight,
 	};
 
+	const iconsObject = getIcons();
+	const icons = iconsObject.icons;
+	const selectedIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
+	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
+
 	const iconMarkup = (
-		<span className={ iconClasses } style={ iconStyles }>
+		<figure className={ iconClasses } style={ iconStyles }>
 			{ iconSVG }
-		</span>
+		</figure>
 	);
 
 	return (
 		<div { ...useBlockProps.save() }>
-			{ iconMarkup }
+			<div className={ containerClasses } style={ containerStyles }>
+				{ iconMarkup }
+			</div>
 		</div>
 	);
 }

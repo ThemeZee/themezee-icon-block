@@ -27,17 +27,22 @@
   },
   "supports": {
     "html": false,
-    "spacing": {
-      "margin": true,
-      "padding": true
-    },
     "color": {
+      "__experimentalSkipSerialization": true,
       "gradients": true,
       "link": true,
       "__experimentalDefaultControls": {
         "text": true,
         "background": true,
         "link": false
+      }
+    },
+    "spacing": {
+      "__experimentalSkipSerialization": true,
+      "margin": true,
+      "padding": true,
+      "__experimentalDefaultControls": {
+        "padding": true
       }
     }
   },
