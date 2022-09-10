@@ -8,9 +8,9 @@ import { isEmpty } from 'lodash';
  * WordPress dependencies
  */
 import {
-	AlignmentControl,
 	BlockControls,
 	InspectorControls,
+	JustifyContentControl,
 	useBlockProps,
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalUseColorProps as useColorProps,
@@ -51,14 +51,14 @@ function Edit( {
 		iconLibrary,
 		iconWidth,
 		iconHeight,
-		textAlign,
+		justification,
 	} = attributes;
 
 	const [ isInserterOpen, setInserterOpen ] = useState( false );
 
 	const blockProps = useBlockProps( {
 		className: classnames( {
-			[ `has-text-align-${ textAlign }` ]: textAlign,
+			[ `items-justified-${ justification }` ]: justification,
 		} ),
 	} );
 
@@ -102,16 +102,15 @@ function Edit( {
 	return (
 		<>
 			<BlockControls group="block">
-				<AlignmentControl
-					value={ textAlign }
-					onChange={ ( nextAlign ) => {
-						setAttributes( { textAlign: nextAlign } );
-					} }
+				<JustifyContentControl
+					allowedControls={ [ 'left', 'center', 'right' ] }
+					value={ justification }
+					onChange={ ( value ) => setAttributes( { justification: value } ) }
 				/>
 				<ToolbarGroup>
 					<ToolbarButton
 						onClick={ () => setInserterOpen(true) }>
-							{ __( 'Change icon' ) }
+							{ __( 'Replace' ) }
 					</ToolbarButton>
 				</ToolbarGroup>
 			</BlockControls>

@@ -23,6 +23,9 @@
     "iconHeight": {
       "type": "string",
       "default": "36px"
+    },
+    "justification": {
+      "type": "string"
     }
   },
   "supports": {

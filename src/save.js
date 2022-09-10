@@ -34,7 +34,14 @@ export default function save( {attributes} ) {
 		iconLibrary,
 		iconWidth,
 		iconHeight,
+		justification,
 	} = attributes;
+
+	const blockProps = useBlockProps.save( {
+		className: classnames( {
+			[ `items-justified-${ justification }` ]: justification,
+		} ),
+	} );
 
 	const borderProps = getBorderClassesAndStyles( attributes );
 	const colorProps = getColorClassesAndStyles( attributes );
@@ -74,7 +81,7 @@ export default function save( {attributes} ) {
 	);
 
 	return (
-		<div { ...useBlockProps.save() }>
+		<div { ...blockProps }>
 			<div className={ containerClasses } style={ containerStyles }>
 				{ iconMarkup }
 			</div>
