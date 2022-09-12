@@ -25,7 +25,13 @@ import {
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { pencil as defaultIcon } from '@wordpress/icons';
+import {
+	pencil as defaultIcon,
+	rotateRight,
+	flipHorizontal as flipH,
+	flipVertical as flipV,
+	link,
+} from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -52,6 +58,9 @@ function Edit( {
 		iconWidth,
 		iconHeight,
 		justification,
+		rotate,
+		flipHorizontal,
+		flipVertical,
 	} = attributes;
 
 	const [ isInserterOpen, setInserterOpen ] = useState( false );
@@ -59,6 +68,9 @@ function Edit( {
 	const blockProps = useBlockProps( {
 		className: classnames( {
 			[ `items-justified-${ justification }` ]: justification,
+			[ `rotate-${ rotate }` ]: rotate,
+			'flip-horizontal': flipHorizontal,
+			'flip-vertical': flipVertical,
 		} ),
 	} );
 
@@ -102,11 +114,49 @@ function Edit( {
 	return (
 		<>
 			<BlockControls group="block">
-				<JustifyContentControl
-					allowedControls={ [ 'left', 'center', 'right' ] }
-					value={ justification }
-					onChange={ ( value ) => setAttributes( { justification: value } ) }
-				/>
+				<ToolbarGroup>
+					<JustifyContentControl
+						allowedControls={ [ 'left', 'center', 'right' ] }
+						value={ justification }
+						onChange={ ( value ) => setAttributes( { justification: value } ) }
+					/>
+				</ToolbarGroup>
+			</BlockControls>
+
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						className={ `themezee-advanced-icon-block__rotate-button-${ rotate }` }
+						icon={ rotateRight }
+						label={ __( 'Rotate' ) }
+						onClick={ () =>
+							setAttributes( {
+								rotate: rotate === 270 ? 0 : rotate + 90,
+							} )
+						}
+						isPressed={ rotate !== 0 }
+					/>
+					<ToolbarButton
+						icon={ flipH }
+						label={ __( 'Flip Horizontal' ) }
+						onClick={ () =>
+							setAttributes( {
+								flipHorizontal: ! flipHorizontal,
+							} )
+						}
+						isPressed={ flipHorizontal }
+					/>
+					<ToolbarButton
+						icon={ flipV }
+						label={ __( 'Flip Vertical' ) }
+						onClick={ () =>
+							setAttributes( {
+								flipVertical: ! flipVertical,
+							} )
+						}
+						isPressed={ flipVertical }
+					/>
+				</ToolbarGroup>
 				<ToolbarGroup>
 					<ToolbarButton
 						onClick={ () => setInserterOpen(true) }>

@@ -17,5 +17,23 @@
   height: inherit;
   fill: currentColor;
 }
+.wp-block-themezee-advanced-icon-block.rotate-90 figure {
+  transform: rotate(90deg);
+}
+.wp-block-themezee-advanced-icon-block.rotate-180 figure {
+  transform: rotate(180deg);
+}
+.wp-block-themezee-advanced-icon-block.rotate-270 figure {
+  transform: rotate(270deg);
+}
+.wp-block-themezee-advanced-icon-block.flip-horizontal figure svg {
+  transform: scaleX(-1);
+}
+.wp-block-themezee-advanced-icon-block.flip-vertical figure svg {
+  transform: scaleY(-1);
+}
+.wp-block-themezee-advanced-icon-block.flip-horizontal.flip-vertical figure svg {
+  transform: scale(-1, -1);
+}
 
 /*# sourceMappingURL=style-index.css.map*/

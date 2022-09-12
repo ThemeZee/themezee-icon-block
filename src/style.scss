@@ -15,4 +15,40 @@
 			}
 		}
 	}
+
+	&.rotate-90 {
+		figure {
+			transform: rotate(90deg);
+		}
+	}
+
+	&.rotate-180 {
+		figure {
+			transform: rotate(180deg);
+		}
+	}
+
+	&.rotate-270 {
+		figure {
+			transform: rotate(270deg);
+		}
+	}
+
+	&.flip-horizontal {
+		figure svg {
+			transform: scaleX(-1);
+		}
+	}
+
+	&.flip-vertical {
+		figure svg {
+			transform: scaleY(-1);
+		}
+	}
+
+	&.flip-horizontal.flip-vertical {
+		figure svg {
+			transform: scale(-1, -1);
+		}
+	}
 }

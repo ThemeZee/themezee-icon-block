@@ -123,4 +123,15 @@
   justify-content: center;
 }
 
+/* Adjust Rotate Icon */
+.block-editor-block-toolbar .themezee-advanced-icon-block__rotate-button-90 svg {
+  transform: rotate(90deg);
+}
+.block-editor-block-toolbar .themezee-advanced-icon-block__rotate-button-180 svg {
+  transform: rotate(180deg);
+}
+.block-editor-block-toolbar .themezee-advanced-icon-block__rotate-button-270 svg {
+  transform: rotate(270deg);
+}
+
 /*# sourceMappingURL=index.css.map*/

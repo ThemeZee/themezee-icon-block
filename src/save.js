@@ -35,11 +35,17 @@ export default function save( {attributes} ) {
 		iconWidth,
 		iconHeight,
 		justification,
+		rotate,
+		flipHorizontal,
+		flipVertical,
 	} = attributes;
 
 	const blockProps = useBlockProps.save( {
 		className: classnames( {
 			[ `items-justified-${ justification }` ]: justification,
+			[ `rotate-${ rotate }` ]: rotate,
+			'flip-horizontal': flipHorizontal,
+			'flip-vertical': flipVertical,
 		} ),
 	} );
 
