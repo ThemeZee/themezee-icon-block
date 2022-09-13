@@ -38,6 +38,9 @@ export default function save( {attributes} ) {
 		rotate,
 		flipHorizontal,
 		flipVertical,
+		url,
+		linkTarget,
+		rel,
 	} = attributes;
 
 	const blockProps = useBlockProps.save( {
@@ -80,17 +83,31 @@ export default function save( {attributes} ) {
 	const selectedIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
 	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
 
-	const iconMarkup = (
+	const figure = (
 		<figure className={ iconClasses } style={ iconStyles }>
 			{ iconSVG }
 		</figure>
 	);
 
+	const iconMarkup = url ? (
+		<a
+			className={ containerClasses }
+			href={ url }
+			target={ linkTarget }
+			rel={ rel }
+			style={ containerStyles }
+		>
+			{ figure }
+		</a>
+	) : (
+		<div className={ containerClasses } style={ containerStyles }>
+			{ figure }
+		</div>
+	);
+
 	return (
 		<div { ...blockProps }>
-			<div className={ containerClasses } style={ containerStyles }>
-				{ iconMarkup }
-			</div>
+			{ iconMarkup }
 		</div>
 	);
 }

@@ -174,10 +174,16 @@ function Edit( {
 	const selectedIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
 	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
 
-	const iconMarkup = (
+	const figure = (
 		<figure ref={ iconRef } className={ iconClasses } style={ iconStyles }>
 			{ iconSVG }
 		</figure>
+	);
+
+	const iconMarkup = (
+		<div className={ containerClasses } style={ containerStyles }>
+			{ figure }
+		</div>
 	);
 
 	return (
@@ -319,9 +325,7 @@ function Edit( {
 			</InspectorControls>
 
 			<div { ...blockProps }>
-				<div className={ containerClasses } style={ containerStyles }>
-					{ iconMarkup }
-				</div>
+				{ iconMarkup }
 			</div>
 
 			<InserterModal
