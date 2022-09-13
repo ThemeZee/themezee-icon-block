@@ -197,26 +197,28 @@ function Edit( {
 				</ToolbarGroup>
 			</BlockControls>
 
-			<BlockControls group="block">
-				{ ! isURLSet && (
-					<ToolbarButton
-						name="link"
-						icon={ link }
-						title={ __( 'Link' ) }
-						shortcut={ displayShortcut.primary( 'k' ) }
-						onClick={ startEditing }
-					/>
-				) }
-				{ isURLSet && (
-					<ToolbarButton
-						name="link"
-						icon={ linkOff }
-						title={ __( 'Unlink' ) }
-						shortcut={ displayShortcut.primaryShift( 'k' ) }
-						onClick={ unlink }
-						isActive={ true }
-					/>
-				) }
+			<BlockControls>
+				<ToolbarGroup>
+					{ ! isURLSet && (
+						<ToolbarButton
+							name="link"
+							icon={ link }
+							title={ __( 'Link' ) }
+							shortcut={ displayShortcut.primary( 'k' ) }
+							onClick={ startEditing }
+						/>
+					) }
+					{ isURLSet && (
+						<ToolbarButton
+							name="link"
+							icon={ linkOff }
+							title={ __( 'Unlink' ) }
+							shortcut={ displayShortcut.primaryShift( 'k' ) }
+							onClick={ unlink }
+							isActive={ true }
+						/>
+					) }
+				</ToolbarGroup>
 			</BlockControls>
 
 			{ isSelected && ( isEditingURL || isURLSet ) && (
