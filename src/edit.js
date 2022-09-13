@@ -170,8 +170,14 @@ function Edit( {
 
 	const iconsObject = getIcons();
 	const icons = iconsObject.icons;
-	const selectedIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
-	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
+	const findIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
+	const selectedIcon = ! isEmpty( findIcon ) ? findIcon[ 0 ].icon : defaultIcon;
+
+	// Make sure all icons have aria-hidden and focusable attributes.
+	const iconSVG = {
+		...selectedIcon,
+		props: { ...selectedIcon.props, 'aria-hidden': true, 'focusable': false },
+	};
 
 	const figure = (
 		<figure className={ iconClasses } style={ iconStyles }>
