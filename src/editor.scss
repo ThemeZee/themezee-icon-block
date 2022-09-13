@@ -161,3 +161,14 @@
 		transform: rotate(270deg);
 	}
 }
+
+/* Block width control */
+.block-editor-block-inspector {
+	.components-block-width-control__wrapper {
+		grid-column: 1 / -1;
+
+		.components-unit-control-wrapper {
+			margin-bottom: 16px;
+		}
+	}
+}

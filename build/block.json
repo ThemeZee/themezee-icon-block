@@ -8,6 +8,9 @@
   "description": "Display a SVG icon.",
   "textdomain": "advanced-icon-block",
   "attributes": {
+    "blockWidth": {
+      "type": "string"
+    },
     "iconName": {
       "type": "string",
       "default": "pencil"

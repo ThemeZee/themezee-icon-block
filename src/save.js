@@ -30,6 +30,7 @@ import getIcons from './icons';
  */
 export default function save( {attributes} ) {
 	const {
+		blockWidth,
 		iconName,
 		iconLibrary,
 		iconWidth,
@@ -67,6 +68,7 @@ export default function save( {attributes} ) {
 		...borderProps.style,
 		...colorProps.style,
 		...spacingProps.style,
+		width: blockWidth ? blockWidth : undefined,
 	};
 
 	const iconClasses = classnames( 'icon', {

@@ -19,6 +19,8 @@ import {
 	__experimentalGetSpacingClassesAndStyles as useSpacingProps,
 } from '@wordpress/block-editor';
 import {
+	Button,
+	ButtonGroup,
 	Popover,
 	TextControl,
 	ToolbarButton,
@@ -59,6 +61,7 @@ function Edit( {
 	setAttributes,
 } ) {
 	const {
+		blockWidth,
 		iconName,
 		iconLibrary,
 		iconWidth,
@@ -157,6 +160,7 @@ function Edit( {
 		...borderProps.style,
 		...colorProps.style,
 		...spacingProps.style,
+		width: blockWidth ? blockWidth : undefined,
 	};
 
 	const iconClasses = classnames( 'icon', {
@@ -313,9 +317,7 @@ function Edit( {
 			<InspectorControls>
 				<ToolsPanel label={ __( 'Icon settings' ) }>
 					<ToolsPanelItem
-						hasValue={ () => {
-							return iconWidth === "48px" ? false : true;
-						} }
+						hasValue={ () => iconWidth === "48px" ? false : true }
 						label={ __( 'Icon size' ) }
 						onDeselect={ () => setAttributes( { iconWidth: "48px", iconHeight: "48px" } ) }
 						resetAllFilter={ () => ( { iconWidth: "48px", iconHeight: "48px" } ) }
@@ -348,6 +350,38 @@ function Edit( {
 						/>
 					</ToolsPanelItem>
 				</ToolsPanel>
+			</InspectorControls>
+
+			<InspectorControls __experimentalGroup="dimensions">
+				<div className="components-block-width-control__wrapper">
+					<UnitControl
+						label={ __( 'Block width' ) }
+						isResetValueOnUnitChange
+						value={ blockWidth }
+						onChange={ ( value ) => setAttributes( { blockWidth: value } ) }
+					/>
+					<ButtonGroup aria-label={ __( 'Button width' ) }>
+						{ [ "25%", "50%", "75%", "100%" ].map( ( widthValue ) => {
+							return (
+								<Button
+									key={ widthValue }
+									isSmall
+									variant={
+										widthValue === blockWidth
+											? 'primary'
+											: undefined
+									}
+									onClick={ () => ( function ( newWidth ) {
+										const width = blockWidth === newWidth ? undefined : newWidth;
+										setAttributes( { blockWidth: width } );
+									} )( widthValue ) }
+								>
+									{ widthValue }
+								</Button>
+							);
+						} ) }
+					</ButtonGroup>
+				</div>
 			</InspectorControls>
 
 			<InspectorControls __experimentalGroup="advanced">

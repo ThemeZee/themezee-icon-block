@@ -134,4 +134,12 @@
   transform: rotate(270deg);
 }
 
+/* Block width control */
+.block-editor-block-inspector .components-block-width-control__wrapper {
+  grid-column: 1/-1;
+}
+.block-editor-block-inspector .components-block-width-control__wrapper .components-unit-control-wrapper {
+  margin-bottom: 16px;
+}
+
 /*# sourceMappingURL=index.css.map*/
