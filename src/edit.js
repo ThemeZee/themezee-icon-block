@@ -7,30 +7,35 @@ import { isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
 import {
 	BlockControls,
 	InspectorControls,
 	JustifyContentControl,
 	useBlockProps,
+	__experimentalLinkControl as LinkControl,
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalUseColorProps as useColorProps,
 	__experimentalGetSpacingClassesAndStyles as useSpacingProps,
 } from '@wordpress/block-editor';
 import {
+	Popover,
+	TextControl,
 	ToolbarButton,
 	ToolbarGroup,
 	__experimentalUnitControl as UnitControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';
-import { useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { useCallback, useEffect, useState, useRef } from '@wordpress/element';
+import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
 import {
 	pencil as defaultIcon,
 	rotateRight,
 	flipHorizontal as flipH,
 	flipVertical as flipV,
 	link,
+	linkOff,
 } from '@wordpress/icons';
 
 /**
@@ -50,6 +55,7 @@ import './editor.scss';
  */
 function Edit( {
 	attributes,
+	isSelected,
 	setAttributes,
 } ) {
 	const {
@@ -61,9 +67,74 @@ function Edit( {
 		rotate,
 		flipHorizontal,
 		flipVertical,
+		url,
+		linkTarget,
+		rel,
 	} = attributes;
 
 	const [ isInserterOpen, setInserterOpen ] = useState( false );
+
+	const onSetLinkRel = useCallback(
+		( value ) => {
+			setAttributes( { rel: value } );
+		},
+		[ setAttributes ]
+	);
+
+	const [ isEditingURL, setIsEditingURL ] = useState( false );
+	const isURLSet = !! url;
+	const opensInNewTab = linkTarget === '_blank';
+
+	useEffect( () => {
+		if ( ! isSelected ) {
+			setIsEditingURL( false );
+		}
+	}, [ isSelected ] );
+
+	function onToggleOpenInNewTab( value ) {
+		const newLinkTarget = value ? '_blank' : undefined;
+
+		let updatedRel = rel;
+		if ( newLinkTarget && ! rel ) {
+			updatedRel = 'noreferrer noopener';
+		} else if ( ! newLinkTarget && rel === 'noreferrer noopener' ) {
+			updatedRel = undefined;
+		}
+
+		setAttributes( {
+			linkTarget: newLinkTarget,
+			rel: updatedRel,
+		} );
+	}
+
+	function onKeyDown( event ) {
+		if ( isKeyboardEvent.primary( event, 'k' ) ) {
+			startEditing( event );
+		} else if ( isKeyboardEvent.primaryShift( event, 'k' ) ) {
+			unlink();
+			iconRef.current?.focus();
+		}
+	}
+
+	function startEditing( event ) {
+		event.preventDefault();
+		setIsEditingURL( true );
+	}
+
+	function unlink() {
+		setAttributes( {
+			url: undefined,
+			linkTarget: undefined,
+			rel: undefined,
+		} );
+		setIsEditingURL( false );
+	}
+
+	const borderProps = useBorderProps( attributes );
+	const colorProps = useColorProps( attributes );
+	const spacingProps = useSpacingProps( attributes );
+	const ref = useRef();
+	const iconRef = useRef();
 
 	const blockProps = useBlockProps( {
 		className: classnames( {
@@ -72,11 +143,9 @@ function Edit( {
 			'flip-horizontal': flipHorizontal,
 			'flip-vertical': flipVertical,
 		} ),
+		ref,
+		onKeyDown,
 	} );
-
-	const borderProps = useBorderProps( attributes );
-	const colorProps = useColorProps( attributes );
-	const spacingProps = useSpacingProps( attributes );
 
 	const containerClasses = classnames(
 		'icon-container',
@@ -106,7 +175,7 @@ function Edit( {
 	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
 
 	const iconMarkup = (
-		<figure className={ iconClasses } style={ iconStyles }>
+		<figure ref={ iconRef } className={ iconClasses } style={ iconStyles }>
 			{ iconSVG }
 		</figure>
 	);
@@ -122,6 +191,61 @@ function Edit( {
 					/>
 				</ToolbarGroup>
 			</BlockControls>
+
+			<BlockControls group="block">
+				{ ! isURLSet && (
+					<ToolbarButton
+						name="link"
+						icon={ link }
+						title={ __( 'Link' ) }
+						shortcut={ displayShortcut.primary( 'k' ) }
+						onClick={ startEditing }
+					/>
+				) }
+				{ isURLSet && (
+					<ToolbarButton
+						name="link"
+						icon={ linkOff }
+						title={ __( 'Unlink' ) }
+						shortcut={ displayShortcut.primaryShift( 'k' ) }
+						onClick={ unlink }
+						isActive={ true }
+					/>
+				) }
+			</BlockControls>
+
+			{ isSelected && ( isEditingURL || isURLSet ) && (
+				<Popover
+					position="bottom center"
+					onClose={ () => {
+						setIsEditingURL( false );
+						iconRef.current?.focus();
+					} }
+					anchorRef={ ref?.current }
+					focusOnMount={ isEditingURL ? 'firstElement' : false }
+					__unstableSlotName={ '__unstable-block-tools-after' }
+				>
+					<LinkControl
+						className="wp-block-navigation-link__inline-link-input"
+						value={ { url, opensInNewTab } }
+						onChange={ ( {
+							url: newURL = '',
+							opensInNewTab: newOpensInNewTab,
+						} ) => {
+							setAttributes( { url: newURL } );
+
+							if ( opensInNewTab !== newOpensInNewTab ) {
+								onToggleOpenInNewTab( newOpensInNewTab );
+							}
+						} }
+						onRemove={ () => {
+							unlink();
+							iconRef.current?.focus();
+						} }
+						forceIsEditingLink={ isEditingURL }
+					/>
+				</Popover>
+			) }
 
 			<BlockControls>
 				<ToolbarGroup>
@@ -184,6 +308,14 @@ function Edit( {
 						/>
 					</ToolsPanelItem>
 				</ToolsPanel>
+			</InspectorControls>
+
+			<InspectorControls __experimentalGroup="advanced">
+				<TextControl
+					label={ __( 'Link rel' ) }
+					value={ rel || '' }
+					onChange={ onSetLinkRel }
+				/>
 			</InspectorControls>
 
 			<div { ...blockProps }>
