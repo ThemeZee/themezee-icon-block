@@ -18,11 +18,11 @@
     },
     "iconWidth": {
       "type": "string",
-      "default": "36px"
+      "default": "48px"
     },
     "iconHeight": {
       "type": "string",
-      "default": "36px"
+      "default": "48px"
     },
     "justification": {
       "type": "string"

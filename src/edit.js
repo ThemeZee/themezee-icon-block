@@ -314,11 +314,11 @@ function Edit( {
 				<ToolsPanel label={ __( 'Icon settings' ) }>
 					<ToolsPanelItem
 						hasValue={ () => {
-							return iconWidth === "36px" ? false : true;
+							return iconWidth === "48px" ? false : true;
 						} }
 						label={ __( 'Icon size' ) }
-						onDeselect={ () => setAttributes( { iconWidth: "36px", iconHeight: "36px" } ) }
-						resetAllFilter={ () => ( { iconWidth: "36px", iconHeight: "36px" } ) }
+						onDeselect={ () => setAttributes( { iconWidth: "48px", iconHeight: "48px" } ) }
+						resetAllFilter={ () => ( { iconWidth: "48px", iconHeight: "48px" } ) }
 						isShownByDefault={ true }
 					>
 						<UnitControl
