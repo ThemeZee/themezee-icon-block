@@ -70,6 +70,7 @@ function Edit( {
 		url,
 		linkTarget,
 		rel,
+		label,
 	} = attributes;
 
 	const [ isInserterOpen, setInserterOpen ] = useState( false );
@@ -179,9 +180,16 @@ function Edit( {
 		props: { ...selectedIcon.props, 'aria-hidden': true, 'focusable': false },
 	};
 
+	const screenReaderText = label && (
+		<span className="screen-reader-text">
+			{ label }
+		</span>
+	);
+
 	const figure = (
 		<figure className={ iconClasses } style={ iconStyles }>
 			{ iconSVG }
+			{ screenReaderText }
 		</figure>
 	);
 
@@ -303,21 +311,40 @@ function Edit( {
 			</BlockControls>
 
 			<InspectorControls>
-				<ToolsPanel label={ __( 'Icon Settings' ) }>
+				<ToolsPanel label={ __( 'Icon settings' ) }>
 					<ToolsPanelItem
 						hasValue={ () => {
 							return iconWidth === "36px" ? false : true;
 						} }
-						label={ __( 'Icon Size' ) }
+						label={ __( 'Icon size' ) }
 						onDeselect={ () => setAttributes( { iconWidth: "36px", iconHeight: "36px" } ) }
 						resetAllFilter={ () => ( { iconWidth: "36px", iconHeight: "36px" } ) }
 						isShownByDefault={ true }
 					>
 						<UnitControl
-							label={ __( 'Icon Size' ) }
+							label={ __( 'Icon size' ) }
 							isResetValueOnUnitChange
 							value={ iconWidth }
 							onChange={ ( value ) => setAttributes( { iconWidth: value, iconHeight: value } ) }
+						/>
+					</ToolsPanelItem>
+
+					<ToolsPanelItem
+						hasValue={ () => label ? true : false }
+						label={ __( 'Icon label' ) }
+						onDeselect={ () => setAttributes( { label: undefined } ) }
+						resetAllFilter={ () => ( { label: undefined } ) }
+						isShownByDefault={ false }
+					>
+						<TextControl
+							label={ __( 'Icon label' ) }
+							help={ __(
+								'Briefly describe the link to help screen reader users.'
+							) }
+							value={ label }
+							onChange={ ( value ) =>
+								setAttributes( { label: value } )
+							}
 						/>
 					</ToolsPanelItem>
 				</ToolsPanel>

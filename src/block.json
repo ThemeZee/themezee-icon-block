@@ -54,6 +54,9 @@
 			"source": "attribute",
 			"selector": "a",
 			"attribute": "rel"
+		},
+		"label": {
+			"type": "string"
 		}
 	},
 	"supports": {

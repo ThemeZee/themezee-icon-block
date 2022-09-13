@@ -41,6 +41,7 @@ export default function save( {attributes} ) {
 		url,
 		linkTarget,
 		rel,
+		label,
 	} = attributes;
 
 	const blockProps = useBlockProps.save( {
@@ -94,9 +95,16 @@ export default function save( {attributes} ) {
 		props: { ...selectedIcon.props, 'aria-hidden': true, 'focusable': false },
 	};
 
+	const screenReaderText = label && (
+		<span className="screen-reader-text">
+			{ label }
+		</span>
+	);
+
 	const figure = (
 		<figure className={ iconClasses } style={ iconStyles }>
 			{ iconSVG }
+			{ screenReaderText }
 		</figure>
 	);
 
