@@ -16,6 +16,15 @@
 		}
 	}
 
+	a:link,
+	a:visited,
+	a:hover,
+	a:focus,
+	a:active {
+		color: inherit;
+		text-decoration: none;
+	}
+
 	&.rotate-90 {
 		figure {
 			transform: rotate(90deg);

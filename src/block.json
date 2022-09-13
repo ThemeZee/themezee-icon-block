@@ -62,11 +62,9 @@
 		"color": {
 			"__experimentalSkipSerialization": true,
 			"gradients": true,
-			"link": true,
 			"__experimentalDefaultControls": {
 				"text": true,
-				"background": true,
-				"link": false
+				"background": true
 			}
 		},
 		"spacing": {
