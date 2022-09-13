@@ -112,7 +112,7 @@ function Edit( {
 			startEditing( event );
 		} else if ( isKeyboardEvent.primaryShift( event, 'k' ) ) {
 			unlink();
-			iconRef.current?.focus();
+			ref.current?.focus();
 		}
 	}
 
@@ -134,7 +134,6 @@ function Edit( {
 	const colorProps = useColorProps( attributes );
 	const spacingProps = useSpacingProps( attributes );
 	const ref = useRef();
-	const iconRef = useRef();
 
 	const blockProps = useBlockProps( {
 		className: classnames( {
@@ -175,7 +174,7 @@ function Edit( {
 	const iconSVG = ! isEmpty( selectedIcon ) ? selectedIcon[ 0 ].icon : defaultIcon;
 
 	const figure = (
-		<figure ref={ iconRef } className={ iconClasses } style={ iconStyles }>
+		<figure className={ iconClasses } style={ iconStyles }>
 			{ iconSVG }
 		</figure>
 	);
@@ -225,7 +224,7 @@ function Edit( {
 					position="bottom center"
 					onClose={ () => {
 						setIsEditingURL( false );
-						iconRef.current?.focus();
+						ref.current?.focus();
 					} }
 					anchorRef={ ref?.current }
 					focusOnMount={ isEditingURL ? 'firstElement' : false }
@@ -246,7 +245,7 @@ function Edit( {
 						} }
 						onRemove={ () => {
 							unlink();
-							iconRef.current?.focus();
+							ref.current?.focus();
 						} }
 						forceIsEditingLink={ isEditingURL }
 					/>
