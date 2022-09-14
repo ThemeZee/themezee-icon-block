@@ -43,5 +43,26 @@
 .wp-block-themezee-advanced-icon-block.flip-horizontal.flip-vertical figure svg {
   transform: scale(-1, -1);
 }
+/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/components/unit-range-control/style.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************/
+.themezee-components-unit-range-control {
+  margin-bottom: 12px;
+}
+.themezee-components-unit-range-control legend {
+  margin-bottom: 8px;
+}
+.themezee-components-unit-range-control .themezee-components-unit-range-control__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.themezee-components-unit-range-control .themezee-components-unit-range-control__wrapper .components-unit-control-wrapper {
+  width: 110px;
+  margin-right: 8px;
+}
+.themezee-components-unit-range-control .themezee-components-unit-range-control__wrapper .components-range-control {
+  flex-grow: 1;
+}
 
 /*# sourceMappingURL=style-index.css.map*/

@@ -45,6 +45,7 @@ import {
  */
 import getIcons from './icons';
 import InserterModal from './inserter';
+import UnitRangeControl from './components/unit-range-control';
 import './editor.scss';
 
 /**
@@ -323,9 +324,8 @@ function Edit( {
 						resetAllFilter={ () => ( { iconWidth: "48px", iconHeight: "48px" } ) }
 						isShownByDefault={ true }
 					>
-						<UnitControl
+						<UnitRangeControl
 							label={ __( 'Icon size' ) }
-							isResetValueOnUnitChange
 							value={ iconWidth }
 							onChange={ ( value ) => setAttributes( { iconWidth: value, iconHeight: value } ) }
 						/>
