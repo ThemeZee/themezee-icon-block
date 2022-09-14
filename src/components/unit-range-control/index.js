@@ -32,12 +32,11 @@ export default function UnitRangeControl( props ) {
 		onChange,
 		min = 0,
 		max = 100,
+		units = undefined,
 	} = props;
 
 	const [ unit, setUnit ] = useState( parseQuantityAndUnitFromRawValue( value )[ 1 ] );
 	const numericValue = parseQuantityAndUnitFromRawValue( value )[ 0 ];
-
-	console.log( unit, numericValue );
 
 	const handleSliderChange = ( next ) => {
 		onChange( next !== undefined ? `${ next }${ unit }` : undefined );
@@ -54,6 +53,7 @@ export default function UnitRangeControl( props ) {
 					value={ value }
 					onChange={ onChange }
 					onUnitChange={ setUnit }
+					{...( units ? { units: units } : {} ) }
 				/>
 				<RangeControl
 					label={ label }

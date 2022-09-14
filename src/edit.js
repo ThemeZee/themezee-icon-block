@@ -13,6 +13,7 @@ import {
 	InspectorControls,
 	JustifyContentControl,
 	useBlockProps,
+	useSetting,
 	__experimentalLinkControl as LinkControl,
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalUseColorProps as useColorProps,
@@ -26,6 +27,7 @@ import {
 	ToolbarButton,
 	ToolbarGroup,
 	__experimentalUnitControl as UnitControl,
+	__experimentalUseCustomUnits as useCustomUnits,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';
@@ -78,6 +80,21 @@ function Edit( {
 	} = attributes;
 
 	const [ isInserterOpen, setInserterOpen ] = useState( false );
+
+	const availableUnitSettings = (
+		useSetting( 'spacing.units' ) || undefined
+	)?.filter( ( availableUnit ) => availableUnit !== '%' );
+
+	const units = useCustomUnits( {
+		availableUnits: availableUnitSettings || [
+			'px',
+			'em',
+			'rem',
+			'vw',
+			'vh',
+		],
+		defaultValues: { px: 48, em: 4, rem: 4, vw: 1, vh: 1 },
+	} );
 
 	const onSetLinkRel = useCallback(
 		( value ) => {
@@ -327,6 +344,7 @@ function Edit( {
 						<UnitRangeControl
 							label={ __( 'Icon size' ) }
 							value={ iconWidth }
+							units={ units }
 							onChange={ ( value ) => setAttributes( { iconWidth: value, iconHeight: value } ) }
 						/>
 					</ToolsPanelItem>
