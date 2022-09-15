@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { isEmpty } from 'lodash';
+ 
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -46,6 +51,32 @@ const icons = {
 };
 
 // Allow third parties to add their own icon types via filter.
-export default function getIcons() {
+export function getIcons() {
 	return applyFilters( 'iconBlock.icons', icons );
+}
+
+// Allow third parties to add their own icon types via filter.
+export function getSingleIcon( iconName = '', iconLibrary = 'wordpress' ) {
+	// Return early if icon name is empty.
+	if ( iconName === '' ) {
+		return '';
+	}
+
+	const iconsObject = getIcons();
+	const icons = iconsObject.icons;
+	const findIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
+	const selectedIcon = ! isEmpty( findIcon ) ? findIcon[ 0 ].icon : null;
+
+	// Return if icon is missing.
+	if ( ! selectedIcon ) {
+		return '';
+	}
+
+	// Make sure all icons have aria-hidden and focusable attributes.
+	const iconSVG = {
+		...selectedIcon,
+		props: { ...selectedIcon.props, 'aria-hidden': true, 'focusable': false },
+	};
+
+	return iconSVG;
 }

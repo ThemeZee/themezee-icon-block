@@ -2,7 +2,6 @@
  * External dependencies
  */
 import classnames from 'classnames';
-import { isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -17,7 +16,7 @@ import {
 /**
  * Internal dependencies
  */
-import getIcons from './icons';
+import { getSingleIcon } from './icons';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -81,21 +80,8 @@ export default function save( {attributes} ) {
 		height: iconHeight,
 	};
 
-	const iconsObject = getIcons();
-	const icons = iconsObject.icons;
-	const findIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
-	const selectedIcon = ! isEmpty( findIcon ) ? findIcon[ 0 ].icon : defaultIcon;
-
-	// Return early if icon is missing.
-	if ( ! selectedIcon ) {
-		return null;
-	}
-
-	// Make sure all icons have aria-hidden and focusable attributes.
-	const iconSVG = {
-		...selectedIcon,
-		props: { ...selectedIcon.props, 'aria-hidden': true, 'focusable': false },
-	};
+	// Get icon SVG.
+	const iconSVG = getSingleIcon( iconName, iconLibrary );
 
 	const screenReaderText = label && (
 		<span className="screen-reader-text">

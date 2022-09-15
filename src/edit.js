@@ -2,7 +2,6 @@
  * External dependencies
  */
 import classnames from 'classnames';
-import { isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -34,7 +33,6 @@ import {
 import { useCallback, useEffect, useState, useRef } from '@wordpress/element';
 import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
 import {
-	pencil as defaultIcon,
 	rotateRight,
 	flipHorizontal as flipH,
 	flipVertical as flipV,
@@ -45,7 +43,7 @@ import {
 /**
  * Internal dependencies
  */
-import getIcons from './icons';
+import { getSingleIcon } from './icons';
 import InserterModal from './inserter';
 import UnitRangeControl from './components/unit-range-control';
 import './editor.scss';
@@ -191,16 +189,10 @@ function Edit( {
 		height: iconHeight,
 	};
 
-	const iconsObject = getIcons();
-	const icons = iconsObject.icons;
-	const findIcon = icons.filter( ( i ) => ( i.name === iconName && i.library === iconLibrary ) );
-	const selectedIcon = ! isEmpty( findIcon ) ? findIcon[ 0 ].icon : defaultIcon;
+	// Get icon SVG.
+	const iconSVG = getSingleIcon( iconName, iconLibrary );
 
-	// Make sure all icons have aria-hidden and focusable attributes.
-	const iconSVG = {
-		...selectedIcon,
-		props: { ...selectedIcon.props, 'aria-hidden': true, 'focusable': false },
-	};
+	console.log(iconSVG);
 
 	const screenReaderText = label && (
 		<span className="screen-reader-text">

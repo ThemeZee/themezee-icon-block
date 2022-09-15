@@ -23,7 +23,7 @@ import { useState } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import getIcons from './icons';
+import { getIcons } from './icons';
 
 export default function InserterModal( props ) {
 	const {
