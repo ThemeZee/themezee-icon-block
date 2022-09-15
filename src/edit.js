@@ -22,6 +22,7 @@ import {
 	Button,
 	ButtonGroup,
 	Popover,
+	Placeholder,
 	TextControl,
 	ToolbarButton,
 	ToolbarGroup,
@@ -33,6 +34,8 @@ import {
 import { useCallback, useEffect, useState, useRef } from '@wordpress/element';
 import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
 import {
+	Icon,
+	check,
 	rotateRight,
 	flipHorizontal as flipH,
 	flipVertical as flipV,
@@ -192,7 +195,7 @@ function Edit( {
 	// Get icon SVG.
 	const iconSVG = getSingleIcon( iconName, iconLibrary );
 
-	console.log(iconSVG);
+	console.log(iconName);
 
 	const screenReaderText = label && (
 		<span className="screen-reader-text">
@@ -215,203 +218,230 @@ function Edit( {
 
 	return (
 		<>
-			<BlockControls group="block">
-				<ToolbarGroup>
-					<JustifyContentControl
-						allowedControls={ [ 'left', 'center', 'right' ] }
-						value={ justification }
-						onChange={ ( value ) => setAttributes( { justification: value } ) }
-					/>
-				</ToolbarGroup>
-			</BlockControls>
+			{ iconName && (
+				<>
+					<BlockControls group="block">
+						<ToolbarGroup>
+							<JustifyContentControl
+								allowedControls={ [ 'left', 'center', 'right' ] }
+								value={ justification }
+								onChange={ ( value ) => setAttributes( { justification: value } ) }
+							/>
+						</ToolbarGroup>
+					</BlockControls>
 
-			<BlockControls>
-				<ToolbarGroup>
-					{ ! isURLSet && (
-						<ToolbarButton
-							name="link"
-							icon={ link }
-							title={ __( 'Link' ) }
-							shortcut={ displayShortcut.primary( 'k' ) }
-							onClick={ startEditing }
-						/>
+					<BlockControls>
+						<ToolbarGroup>
+							{ ! isURLSet && (
+								<ToolbarButton
+									name="link"
+									icon={ link }
+									title={ __( 'Link' ) }
+									shortcut={ displayShortcut.primary( 'k' ) }
+									onClick={ startEditing }
+								/>
+							) }
+							{ isURLSet && (
+								<ToolbarButton
+									name="link"
+									icon={ linkOff }
+									title={ __( 'Unlink' ) }
+									shortcut={ displayShortcut.primaryShift( 'k' ) }
+									onClick={ unlink }
+									isActive={ true }
+								/>
+							) }
+						</ToolbarGroup>
+					</BlockControls>
+
+					{ isSelected && ( isEditingURL || isURLSet ) && (
+						<Popover
+							position="bottom center"
+							onClose={ () => {
+								setIsEditingURL( false );
+								ref.current?.focus();
+							} }
+							anchorRef={ ref?.current }
+							focusOnMount={ isEditingURL ? 'firstElement' : false }
+							__unstableSlotName={ '__unstable-block-tools-after' }
+						>
+							<LinkControl
+								className="wp-block-navigation-link__inline-link-input"
+								value={ { url, opensInNewTab } }
+								onChange={ ( {
+									url: newURL = '',
+									opensInNewTab: newOpensInNewTab,
+								} ) => {
+									setAttributes( { url: newURL } );
+
+									if ( opensInNewTab !== newOpensInNewTab ) {
+										onToggleOpenInNewTab( newOpensInNewTab );
+									}
+								} }
+								onRemove={ () => {
+									unlink();
+									ref.current?.focus();
+								} }
+								forceIsEditingLink={ isEditingURL }
+							/>
+						</Popover>
 					) }
-					{ isURLSet && (
-						<ToolbarButton
-							name="link"
-							icon={ linkOff }
-							title={ __( 'Unlink' ) }
-							shortcut={ displayShortcut.primaryShift( 'k' ) }
-							onClick={ unlink }
-							isActive={ true }
+
+					<BlockControls>
+						<ToolbarGroup>
+							<ToolbarButton
+								className={ `themezee-advanced-icon-block__rotate-button-${ rotate }` }
+								icon={ rotateRight }
+								label={ __( 'Rotate' ) }
+								onClick={ () =>
+									setAttributes( {
+										rotate: rotate === 270 ? 0 : rotate + 90,
+									} )
+								}
+								isPressed={ rotate !== 0 }
+							/>
+							<ToolbarButton
+								icon={ flipH }
+								label={ __( 'Flip Horizontal' ) }
+								onClick={ () =>
+									setAttributes( {
+										flipHorizontal: ! flipHorizontal,
+									} )
+								}
+								isPressed={ flipHorizontal }
+							/>
+							<ToolbarButton
+								icon={ flipV }
+								label={ __( 'Flip Vertical' ) }
+								onClick={ () =>
+									setAttributes( {
+										flipVertical: ! flipVertical,
+									} )
+								}
+								isPressed={ flipVertical }
+							/>
+						</ToolbarGroup>
+						<ToolbarGroup>
+							<ToolbarButton
+								onClick={ () => setInserterOpen(true) }>
+									{ __( 'Replace' ) }
+							</ToolbarButton>
+						</ToolbarGroup>
+					</BlockControls>
+
+					<InspectorControls>
+						<ToolsPanel label={ __( 'Icon settings' ) }>
+							<ToolsPanelItem
+								hasValue={ () => iconWidth === "48px" ? false : true }
+								label={ __( 'Icon size' ) }
+								onDeselect={ () => setAttributes( { iconWidth: "48px", iconHeight: "48px" } ) }
+								resetAllFilter={ () => ( { iconWidth: "48px", iconHeight: "48px" } ) }
+								isShownByDefault={ true }
+							>
+								<UnitRangeControl
+									label={ __( 'Icon size' ) }
+									value={ iconWidth }
+									onChange={ ( value ) => setAttributes( { iconWidth: value, iconHeight: value } ) }
+									units = {units}
+									max = { {
+										'px': 320,
+										'em': 20,
+										'rem': 20,
+										'vw': 20,
+										'vh': 20,
+									} }
+								/>
+							</ToolsPanelItem>
+
+							<ToolsPanelItem
+								hasValue={ () => label ? true : false }
+								label={ __( 'Icon label' ) }
+								onDeselect={ () => setAttributes( { label: undefined } ) }
+								resetAllFilter={ () => ( { label: undefined } ) }
+								isShownByDefault={ false }
+							>
+								<TextControl
+									label={ __( 'Icon label' ) }
+									help={ __(
+										'Briefly describe the link to help screen reader users.'
+									) }
+									value={ label }
+									onChange={ ( value ) =>
+										setAttributes( { label: value } )
+									}
+								/>
+							</ToolsPanelItem>
+						</ToolsPanel>
+					</InspectorControls>
+
+					<InspectorControls __experimentalGroup="dimensions">
+						<div className="components-block-width-control__wrapper">
+							<UnitControl
+								label={ __( 'Block width' ) }
+								isResetValueOnUnitChange
+								value={ blockWidth }
+								onChange={ ( value ) => setAttributes( { blockWidth: value } ) }
+							/>
+							<ButtonGroup aria-label={ __( 'Button width' ) }>
+								{ [ "25%", "50%", "75%", "100%" ].map( ( widthValue ) => {
+									return (
+										<Button
+											key={ widthValue }
+											isSmall
+											variant={
+												widthValue === blockWidth
+													? 'primary'
+													: undefined
+											}
+											onClick={ () => ( function ( newWidth ) {
+												const width = blockWidth === newWidth ? undefined : newWidth;
+												setAttributes( { blockWidth: width } );
+											} )( widthValue ) }
+										>
+											{ widthValue }
+										</Button>
+									);
+								} ) }
+							</ButtonGroup>
+						</div>
+					</InspectorControls>
+
+					<InspectorControls __experimentalGroup="advanced">
+						<TextControl
+							label={ __( 'Link rel' ) }
+							value={ rel || '' }
+							onChange={ onSetLinkRel }
 						/>
-					) }
-				</ToolbarGroup>
-			</BlockControls>
-
-			{ isSelected && ( isEditingURL || isURLSet ) && (
-				<Popover
-					position="bottom center"
-					onClose={ () => {
-						setIsEditingURL( false );
-						ref.current?.focus();
-					} }
-					anchorRef={ ref?.current }
-					focusOnMount={ isEditingURL ? 'firstElement' : false }
-					__unstableSlotName={ '__unstable-block-tools-after' }
-				>
-					<LinkControl
-						className="wp-block-navigation-link__inline-link-input"
-						value={ { url, opensInNewTab } }
-						onChange={ ( {
-							url: newURL = '',
-							opensInNewTab: newOpensInNewTab,
-						} ) => {
-							setAttributes( { url: newURL } );
-
-							if ( opensInNewTab !== newOpensInNewTab ) {
-								onToggleOpenInNewTab( newOpensInNewTab );
-							}
-						} }
-						onRemove={ () => {
-							unlink();
-							ref.current?.focus();
-						} }
-						forceIsEditingLink={ isEditingURL }
-					/>
-				</Popover>
+					</InspectorControls>
+				</> 
 			) }
 
-			<BlockControls>
-				<ToolbarGroup>
-					<ToolbarButton
-						className={ `themezee-advanced-icon-block__rotate-button-${ rotate }` }
-						icon={ rotateRight }
-						label={ __( 'Rotate' ) }
-						onClick={ () =>
-							setAttributes( {
-								rotate: rotate === 270 ? 0 : rotate + 90,
-							} )
-						}
-						isPressed={ rotate !== 0 }
-					/>
-					<ToolbarButton
-						icon={ flipH }
-						label={ __( 'Flip Horizontal' ) }
-						onClick={ () =>
-							setAttributes( {
-								flipHorizontal: ! flipHorizontal,
-							} )
-						}
-						isPressed={ flipHorizontal }
-					/>
-					<ToolbarButton
-						icon={ flipV }
-						label={ __( 'Flip Vertical' ) }
-						onClick={ () =>
-							setAttributes( {
-								flipVertical: ! flipVertical,
-							} )
-						}
-						isPressed={ flipVertical }
-					/>
-				</ToolbarGroup>
-				<ToolbarGroup>
-					<ToolbarButton
-						onClick={ () => setInserterOpen(true) }>
-							{ __( 'Replace' ) }
-					</ToolbarButton>
-				</ToolbarGroup>
-			</BlockControls>
-
-			<InspectorControls>
-				<ToolsPanel label={ __( 'Icon settings' ) }>
-					<ToolsPanelItem
-						hasValue={ () => iconWidth === "48px" ? false : true }
-						label={ __( 'Icon size' ) }
-						onDeselect={ () => setAttributes( { iconWidth: "48px", iconHeight: "48px" } ) }
-						resetAllFilter={ () => ( { iconWidth: "48px", iconHeight: "48px" } ) }
-						isShownByDefault={ true }
-					>
-						<UnitRangeControl
-							label={ __( 'Icon size' ) }
-							value={ iconWidth }
-							onChange={ ( value ) => setAttributes( { iconWidth: value, iconHeight: value } ) }
-							units = {units}
-							max = { {
-								'px': 320,
-								'em': 20,
-								'rem': 20,
-								'vw': 20,
-								'vh': 20,
-							} }
-						/>
-					</ToolsPanelItem>
-
-					<ToolsPanelItem
-						hasValue={ () => label ? true : false }
-						label={ __( 'Icon label' ) }
-						onDeselect={ () => setAttributes( { label: undefined } ) }
-						resetAllFilter={ () => ( { label: undefined } ) }
-						isShownByDefault={ false }
-					>
-						<TextControl
-							label={ __( 'Icon label' ) }
-							help={ __(
-								'Briefly describe the link to help screen reader users.'
-							) }
-							value={ label }
-							onChange={ ( value ) =>
-								setAttributes( { label: value } )
-							}
-						/>
-					</ToolsPanelItem>
-				</ToolsPanel>
-			</InspectorControls>
-
-			<InspectorControls __experimentalGroup="dimensions">
-				<div className="components-block-width-control__wrapper">
-					<UnitControl
-						label={ __( 'Block width' ) }
-						isResetValueOnUnitChange
-						value={ blockWidth }
-						onChange={ ( value ) => setAttributes( { blockWidth: value } ) }
-					/>
-					<ButtonGroup aria-label={ __( 'Button width' ) }>
-						{ [ "25%", "50%", "75%", "100%" ].map( ( widthValue ) => {
-							return (
-								<Button
-									key={ widthValue }
-									isSmall
-									variant={
-										widthValue === blockWidth
-											? 'primary'
-											: undefined
-									}
-									onClick={ () => ( function ( newWidth ) {
-										const width = blockWidth === newWidth ? undefined : newWidth;
-										setAttributes( { blockWidth: width } );
-									} )( widthValue ) }
-								>
-									{ widthValue }
-								</Button>
-							);
-						} ) }
-					</ButtonGroup>
+			{ iconName && (
+				<div { ...blockProps }>
+					{ iconMarkup }
 				</div>
-			</InspectorControls>
+			) }
 
-			<InspectorControls __experimentalGroup="advanced">
-				<TextControl
-					label={ __( 'Link rel' ) }
-					value={ rel || '' }
-					onChange={ onSetLinkRel }
-				/>
-			</InspectorControls>
-
-			<div { ...blockProps }>
-				{ iconMarkup }
-			</div>
+			{ ! iconName && (
+				<Placeholder className="wp-block-themezee-advanced-icon-placeholder">
+					<div className="wp-block-themezee-advanced-icon-placeholder__preview">
+						<Icon icon={ check } />
+					</div>
+					<div className="wp-block-themezee-advanced-icon-placeholder__controls">
+						<div className="wp-block-themezee-advanced-icon-placeholder__actions">
+							<div className="wp-block-themezee-advanced-icon-placeholder__actions__indicator">
+								<Icon icon={ check } /> { __( 'Icon Block' ) }
+							</div>
+							<Button
+								isPrimary
+								onClick={ () => setInserterOpen( true ) }
+							>
+								{ __( 'Browse Icons', 'icon-block' ) }
+							</Button>
+						</div>
+					</div>
+				</Placeholder>
+			) }
 
 			<InserterModal
 				isInserterOpen={ isInserterOpen }
