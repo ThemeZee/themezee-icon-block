@@ -142,4 +142,9 @@
   margin-bottom: 16px;
 }
 
+/* Icon Placeholder */
+.components-placeholder.wp-block-themezee-advanced-icon-placeholder {
+  min-height: auto;
+}
+
 /*# sourceMappingURL=index.css.map*/

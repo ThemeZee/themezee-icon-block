@@ -420,13 +420,13 @@ function Edit( {
 			) }
 
 			{ ! iconName && (
-				<Placeholder
-					icon={ placeholderIcon }
-					label={ __( 'Advanced Icon' ) }
-					className="wp-block-themezee-advanced-icon-placeholder"
-				>
-					<div className="wp-block-themezee-advanced-icon-placeholder__controls">
-						<div className="wp-block-themezee-advanced-icon-placeholder__actions">
+				<div { ...blockProps }>
+					<Placeholder
+						icon={ placeholderIcon }
+						label={ __( 'Advanced Icon' ) }
+						className="wp-block-themezee-advanced-icon-placeholder"
+					>
+						<div className="wp-block-themezee-advanced-icon-placeholder__controls">
 							<Button
 								isPrimary
 								onClick={ () => setInserterOpen( true ) }
@@ -434,8 +434,8 @@ function Edit( {
 								{ __( 'Browse Icons', 'icon-block' ) }
 							</Button>
 						</div>
-					</div>
-				</Placeholder>
+					</Placeholder>
+				</div>
 			) }
 
 			<InserterModal
