@@ -818,7 +818,7 @@ export const icons = [
 		library: 'wordpress',
 	},
 	{
-		name: 'editor',
+		name: 'media',
 		icon: media,
 		library: 'wordpress',
 	},

@@ -34,8 +34,7 @@ import {
 import { useCallback, useEffect, useState, useRef } from '@wordpress/element';
 import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
 import {
-	Icon,
-	check,
+	siteLogo as placeholderIcon,
 	rotateRight,
 	flipHorizontal as flipH,
 	flipVertical as flipV,
@@ -194,8 +193,6 @@ function Edit( {
 
 	// Get icon SVG.
 	const iconSVG = getSingleIcon( iconName, iconLibrary );
-
-	console.log(iconName);
 
 	const screenReaderText = label && (
 		<span className="screen-reader-text">
@@ -423,15 +420,13 @@ function Edit( {
 			) }
 
 			{ ! iconName && (
-				<Placeholder className="wp-block-themezee-advanced-icon-placeholder">
-					<div className="wp-block-themezee-advanced-icon-placeholder__preview">
-						<Icon icon={ check } />
-					</div>
+				<Placeholder
+					icon={ placeholderIcon }
+					label={ __( 'Advanced Icon' ) }
+					className="wp-block-themezee-advanced-icon-placeholder"
+				>
 					<div className="wp-block-themezee-advanced-icon-placeholder__controls">
 						<div className="wp-block-themezee-advanced-icon-placeholder__actions">
-							<div className="wp-block-themezee-advanced-icon-placeholder__actions__indicator">
-								<Icon icon={ check } /> { __( 'Icon Block' ) }
-							</div>
 							<Button
 								isPrimary
 								onClick={ () => setInserterOpen( true ) }
