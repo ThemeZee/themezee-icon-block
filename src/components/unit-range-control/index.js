@@ -3,7 +3,6 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { useSetting } from '@wordpress/block-editor';
 import {
 	BaseControl,
 	RangeControl,
@@ -32,6 +31,7 @@ export default function UnitRangeControl( props ) {
 		onChange,
 		min = {},
 		max = {},
+		step = {},
 		units = undefined,
 	} = props;
 
@@ -58,6 +58,16 @@ export default function UnitRangeControl( props ) {
 		...max,
 	};
 
+	const steps = {
+		'px': 1,
+		'%': 1,
+		'em': 0.1,
+		'rem': 0.1,
+		'vw': 0.1,
+		'vh': 0.1,
+		...step,
+	};
+
 	const handleSliderChange = ( next ) => {
 		onChange( next !== undefined ? `${ next }${ unit }` : undefined );
 	};
@@ -82,6 +92,7 @@ export default function UnitRangeControl( props ) {
 					value={ numericValue ?? '' }
 					min={ minValues[unit] }
 					max={ maxValues[unit] }
+					step={ steps[unit] }
 					withInputField={ false }
 					onChange={ handleSliderChange }
 				/>
