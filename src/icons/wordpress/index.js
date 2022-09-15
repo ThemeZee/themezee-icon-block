@@ -11,7 +11,6 @@ import {
 	alignNone,
 	alignRight,
 	archive,
-	archiveTitle,
 	arrowDown,
 	arrowLeft,
 	arrowRight,
@@ -161,7 +160,6 @@ import {
 	postFeaturedImage,
 	postList,
 	postTerms,
-	postTitle,
 	previous,
 	next,
 	preformatted,
@@ -172,7 +170,6 @@ import {
 	queryPaginationNext,
 	queryPaginationNumbers,
 	queryPaginationPrevious,
-	queryTitle,
 	quote,
 	receipt,
 	redo,
@@ -278,11 +275,6 @@ export const icons = [
 	{
 		name: 'archive',
 		icon: archive,
-		library: 'wordpress',
-	},
-	{
-		name: 'archiveTitle',
-		icon: archiveTitle,
 		library: 'wordpress',
 	},
 	{
@@ -1030,11 +1022,6 @@ export const icons = [
 		library: 'wordpress',
 	},
 	{
-		name: 'postTitle',
-		icon: postTitle,
-		library: 'wordpress',
-	},
-	{
 		name: 'previous',
 		icon: previous,
 		library: 'wordpress',
@@ -1082,11 +1069,6 @@ export const icons = [
 	{
 		name: 'queryPaginationPrevious',
 		icon: queryPaginationPrevious,
-		library: 'wordpress',
-	},
-	{
-		name: 'queryTitle',
-		icon: queryTitle,
 		library: 'wordpress',
 	},
 	{
