@@ -9,11 +9,12 @@ import { isEmpty } from 'lodash';
  */
 import { __, _n, sprintf } from '@wordpress/i18n';
 import {
+	BaseControl,
 	Button,
+	ButtonGroup,
 	MenuGroup,
 	MenuItem,
 	Modal,
-	RangeControl,
 	SearchControl,
 	ToggleControl,
 } from '@wordpress/components';
@@ -45,7 +46,7 @@ export default function InserterModal( props ) {
 	const [ searchInput, setSearchInput ] = useState( '' );
 	const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
 	const [ iconSize, setIconSize ] = useState( 32 );
-	const [ showIconNames, setShowIconNames ] = useState( false );
+	const [ showIconNames, setShowIconNames ] = useState( true );
 
 	function updateIconName( name, library ) {
 		setAttributes( {
@@ -141,16 +142,6 @@ export default function InserterModal( props ) {
 						className="tz-icon-inserter__sidebar__settings"
 						label={ __( 'Settings' ) }
 					>
-						<RangeControl
-							label={ __( 'Preview Size' ) }
-							min={ 16 }
-							max={ 72 }
-							initialPosition={ 32 }
-							withInputField={ true }
-							onChange={ ( value ) =>
-								setIconSize( value )
-							}
-						/>
 						<ToggleControl
 							label={ __( 'Show icon names' ) }
 							checked={ showIconNames }
@@ -158,7 +149,24 @@ export default function InserterModal( props ) {
 								setShowIconNames( ( state ) => ! state );
 							} }
 						/>
-						
+						<BaseControl  label={ __( 'Preview Size' ) }>					
+							<ButtonGroup>
+								{ [ 16, 24, 32, 48, 64 ].map( ( size ) => {
+									return (
+										<Button
+											key={ size }
+											isSmall
+											variant={ size === iconSize ? 'primary' : undefined }
+											onClick={ () => ( function ( value ) {
+												setIconSize( value )
+											} )( size ) }
+										>
+											{ size }px
+										</Button>
+									);
+								} ) }
+							</ButtonGroup>
+						</BaseControl>
 					</MenuGroup>
 				</div>
 				<div className="tz-icon-inserter__content">
