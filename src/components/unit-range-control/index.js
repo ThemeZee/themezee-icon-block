@@ -30,13 +30,33 @@ export default function UnitRangeControl( props ) {
 		label = '',
 		value,
 		onChange,
-		min = 0,
-		max = 100,
+		min = {},
+		max = {},
 		units = undefined,
 	} = props;
 
 	const [ unit, setUnit ] = useState( parseQuantityAndUnitFromRawValue( value )[ 1 ] );
 	const numericValue = parseQuantityAndUnitFromRawValue( value )[ 0 ];
+
+	const minValues = {
+		'px': 0,
+		'%': 0,
+		'em': 0,
+		'rem': 0,
+		'vw': 0,
+		'vh': 0,
+		...min,
+	};
+
+	const maxValues = {
+		'px': 800,
+		'%': 100,
+		'em': 50,
+		'rem': 50,
+		'vw': 100,
+		'vh': 100,
+		...max,
+	};
 
 	const handleSliderChange = ( next ) => {
 		onChange( next !== undefined ? `${ next }${ unit }` : undefined );
@@ -60,8 +80,8 @@ export default function UnitRangeControl( props ) {
 					hideLabelFromVision
 					className="themezee-components-unit-range-control__range-control"
 					value={ numericValue ?? '' }
-					min={ min }
-					max={ max }
+					min={ minValues[unit] }
+					max={ maxValues[unit] }
 					withInputField={ false }
 					onChange={ handleSliderChange }
 				/>

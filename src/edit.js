@@ -93,7 +93,7 @@ function Edit( {
 			'vw',
 			'vh',
 		],
-		defaultValues: { px: 48, em: 4, rem: 4, vw: 1, vh: 1 },
+		defaultValues: { px: 48, em: 3, rem: 3, vw: 3, vh: 6 },
 	} );
 
 	const onSetLinkRel = useCallback(
@@ -344,8 +344,15 @@ function Edit( {
 						<UnitRangeControl
 							label={ __( 'Icon size' ) }
 							value={ iconWidth }
-							units={ units }
 							onChange={ ( value ) => setAttributes( { iconWidth: value, iconHeight: value } ) }
+							units = {units}
+							max = { {
+								'px': 320,
+								'em': 20,
+								'rem': 20,
+								'vw': 20,
+								'vh': 20,
+							} }
 						/>
 					</ToolsPanelItem>
 
