@@ -426,14 +426,18 @@ function Edit( {
 						label={ __( 'Advanced Icon' ) }
 						className="wp-block-themezee-advanced-icon-placeholder"
 					>
-						<div className="wp-block-themezee-advanced-icon-placeholder__controls">
 							<Button
 								isPrimary
 								onClick={ () => setInserterOpen( true ) }
 							>
-								{ __( 'Browse Icons', 'icon-block' ) }
+								{ __( 'Browse icons', 'icon-block' ) }
 							</Button>
-						</div>
+							<Button
+								isSecondary
+								onClick={ () => setInserterOpen( true ) }
+							>
+								{ __( 'Search for icon', 'icon-block' ) }
+							</Button>
 					</Placeholder>
 				</div>
 			) }
