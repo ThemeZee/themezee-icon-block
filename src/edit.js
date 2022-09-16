@@ -46,7 +46,7 @@ import {
  * Internal dependencies
  */
 import { getSingleIcon } from './icons';
-import InserterModal from './inserter';
+import IconModal from './components/icon-modal';
 import UnitRangeControl from './components/unit-range-control';
 import './editor.scss';
 
@@ -79,7 +79,7 @@ function Edit( {
 		label,
 	} = attributes;
 
-	const [ isInserterOpen, setInserterOpen ] = useState( false );
+	const [ isIconModalOpen, setIconModalOpen ] = useState( false );
 
 	const availableUnitSettings = (
 		useSetting( 'spacing.units' ) || undefined
@@ -320,7 +320,7 @@ function Edit( {
 						</ToolbarGroup>
 						<ToolbarGroup>
 							<ToolbarButton
-								onClick={ () => setInserterOpen(true) }>
+								onClick={ () => setIconModalOpen(true) }>
 									{ __( 'Replace' ) }
 							</ToolbarButton>
 						</ToolbarGroup>
@@ -428,13 +428,13 @@ function Edit( {
 					>
 							<Button
 								isPrimary
-								onClick={ () => setInserterOpen( true ) }
+								onClick={ () => setIconModalOpen( true ) }
 							>
 								{ __( 'Browse icons', 'icon-block' ) }
 							</Button>
 							<Button
 								isSecondary
-								onClick={ () => setInserterOpen( true ) }
+								onClick={ () => setIconModalOpen( true ) }
 							>
 								{ __( 'Search for icon', 'icon-block' ) }
 							</Button>
@@ -442,9 +442,9 @@ function Edit( {
 				</div>
 			) }
 
-			<InserterModal
-				isInserterOpen={ isInserterOpen }
-				setInserterOpen={ setInserterOpen }
+			<IconModal
+				isIconModalOpen={ isIconModalOpen }
+				setIconModalOpen={ setIconModalOpen }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>
