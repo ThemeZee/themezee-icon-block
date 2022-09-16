@@ -47,6 +47,7 @@ import {
  */
 import { getSingleIcon } from './icons';
 import IconModal from './components/icon-modal';
+import SearchPopover from './components/search-popover';
 import UnitRangeControl from './components/unit-range-control';
 import './editor.scss';
 
@@ -80,6 +81,7 @@ function Edit( {
 	} = attributes;
 
 	const [ isIconModalOpen, setIconModalOpen ] = useState( false );
+	const [ isSearchPopoverOpen, setSearchPopoverOpen ] = useState( false );
 
 	const availableUnitSettings = (
 		useSetting( 'spacing.units' ) || undefined
@@ -430,11 +432,11 @@ function Edit( {
 								isPrimary
 								onClick={ () => setIconModalOpen( true ) }
 							>
-								{ __( 'Browse icons', 'icon-block' ) }
+								{ __( 'Browse all icons', 'icon-block' ) }
 							</Button>
 							<Button
 								isSecondary
-								onClick={ () => setIconModalOpen( true ) }
+								onClick={ () => setSearchPopoverOpen( true ) }
 							>
 								{ __( 'Search for icon', 'icon-block' ) }
 							</Button>
@@ -447,6 +449,13 @@ function Edit( {
 				setIconModalOpen={ setIconModalOpen }
 				attributes={ attributes }
 				setAttributes={ setAttributes }
+			/>
+			<SearchPopover
+				setIconModalOpen={ setIconModalOpen }
+				isSearchPopoverOpen={ isSearchPopoverOpen }
+				setSearchPopoverOpen={ setSearchPopoverOpen }
+				setAttributes={ setAttributes }
+				anchorRef={ ref?.current }
 			/>
 		</>
 	);

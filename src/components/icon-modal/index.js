@@ -183,7 +183,8 @@ export default function IconModal( props ) {
 									),
 									renderedIcons.length,
 									searchInput
-								) }
+								)
+							}
 						</div>
 					</div>
 					<div className="tz-icon-modal__content-grid">
