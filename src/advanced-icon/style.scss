@@ -1,0 +1,63 @@
+.wp-block-themezee-advanced-icon-block {
+	display: flex;
+
+	.icon-container {
+		display: flex;
+		justify-content: center;
+		width: fit-content;
+
+		figure {
+			svg {
+				display: flex;
+				width: inherit;
+				height: inherit;
+				fill: currentColor;
+			}
+		}
+	}
+
+	a:link,
+	a:visited,
+	a:hover,
+	a:focus,
+	a:active {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	&.rotate-90 {
+		figure {
+			transform: rotate(90deg);
+		}
+	}
+
+	&.rotate-180 {
+		figure {
+			transform: rotate(180deg);
+		}
+	}
+
+	&.rotate-270 {
+		figure {
+			transform: rotate(270deg);
+		}
+	}
+
+	&.flip-horizontal {
+		figure svg {
+			transform: scaleX(-1);
+		}
+	}
+
+	&.flip-vertical {
+		figure svg {
+			transform: scaleY(-1);
+		}
+	}
+
+	&.flip-horizontal.flip-vertical {
+		figure svg {
+			transform: scale(-1, -1);
+		}
+	}
+}

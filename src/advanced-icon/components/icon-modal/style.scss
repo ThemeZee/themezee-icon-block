@@ -1,0 +1,148 @@
+.wp-block-themezee-advanced-icon-block__icon_modal {
+	.components-modal__content {
+		flex: 1 1 0%;
+		overflow: auto;
+		padding: 0px;
+
+		&:before {
+			margin-bottom: 0;
+		}
+	}
+
+	.tz-icon-modal {
+		align-items: stretch;
+		display: flex;
+		height: 100%;
+	}
+
+	.tz-icon-modal__sidebar {
+		display: none;
+		flex-direction: column;
+		flex-shrink: 0;
+		overflow-y: scroll;
+		width: 280px;
+		border-right: 1px solid rgb(221, 221, 221);
+		padding: 24px;
+
+		@media ( min-width: 900px ) {
+			display: flex;
+		}
+
+		&__search {
+			margin-bottom: 16px;
+
+			.components-base-control__field {
+				margin-bottom: 0;
+			}
+		}
+
+		&__library,
+		&__settings {
+			// Override core component styles.
+			border: none;
+
+			.components-menu-group__label {
+				margin: 0;
+				padding: 16px 0;
+			}
+
+			.components-menu-item__item {
+				text-transform: capitalize;
+				display: inline-flex;
+				justify-content: space-between;
+				width: 100%;
+
+				&>span {
+					opacity: 0.5;
+				}
+			}
+		}
+	}
+
+	.tz-icon-modal__content {
+		display: flex;
+		flex-direction: column;
+		flex-shrink: 0;
+		overflow: auto;
+		padding: 16px 16px 32px;
+		width: 100%;
+
+		@media ( min-width: 900px ) {
+			width: calc(100% - 281px);
+		}
+
+		.tz-icon-modal__content-header {
+			align-items: center;
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 12px;
+
+			.search-results {
+				color: #757575;
+			}
+		}
+
+		.block-editor-modal__no-results {
+			height: calc(100% - 56px);
+			margin-top: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+	}
+
+	.tz-icon-list {
+		display: flex;
+		flex-wrap: wrap;
+
+		.tz-icon-list__item {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 24px;
+			height: auto;
+			background: transparent;
+			border: 1px solid transparent;
+			border-radius: 2px;
+			color: #1e1e1e;
+			cursor: pointer;
+			transition: all .05s ease-in-out;
+			word-break: break-word;
+
+			&:hover {
+				border-color: var(--wp-admin-theme-color);
+				color: var(--wp-admin-theme-color) !important;
+			}
+
+			.tz-icon-list__item-icon {
+				svg {
+					width: inherit;
+					height: inherit;
+					fill: currentColor;
+				}
+			}
+
+			&.is-active {
+				background-color: var(--wp-admin-theme-color);
+				color: #fff;
+
+				&:hover {
+					color: #fff !important;
+				}
+			}
+		}
+
+		&.show-icon-names {
+			.tz-icon-list__item {
+				flex-direction: column;
+				width: 150px;
+
+				.tz-icon-list__item-name {
+					margin-top: 12px;
+					font-size: 12px;
+				}
+			}
+		}
+	}
+}

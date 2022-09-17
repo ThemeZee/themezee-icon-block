@@ -1,0 +1,22 @@
+.themezee-components-unit-range-control {
+	margin-bottom: 12px;
+
+	legend {
+		margin-bottom: 8px;
+	}
+
+	.themezee-components-unit-range-control__wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+
+		.components-unit-control-wrapper {
+			width: 110px;
+			margin-right: 8px;
+		}
+
+		.components-range-control {
+			flex-grow: 1;
+		}
+	}
+}

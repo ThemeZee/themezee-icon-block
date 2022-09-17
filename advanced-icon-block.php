@@ -21,6 +21,7 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function register_themezee_advanced_icon_block_block() {
-	register_block_type( __DIR__ . '/build' );
+	register_block_type( __DIR__ . '/build/advanced-icon' );
+	register_block_type( __DIR__ . '/build/icon-row' );
 }
 add_action( 'init', 'register_themezee_advanced_icon_block_block' );

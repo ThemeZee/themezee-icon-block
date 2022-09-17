@@ -1,0 +1,30 @@
+/* Adjust Rotate Icon */
+.block-editor-block-toolbar {
+	.themezee-advanced-icon-block__rotate-button-90 svg {
+		transform: rotate(90deg);
+	}
+
+	.themezee-advanced-icon-block__rotate-button-180 svg {
+		transform: rotate(180deg);
+	}
+
+	.themezee-advanced-icon-block__rotate-button-270 svg {
+		transform: rotate(270deg);
+	}
+}
+
+/* Block width control */
+.block-editor-block-inspector {
+	.components-block-width-control__wrapper {
+		grid-column: 1 / -1;
+
+		.components-unit-control-wrapper {
+			margin-bottom: 16px;
+		}
+	}
+}
+
+/* Icon Placeholder */
+.components-placeholder.wp-block-themezee-advanced-icon-placeholder {
+	min-height: auto;
+}
