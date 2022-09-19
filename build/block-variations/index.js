@@ -239,8 +239,8 @@ __webpack_require__.r(__webpack_exports__);
   innerBlocks: [['themezee/advanced-icon', {
     iconName: "archive",
     iconLibrary: "wordpress",
-    iconWidth: "1em",
-    iconHeight: "1em"
+    iconWidth: "1.2em",
+    iconHeight: "1.2em"
   }], ['core/post-terms', {
     term: 'category'
   }]],
@@ -258,8 +258,8 @@ __webpack_require__.r(__webpack_exports__);
       attributes: {
         iconName: "archive",
         iconLibrary: "wordpress",
-        iconWidth: "1em",
-        iconHeight: "1em"
+        iconWidth: "1.2em",
+        iconHeight: "1.2em"
       }
     }, {
       name: 'core/paragraph',
@@ -316,8 +316,8 @@ __webpack_require__.r(__webpack_exports__);
   innerBlocks: [['themezee/advanced-icon', {
     iconName: "calendar",
     iconLibrary: "wordpress",
-    iconWidth: "1em",
-    iconHeight: "1em"
+    iconWidth: "1.1em",
+    iconHeight: "1.1em"
   }], ['core/post-date', {}]],
   example: {
     attributes: {
@@ -333,8 +333,8 @@ __webpack_require__.r(__webpack_exports__);
       attributes: {
         iconName: "calendar",
         iconLibrary: "wordpress",
-        iconWidth: "1em",
-        iconHeight: "1em"
+        iconWidth: "1.1em",
+        iconHeight: "1.1em"
       }
     }, {
       name: 'core/paragraph',
@@ -391,8 +391,8 @@ __webpack_require__.r(__webpack_exports__);
   innerBlocks: [['themezee/advanced-icon', {
     iconName: "tag",
     iconLibrary: "wordpress",
-    iconWidth: "1em",
-    iconHeight: "1em"
+    iconWidth: "1.2em",
+    iconHeight: "1.2em"
   }], ['core/post-terms', {
     term: 'post_tag'
   }]],
@@ -410,8 +410,8 @@ __webpack_require__.r(__webpack_exports__);
       attributes: {
         iconName: "tag",
         iconLibrary: "wordpress",
-        iconWidth: "1em",
-        iconHeight: "1em"
+        iconWidth: "1.2em",
+        iconHeight: "1.2em"
       }
     }, {
       name: 'core/paragraph',
@@ -547,6 +547,7 @@ __webpack_require__.r(__webpack_exports__);
  * Load block variations
  */
 
+ //import './icon-post-author-name.js'; // Include this after WordPress 6.1 was released.
 
 
 

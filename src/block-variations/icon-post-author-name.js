@@ -2,19 +2,19 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { postTerms as icon } from '@wordpress/icons';
+import { postAuthor as icon } from '@wordpress/icons';
 import { registerBlockVariation } from '@wordpress/blocks';
 
 registerBlockVariation(
 	'core/group', {
-		name: 'themezee/icon-post-tags',
-		title: __( 'Icon Post Tags' ),
+		name: 'themezee/icon-post-author-name',
+		title: __( 'Icon Post Author Name' ),
 		icon,
-		description: __( 'Arrange icon and post tags horizontally.' ),
+		description: __( 'Arrange icon and post author horizontally.' ),
 		category: 'theme',
 		attributes: {
 			layout: { type: 'flex', flexWrap: 'nowrap' },
-			style: { spacing: { blockGap: '8px' } },
+			style: { spacing: { blockGap: '5px' } },
 		},
 		scope: [ 'inserter' ],
 		isActive: ( blockAttributes ) =>
@@ -23,14 +23,12 @@ registerBlockVariation(
 				blockAttributes.layout?.orientation === 'horizontal' ),
 		innerBlocks: [
 			[ 'themezee/advanced-icon', {
-				iconName: "tag",
+				iconName: "commentAuthorAvatar",
 				iconLibrary: "wordpress",
-				iconWidth: "1.2em",
-				iconHeight: "1.2em",
+				iconWidth: "1.4em",
+				iconHeight: "1.4em",
 			}],
-			[ 'core/post-terms', {
-				term: 'post_tag',
-			} ],
+			[ 'core/post-author-name', {} ],
 		],
 		example: {
 			attributes: {
@@ -45,16 +43,16 @@ registerBlockVariation(
 				{
 					name: 'themezee/advanced-icon',
 					attributes: {
-						iconName: "tag",
+						iconName: "commentAuthorAvatar",
 						iconLibrary: "wordpress",
-						iconWidth: "1.2em",
-						iconHeight: "1.2em",
+						iconWidth: "1.4em",
+						iconHeight: "1.4em",
 					},
 				},
 				{
 					name: 'core/paragraph',
 					attributes: {
-						content: __( 'Post Tags' ),
+						content: __( 'Post Author' ),
 					},
 				},
 			],

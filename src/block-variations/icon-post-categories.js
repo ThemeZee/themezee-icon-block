@@ -25,8 +25,8 @@ registerBlockVariation(
 			[ 'themezee/advanced-icon', {
 				iconName: "archive",
 				iconLibrary: "wordpress",
-				iconWidth: "1em",
-				iconHeight: "1em",
+				iconWidth: "1.2em",
+				iconHeight: "1.2em",
 			}],
 			[ 'core/post-terms', {
 				term: 'category',
@@ -47,8 +47,8 @@ registerBlockVariation(
 					attributes: {
 						iconName: "archive",
 						iconLibrary: "wordpress",
-						iconWidth: "1em",
-						iconHeight: "1em",
+						iconWidth: "1.2em",
+						iconHeight: "1.2em",
 					},
 				},
 				{

@@ -25,8 +25,8 @@ registerBlockVariation(
 			[ 'themezee/advanced-icon', {
 				iconName: "calendar",
 				iconLibrary: "wordpress",
-				iconWidth: "1em",
-				iconHeight: "1em",
+				iconWidth: "1.1em",
+				iconHeight: "1.1em",
 			}],
 			[ 'core/post-date', {} ],
 		],
@@ -45,8 +45,8 @@ registerBlockVariation(
 					attributes: {
 						iconName: "calendar",
 						iconLibrary: "wordpress",
-						iconWidth: "1em",
-						iconHeight: "1em",
+						iconWidth: "1.1em",
+						iconHeight: "1.1em",
 					},
 				},
 				{
