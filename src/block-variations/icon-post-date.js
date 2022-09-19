@@ -2,18 +2,18 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { heading as icon } from '@wordpress/icons';
+import { postDate as icon } from '@wordpress/icons';
 import { registerBlockVariation } from '@wordpress/blocks';
 
 registerBlockVariation(
 	'core/group', {
-	name: 'themezee/icon-heading',
-	title: __( 'Icon Heading' ),
+	name: 'themezee/icon-post-date',
+	title: __( 'Icon Post Date' ),
 	icon,
-	description: __( 'Arrange icon and heading horizontally.' ),
+	description: __( 'Arrange icon and post date horizontally.' ),
 	attributes: {
 		layout: { type: 'flex', flexWrap: 'nowrap' },
-		style: { spacing: { blockGap: '12px' } },
+		style: { spacing: { blockGap: '8px' } },
 	},
 	scope: [ 'inserter' ],
 	isActive: ( blockAttributes ) =>
@@ -22,14 +22,12 @@ registerBlockVariation(
 			blockAttributes.layout?.orientation === 'horizontal' ),
 	innerBlocks: [
 		[ 'themezee/advanced-icon', {
-			iconName: "cover",
+			iconName: "calendar",
 			iconLibrary: "wordpress",
-			iconWidth: "36px",
-			iconHeight: "36px",
+			iconWidth: "1em",
+			iconHeight: "1em",
 		}],
-		[ 'core/heading', {
-			placeholder: __( 'Icon Heading' ),
-		} ],
+		[ 'core/post-date', {} ],
 	],
 	}
 );

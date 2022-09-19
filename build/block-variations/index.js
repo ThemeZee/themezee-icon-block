@@ -30,6 +30,36 @@ const heading = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 /***/ }),
 
+/***/ "./node_modules/@wordpress/icons/build-module/library/post-date.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/post-date.js ***!
+  \*************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * WordPress dependencies
+ */
+
+const postDate = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M11.696 13.972c.356-.546.599-.958.728-1.235a1.79 1.79 0 00.203-.783c0-.264-.077-.47-.23-.618-.148-.153-.354-.23-.618-.23-.295 0-.569.07-.82.212a3.413 3.413 0 00-.738.571l-.147-1.188c.289-.234.59-.41.903-.526.313-.117.66-.175 1.041-.175.375 0 .695.08.959.24.264.153.46.362.59.626.135.265.203.556.203.876 0 .362-.08.734-.24 1.115-.154.381-.427.87-.82 1.466l-.756 1.152H14v1.106h-4l1.696-2.609z"
+}), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M19.5 7h-15v12a.5.5 0 00.5.5h14a.5.5 0 00.5-.5V7zM3 7V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"
+}));
+/* harmony default export */ __webpack_exports__["default"] = (postDate);
+//# sourceMappingURL=post-date.js.map
+
+/***/ }),
+
 /***/ "./src/block-variations/icon-heading.js":
 /*!**********************************************!*\
   !*** ./src/block-variations/icon-heading.js ***!
@@ -49,10 +79,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockVariation)('core/group', {
-  name: 'icon-heading',
+  name: 'themezee/icon-heading',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Icon Heading'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"],
-  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Arrange blocks horizontally.'),
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Arrange icon and heading horizontally.'),
   attributes: {
     layout: {
       type: 'flex',
@@ -78,6 +108,56 @@ __webpack_require__.r(__webpack_exports__);
   }], ['core/heading', {
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Icon Heading')
   }]]
+});
+
+/***/ }),
+
+/***/ "./src/block-variations/icon-post-date.js":
+/*!************************************************!*\
+  !*** ./src/block-variations/icon-post-date.js ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/post-date.js");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
+/**
+ * WordPress dependencies
+ */
+
+
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockVariation)('core/group', {
+  name: 'themezee/icon-post-date',
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Icon Post Date'),
+  icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"],
+  description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Arrange icon and post date horizontally.'),
+  attributes: {
+    layout: {
+      type: 'flex',
+      flexWrap: 'nowrap'
+    },
+    style: {
+      spacing: {
+        blockGap: '8px'
+      }
+    }
+  },
+  scope: ['inserter'],
+  isActive: blockAttributes => {
+    var _blockAttributes$layo, _blockAttributes$layo2, _blockAttributes$layo3;
+
+    return ((_blockAttributes$layo = blockAttributes.layout) === null || _blockAttributes$layo === void 0 ? void 0 : _blockAttributes$layo.type) === 'flex' && (!((_blockAttributes$layo2 = blockAttributes.layout) !== null && _blockAttributes$layo2 !== void 0 && _blockAttributes$layo2.orientation) || ((_blockAttributes$layo3 = blockAttributes.layout) === null || _blockAttributes$layo3 === void 0 ? void 0 : _blockAttributes$layo3.orientation) === 'horizontal');
+  },
+  innerBlocks: [['themezee/advanced-icon', {
+    iconName: "calendar",
+    iconLibrary: "wordpress",
+    iconWidth: "1em",
+    iconHeight: "1em"
+  }], ['core/post-date', {}]]
 });
 
 /***/ }),
@@ -198,9 +278,11 @@ var __webpack_exports__ = {};
   \***************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icon_heading_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./icon-heading.js */ "./src/block-variations/icon-heading.js");
+/* harmony import */ var _icon_post_date_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./icon-post-date.js */ "./src/block-variations/icon-post-date.js");
 /**
  * Load block variations
  */
+
 
 }();
 /******/ })()
