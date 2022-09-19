@@ -28,3 +28,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# Custom
+build/block-variations/block.json
+build/block-variations/index.asset.php
