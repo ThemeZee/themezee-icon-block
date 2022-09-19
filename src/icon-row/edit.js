@@ -1,23 +1,30 @@
 /**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
+ * External dependencies
+ */
+import classnames from 'classnames';
+
+/**
+ * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import {
+	BlockControls,
+	InspectorControls,
+	useBlockProps,
+	useInnerBlocksProps,
+} from '@wordpress/block-editor';
+import {
+	Button,
+	ButtonGroup,
+	Popover,
+	Placeholder,
+	TextControl,
+	ToolbarButton,
+	ToolbarGroup,
+} from '@wordpress/components';
 
 /**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ * Internal dependencies
  */
 import './editor.scss';
 
@@ -29,10 +36,34 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+function Edit( {
+	attributes,
+	isSelected,
+	setAttributes,
+} ) {
+	const blockProps = useBlockProps();
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		orientation: "horizontal",
+		template: [
+			[
+				'themezee/advanced-icon',
+				{
+					iconName: "siteLogo",
+					iconLibrary: "wordpress",
+					iconWidth: "24px",
+					iconHeight: "24px",
+				},
+			],
+			[
+				'core/paragraph', {}
+			],
+		],
+		templateLock: "contentOnly",
+	} );
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Icon Row – hello from the editor!', 'icon-row' ) }
-		</p>
+		<div { ...innerBlocksProps } />
 	);
 }
+
+export default Edit;

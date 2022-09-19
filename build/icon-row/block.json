@@ -1,16 +1,16 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "create-block/icon-row",
+  "name": "themezee/icon-row",
   "version": "0.1.0",
   "title": "Icon Row",
-  "category": "widgets",
+  "category": "layout",
   "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "description": "Arrange an icon and more blocks horizontally.",
   "supports": {
     "html": false
   },
-  "textdomain": "icon-row",
+  "textdomain": "advanced-icon-block",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
