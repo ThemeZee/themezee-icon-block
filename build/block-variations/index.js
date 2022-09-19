@@ -141,6 +141,7 @@ __webpack_require__.r(__webpack_exports__);
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Icon Heading'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"],
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Arrange icon and heading horizontally.'),
+  category: 'text',
   attributes: {
     layout: {
       type: 'flex',
@@ -165,7 +166,31 @@ __webpack_require__.r(__webpack_exports__);
     iconHeight: "36px"
   }], ['core/heading', {
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Icon Heading')
-  }]]
+  }]],
+  example: {
+    attributes: {
+      style: {
+        color: {
+          text: '#000000',
+          background: '#ffffff'
+        }
+      }
+    },
+    innerBlocks: [{
+      name: 'themezee/advanced-icon',
+      attributes: {
+        iconName: "cover",
+        iconLibrary: "wordpress",
+        iconWidth: "36px",
+        iconHeight: "36px"
+      }
+    }, {
+      name: 'core/heading',
+      attributes: {
+        content: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Icon Heading')
+      }
+    }]
+  }
 });
 
 /***/ }),
@@ -193,6 +218,7 @@ __webpack_require__.r(__webpack_exports__);
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Icon Post Categories'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"],
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Arrange icon and post categories horizontally.'),
+  category: 'theme',
   attributes: {
     layout: {
       type: 'flex',
@@ -217,7 +243,31 @@ __webpack_require__.r(__webpack_exports__);
     iconHeight: "1em"
   }], ['core/post-terms', {
     term: 'category'
-  }]]
+  }]],
+  example: {
+    attributes: {
+      style: {
+        color: {
+          text: '#000000',
+          background: '#ffffff'
+        }
+      }
+    },
+    innerBlocks: [{
+      name: 'themezee/advanced-icon',
+      attributes: {
+        iconName: "archive",
+        iconLibrary: "wordpress",
+        iconWidth: "1em",
+        iconHeight: "1em"
+      }
+    }, {
+      name: 'core/paragraph',
+      attributes: {
+        content: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Post Categories')
+      }
+    }]
+  }
 });
 
 /***/ }),
@@ -245,6 +295,7 @@ __webpack_require__.r(__webpack_exports__);
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Icon Post Date'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"],
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Arrange icon and post date horizontally.'),
+  category: 'theme',
   attributes: {
     layout: {
       type: 'flex',
@@ -267,7 +318,31 @@ __webpack_require__.r(__webpack_exports__);
     iconLibrary: "wordpress",
     iconWidth: "1em",
     iconHeight: "1em"
-  }], ['core/post-date', {}]]
+  }], ['core/post-date', {}]],
+  example: {
+    attributes: {
+      style: {
+        color: {
+          text: '#000000',
+          background: '#ffffff'
+        }
+      }
+    },
+    innerBlocks: [{
+      name: 'themezee/advanced-icon',
+      attributes: {
+        iconName: "calendar",
+        iconLibrary: "wordpress",
+        iconWidth: "1em",
+        iconHeight: "1em"
+      }
+    }, {
+      name: 'core/paragraph',
+      attributes: {
+        content: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Post Date')
+      }
+    }]
+  }
 });
 
 /***/ }),
@@ -295,6 +370,7 @@ __webpack_require__.r(__webpack_exports__);
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Icon Post Tags'),
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"],
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Arrange icon and post tags horizontally.'),
+  category: 'theme',
   attributes: {
     layout: {
       type: 'flex',
@@ -319,7 +395,31 @@ __webpack_require__.r(__webpack_exports__);
     iconHeight: "1em"
   }], ['core/post-terms', {
     term: 'post_tag'
-  }]]
+  }]],
+  example: {
+    attributes: {
+      style: {
+        color: {
+          text: '#000000',
+          background: '#ffffff'
+        }
+      }
+    },
+    innerBlocks: [{
+      name: 'themezee/advanced-icon',
+      attributes: {
+        iconName: "tag",
+        iconLibrary: "wordpress",
+        iconWidth: "1em",
+        iconHeight: "1em"
+      }
+    }, {
+      name: 'core/paragraph',
+      attributes: {
+        content: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Post Tags')
+      }
+    }]
+  }
 });
 
 /***/ }),
