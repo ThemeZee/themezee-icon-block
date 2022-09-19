@@ -1,4 +1,4 @@
-.wp-block-themezee-advanced-icon-block {
+.wp-block-themezee-advanced-icon {
 	display: flex;
 
 	.icon-container {
@@ -12,6 +12,7 @@
 				width: inherit;
 				height: inherit;
 				fill: currentColor;
+				vertical-align: top;
 			}
 		}
 	}

@@ -30,7 +30,7 @@ function register_themezee_advanced_icon_block_variations() {
 	wp_enqueue_script(
 		'themezee-advanced-icon-block-variations',
 		plugins_url( '/build/block-variations/index.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ),
+		array( 'wp-blocks', 'wp-element', 'wp-i18n', 'wp-primitives', 'wp-dom-ready', 'wp-edit-post' ),
 		filemtime( plugin_dir_path( __FILE__ ) . '/build/block-variations/index.js' )
 	);
 }
