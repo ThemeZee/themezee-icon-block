@@ -23,5 +23,6 @@
 function register_themezee_advanced_icon_block_block() {
 	register_block_type( __DIR__ . '/build/advanced-icon' );
 	register_block_type( __DIR__ . '/build/icon-row' );
+	register_block_type( __DIR__ . '/build/block-variations' );
 }
 add_action( 'init', 'register_themezee_advanced_icon_block_block' );
