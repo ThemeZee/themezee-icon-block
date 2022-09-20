@@ -22,6 +22,8 @@
  */
 function register_themezee_advanced_icon_block() {
 	register_block_type( __DIR__ . '/build/advanced-icon' );
+	register_block_type( __DIR__ . '/build/icon-button' );
+	register_block_type( __DIR__ . '/build/icon-buttons' );
 }
 add_action( 'init', 'register_themezee_advanced_icon_block' );
 
