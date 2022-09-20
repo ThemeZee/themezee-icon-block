@@ -19,6 +19,8 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
+import { select, dispatch } from '@wordpress/data';
+import { store as preferencesStore } from '@wordpress/preferences';
 
 /**
  * Internal dependencies
@@ -42,12 +44,21 @@ export default function IconModal( props ) {
 	const icons = iconsObject.icons;
 	const libraries = iconsObject.libraries;
 
+	// Store default preferences.
+	dispatch( preferencesStore ).setDefaults(
+		'themezee/advanced-icon-block',
+		{
+			showIconNames: true,
+			iconSize: 32,
+		}
+	);
+
 	// State Hooks.
 	const [ filteredIcons, setFilteredIcons ] = useState( icons );
 	const [ searchInput, setSearchInput ] = useState( '' );
 	const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
-	const [ iconSize, setIconSize ] = useState( 32 );
-	const [ showIconNames, setShowIconNames ] = useState( true );
+	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'iconSize' ) );
+	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'showIconNames' ) );
 
 	function updateIconName( name, library ) {
 		setAttributes( {
@@ -148,6 +159,7 @@ export default function IconModal( props ) {
 							checked={ showIconNames }
 							onChange={ () => {
 								setShowIconNames( ( state ) => ! state );
+								dispatch( 'core/preferences' ).toggle( 'themezee/advanced-icon-block', 'showIconNames' );
 							} }
 						/>
 						<BaseControl  label={ __( 'Preview Size' ) }>					
@@ -159,7 +171,8 @@ export default function IconModal( props ) {
 											isSmall
 											variant={ size === iconSize ? 'primary' : undefined }
 											onClick={ () => ( function ( value ) {
-												setIconSize( value )
+												setIconSize( value );
+												dispatch( 'core/preferences' ).set( 'themezee/advanced-icon-block', 'iconSize', value );
 											} )( size ) }
 										>
 											{ size }px
