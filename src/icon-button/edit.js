@@ -26,12 +26,13 @@ import {
 	__experimentalUseColorProps as useColorProps,
 	__experimentalGetSpacingClassesAndStyles as useSpacingProps,
 	__experimentalLinkControl as LinkControl,
-	__experimentalGetElementClassName,
 } from '@wordpress/block-editor';
 import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
 import { link, linkOff } from '@wordpress/icons';
 import { createBlock } from '@wordpress/blocks';
 import { useMergeRefs } from '@wordpress/compose';
+import { useSelect } from '@wordpress/data';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 
 const NEW_TAB_REL = 'noreferrer noopener';
 
@@ -76,6 +77,7 @@ function ButtonEdit( props ) {
 		isSelected,
 		onReplace,
 		mergeBlocks,
+		clientId,
 	} = props;
 	const { linkTarget, placeholder, rel, style, text, url, width } =
 		attributes;
@@ -130,6 +132,7 @@ function ButtonEdit( props ) {
 		onKeyDown,
 	} );
 
+	const { getBlock } = useSelect( blockEditorStore );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: [ 'themezee/advanced-icon' ],
 		template: [ [ 'themezee/advanced-icon', {
@@ -186,7 +189,6 @@ function ButtonEdit( props ) {
 							// provided via block support.
 							'no-border-radius': style?.border?.radius === 0,
 						},
-						__experimentalGetElementClassName( 'button' )
 					) }
 					style={ {
 						...borderProps.style,
@@ -202,12 +204,17 @@ function ButtonEdit( props ) {
 						value={ text }
 						onChange={ ( value ) => setButtonText( value ) }
 						withoutInteractiveFormatting
-						onSplit={ ( value ) =>
-							createBlock( 'themezee/icon-button', {
-								...attributes,
-								text: value,
-							} )
-						}
+						onSplit={ ( value ) => {
+							const innerBlocks = getBlock( clientId ).innerBlocks;
+							return createBlock(
+								'themezee/icon-button',
+								{
+									...attributes,
+									text: value,
+								},
+								innerBlocks.length > 0 ? [ createBlock( innerBlocks[0].name, innerBlocks[0].attributes ) ] : []
+							);
+						} }
 						onReplace={ onReplace }
 						onMerge={ mergeBlocks }
 						identifier="text"

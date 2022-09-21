@@ -109,12 +109,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_keycodes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/keycodes */ "@wordpress/keycodes");
 /* harmony import */ var _wordpress_keycodes__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_keycodes__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/link-off.js");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
 /* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_9__);
 
 
 
@@ -125,6 +127,8 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * WordPress dependencies
  */
+
+
 
 
 
@@ -174,7 +178,8 @@ function ButtonEdit(props) {
     className,
     isSelected,
     onReplace,
-    mergeBlocks
+    mergeBlocks,
+    clientId
   } = props;
   const {
     linkTarget,
@@ -237,6 +242,9 @@ function ButtonEdit(props) {
     ref: (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_8__.useMergeRefs)([setPopoverAnchor, ref]),
     onKeyDown
   });
+  const {
+    getBlock
+  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.useSelect)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.store);
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)(blockProps, {
     allowedBlocks: ['themezee/advanced-icon'],
     template: [['themezee/advanced-icon', {
@@ -280,7 +288,7 @@ function ButtonEdit(props) {
       // For backwards compatibility add style that isn't
       // provided via block support.
       'no-border-radius': (style === null || style === void 0 ? void 0 : (_style$border = style.border) === null || _style$border === void 0 ? void 0 : _style$border.radius) === 0
-    }, (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.__experimentalGetElementClassName)('button')),
+    }),
     style: { ...borderProps.style,
       ...colorProps.style,
       ...spacingProps.style
@@ -292,9 +300,12 @@ function ButtonEdit(props) {
     value: text,
     onChange: value => setButtonText(value),
     withoutInteractiveFormatting: true,
-    onSplit: value => (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__.createBlock)('themezee/icon-button', { ...attributes,
-      text: value
-    }),
+    onSplit: value => {
+      const innerBlocks = getBlock(clientId).innerBlocks;
+      return (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__.createBlock)('themezee/icon-button', { ...attributes,
+        text: value
+      }, innerBlocks.length > 0 ? [(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__.createBlock)(innerBlocks[0].name, innerBlocks[0].attributes)] : []);
+    },
     onReplace: onReplace,
     onMerge: mergeBlocks,
     identifier: "text"
@@ -302,13 +313,13 @@ function ButtonEdit(props) {
     group: "block"
   }, !isURLSet && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
     name: "link",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Link'),
     shortcut: _wordpress_keycodes__WEBPACK_IMPORTED_MODULE_6__.displayShortcut.primary('k'),
     onClick: startEditing
   }), isURLSet && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
     name: "link",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Unlink'),
     shortcut: _wordpress_keycodes__WEBPACK_IMPORTED_MODULE_6__.displayShortcut.primaryShift('k'),
     onClick: unlink,
@@ -476,7 +487,7 @@ function save(_ref) {
     // For backwards compatibility add style that isn't provided via
     // block support.
     'no-border-radius': (style === null || style === void 0 ? void 0 : (_style$border = style.border) === null || _style$border === void 0 ? void 0 : _style$border.radius) === 0
-  }, (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalGetElementClassName)('button'));
+  });
   const buttonStyle = { ...borderProps.style,
     ...colorProps.style,
     ...spacingProps.style
@@ -498,7 +509,6 @@ function save(_ref) {
     target: linkTarget,
     rel: rel
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
-    tagName: "span",
     value: text
   })));
 }
@@ -629,6 +639,17 @@ module.exports = window["wp"]["compose"];
 
 /***/ }),
 
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ (function(module) {
+
+"use strict";
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
 /***/ "@wordpress/element":
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
@@ -710,7 +731,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themezee/icon-button","version":"0.1.0","title":"Icon Button","category":"design","parent":["themezee/icon-buttons"],"description":"Arrange an icon and more blocks horizontally.","attributes":{"url":{"type":"string","source":"attribute","selector":"a","attribute":"href"},"title":{"type":"string","source":"attribute","selector":"a","attribute":"title"},"text":{"type":"string","source":"html","selector":"a"},"linkTarget":{"type":"string","source":"attribute","selector":"a","attribute":"target"},"rel":{"type":"string","source":"attribute","selector":"a","attribute":"rel"},"placeholder":{"type":"string"},"backgroundColor":{"type":"string"},"textColor":{"type":"string"},"gradient":{"type":"string"},"width":{"type":"number"}},"supports":{"anchor":true,"align":true,"alignWide":false,"color":{"__experimentalSkipSerialization":true,"gradients":true,"__experimentalDefaultControls":{"background":true,"text":true}},"typography":{"fontSize":true,"lineHeight":true,"__experimentalFontFamily":true,"__experimentalFontWeight":true,"__experimentalFontStyle":true,"__experimentalTextTransform":true,"__experimentalTextDecoration":true,"__experimentalLetterSpacing":true,"__experimentalDefaultControls":{"fontSize":true}},"reusable":false,"spacing":{"__experimentalSkipSerialization":true,"blockGap":true,"padding":["horizontal","vertical"],"__experimentalDefaultControls":{"blockGap":true,"padding":true}},"__experimentalBorder":{"radius":true,"__experimentalSkipSerialization":true,"__experimentalDefaultControls":{"radius":true}},"__experimentalSelector":".wp-block-button .wp-block-button__link"},"styles":[{"name":"fill","label":"Fill","isDefault":true},{"name":"outline","label":"Outline"}],"textdomain":"advanced-icon-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themezee/icon-button","version":"0.1.0","title":"Icon Button","category":"design","parent":["themezee/icon-buttons"],"description":"Arrange an icon and more blocks horizontally.","attributes":{"url":{"type":"string","source":"attribute","selector":"a","attribute":"href"},"title":{"type":"string","source":"attribute","selector":"a","attribute":"title"},"text":{"type":"string","source":"html","selector":"a"},"linkTarget":{"type":"string","source":"attribute","selector":"a","attribute":"target"},"rel":{"type":"string","source":"attribute","selector":"a","attribute":"rel"},"placeholder":{"type":"string"},"backgroundColor":{"type":"string"},"textColor":{"type":"string"},"gradient":{"type":"string"},"width":{"type":"number"}},"supports":{"anchor":true,"align":true,"alignWide":false,"color":{"__experimentalSkipSerialization":true,"gradients":true,"__experimentalDefaultControls":{"background":true,"text":true}},"typography":{"fontSize":true,"lineHeight":true,"__experimentalFontFamily":true,"__experimentalFontWeight":true,"__experimentalFontStyle":true,"__experimentalTextTransform":true,"__experimentalTextDecoration":true,"__experimentalLetterSpacing":true,"__experimentalDefaultControls":{"fontSize":true}},"reusable":false,"spacing":{"__experimentalSkipSerialization":true,"padding":["horizontal","vertical"],"__experimentalDefaultControls":{"padding":true}},"__experimentalBorder":{"radius":true,"__experimentalSkipSerialization":true,"__experimentalDefaultControls":{"radius":true}},"__experimentalSelector":".wp-block-button .wp-block-button__link"},"styles":[{"name":"fill","label":"Fill","isDefault":true},{"name":"outline","label":"Outline"}],"textdomain":"advanced-icon-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
