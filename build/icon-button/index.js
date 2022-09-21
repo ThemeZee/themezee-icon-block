@@ -237,6 +237,16 @@ function ButtonEdit(props) {
     ref: (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_8__.useMergeRefs)([setPopoverAnchor, ref]),
     onKeyDown
   });
+  const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)(blockProps, {
+    allowedBlocks: ['themezee/advanced-icon'],
+    template: [['themezee/advanced-icon', {
+      iconName: "cover",
+      iconLibrary: "wordpress",
+      iconWidth: "1.2em",
+      iconHeight: "1.2em"
+    }]],
+    renderAppender: false
+  });
   const [isEditingURL, setIsEditingURL] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   const isURLSet = !!url;
   const opensInNewTab = linkTarget === '_blank';
@@ -260,18 +270,12 @@ function ButtonEdit(props) {
       setIsEditingURL(false);
     }
   }, [isSelected]);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, blockProps, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("div", (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, innerBlocksProps, {
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()('wp-block-button', blockProps.className, {
       [`has-custom-width wp-block-button__width-${width}`]: width,
       [`has-custom-font-size`]: blockProps.style.fontSize
     })
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.RichText, {
-    ref: richTextRef,
-    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Button text'),
-    placeholder: placeholder || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add text…'),
-    value: text,
-    onChange: value => setButtonText(value),
-    withoutInteractiveFormatting: true,
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("span", {
     className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(className, 'wp-block-button__link', colorProps.className, borderProps.className, {
       // For backwards compatibility add style that isn't
       // provided via block support.
@@ -280,14 +284,21 @@ function ButtonEdit(props) {
     style: { ...borderProps.style,
       ...colorProps.style,
       ...spacingProps.style
-    },
-    onSplit: value => (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__.createBlock)('core/button', { ...attributes,
+    }
+  }, innerBlocksProps.children, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.RichText, {
+    ref: richTextRef,
+    "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Button text'),
+    placeholder: placeholder || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Add text…'),
+    value: text,
+    onChange: value => setButtonText(value),
+    withoutInteractiveFormatting: true,
+    onSplit: value => (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__.createBlock)('themezee/icon-button', { ...attributes,
       text: value
     }),
     onReplace: onReplace,
     onMerge: mergeBlocks,
     identifier: "text"
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.BlockControls, {
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.BlockControls, {
     group: "block"
   }, !isURLSet && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToolbarButton, {
     name: "link",
@@ -479,16 +490,17 @@ function save(_ref) {
   });
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
     className: wrapperClasses
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
-    tagName: "a",
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     className: buttonClasses,
     href: url,
     title: title,
     style: buttonStyle,
-    value: text,
     target: linkTarget,
     rel: rel
-  }));
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InnerBlocks.Content, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {
+    tagName: "span",
+    value: text
+  })));
 }
 
 /***/ }),
@@ -698,7 +710,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themezee/icon-button","version":"0.1.0","title":"Icon Button","category":"design","parent":["themezee/icon-buttons"],"description":"Arrange an icon and more blocks horizontally.","attributes":{"url":{"type":"string","source":"attribute","selector":"a","attribute":"href"},"title":{"type":"string","source":"attribute","selector":"a","attribute":"title"},"text":{"type":"string","source":"html","selector":"a"},"linkTarget":{"type":"string","source":"attribute","selector":"a","attribute":"target"},"rel":{"type":"string","source":"attribute","selector":"a","attribute":"rel"},"placeholder":{"type":"string"},"backgroundColor":{"type":"string"},"textColor":{"type":"string"},"gradient":{"type":"string"},"width":{"type":"number"}},"supports":{"anchor":true,"align":true,"alignWide":false,"color":{"__experimentalSkipSerialization":true,"gradients":true,"__experimentalDefaultControls":{"background":true,"text":true}},"typography":{"fontSize":true,"lineHeight":true,"__experimentalFontFamily":true,"__experimentalFontWeight":true,"__experimentalFontStyle":true,"__experimentalTextTransform":true,"__experimentalTextDecoration":true,"__experimentalLetterSpacing":true,"__experimentalDefaultControls":{"fontSize":true}},"reusable":false,"spacing":{"__experimentalSkipSerialization":true,"padding":["horizontal","vertical"],"__experimentalDefaultControls":{"padding":true}},"__experimentalBorder":{"radius":true,"__experimentalSkipSerialization":true,"__experimentalDefaultControls":{"radius":true}},"__experimentalSelector":".wp-block-button .wp-block-button__link"},"styles":[{"name":"fill","label":"Fill","isDefault":true},{"name":"outline","label":"Outline"}],"textdomain":"advanced-icon-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themezee/icon-button","version":"0.1.0","title":"Icon Button","category":"design","parent":["themezee/icon-buttons"],"description":"Arrange an icon and more blocks horizontally.","attributes":{"url":{"type":"string","source":"attribute","selector":"a","attribute":"href"},"title":{"type":"string","source":"attribute","selector":"a","attribute":"title"},"text":{"type":"string","source":"html","selector":"a"},"linkTarget":{"type":"string","source":"attribute","selector":"a","attribute":"target"},"rel":{"type":"string","source":"attribute","selector":"a","attribute":"rel"},"placeholder":{"type":"string"},"backgroundColor":{"type":"string"},"textColor":{"type":"string"},"gradient":{"type":"string"},"width":{"type":"number"}},"supports":{"anchor":true,"align":true,"alignWide":false,"color":{"__experimentalSkipSerialization":true,"gradients":true,"__experimentalDefaultControls":{"background":true,"text":true}},"typography":{"fontSize":true,"lineHeight":true,"__experimentalFontFamily":true,"__experimentalFontWeight":true,"__experimentalFontStyle":true,"__experimentalTextTransform":true,"__experimentalTextDecoration":true,"__experimentalLetterSpacing":true,"__experimentalDefaultControls":{"fontSize":true}},"reusable":false,"spacing":{"__experimentalSkipSerialization":true,"blockGap":true,"padding":["horizontal","vertical"],"__experimentalDefaultControls":{"blockGap":true,"padding":true}},"__experimentalBorder":{"radius":true,"__experimentalSkipSerialization":true,"__experimentalDefaultControls":{"radius":true}},"__experimentalSelector":".wp-block-button .wp-block-button__link"},"styles":[{"name":"fill","label":"Fill","isDefault":true},{"name":"outline","label":"Outline"}],"textdomain":"advanced-icon-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

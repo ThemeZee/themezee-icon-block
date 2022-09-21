@@ -21,6 +21,7 @@ import {
 	InspectorControls,
 	RichText,
 	useBlockProps,
+	useInnerBlocksProps,
 	__experimentalUseBorderProps as useBorderProps,
 	__experimentalUseColorProps as useColorProps,
 	__experimentalGetSpacingClassesAndStyles as useSpacingProps,
@@ -129,6 +130,17 @@ function ButtonEdit( props ) {
 		onKeyDown,
 	} );
 
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		allowedBlocks: [ 'themezee/advanced-icon' ],
+		template: [ [ 'themezee/advanced-icon', {
+			iconName: "cover",
+			iconLibrary: "wordpress",
+			iconWidth: "1.2em",
+			iconHeight: "1.2em",
+		} ] ],
+		renderAppender: false,
+	} );
+
 	const [ isEditingURL, setIsEditingURL ] = useState( false );
 	const isURLSet = !! url;
 	const opensInNewTab = linkTarget === '_blank';
@@ -156,20 +168,14 @@ function ButtonEdit( props ) {
 	return (
 		<>
 			<div
-				{ ...blockProps }
+				{ ...innerBlocksProps }
 				className={ classnames( 'wp-block-button', blockProps.className, {
 					[ `has-custom-width wp-block-button__width-${ width }` ]:
 						width,
 					[ `has-custom-font-size` ]: blockProps.style.fontSize,
 				} ) }
 			>
-				<RichText
-					ref={ richTextRef }
-					aria-label={ __( 'Button text' ) }
-					placeholder={ placeholder || __( 'Add text…' ) }
-					value={ text }
-					onChange={ ( value ) => setButtonText( value ) }
-					withoutInteractiveFormatting
+				<span
 					className={ classnames(
 						className,
 						'wp-block-button__link',
@@ -187,16 +193,26 @@ function ButtonEdit( props ) {
 						...colorProps.style,
 						...spacingProps.style,
 					} }
-					onSplit={ ( value ) =>
-						createBlock( 'core/button', {
-							...attributes,
-							text: value,
-						} )
-					}
-					onReplace={ onReplace }
-					onMerge={ mergeBlocks }
-					identifier="text"
-				/>
+				>
+					{ innerBlocksProps.children }
+					<RichText
+						ref={ richTextRef }
+						aria-label={ __( 'Button text' ) }
+						placeholder={ placeholder || __( 'Add text…' ) }
+						value={ text }
+						onChange={ ( value ) => setButtonText( value ) }
+						withoutInteractiveFormatting
+						onSplit={ ( value ) =>
+							createBlock( 'themezee/icon-button', {
+								...attributes,
+								text: value,
+							} )
+						}
+						onReplace={ onReplace }
+						onMerge={ mergeBlocks }
+						identifier="text"
+					/>
+				</span>
 			</div>
 			<BlockControls group="block">
 				{ ! isURLSet && (
