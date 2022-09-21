@@ -136,7 +136,7 @@ function ButtonEdit( props ) {
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: [ 'themezee/advanced-icon' ],
 		template: [ [ 'themezee/advanced-icon', {
-			iconName: "cover",
+			iconName: "download",
 			iconLibrary: "wordpress",
 			iconWidth: "1.2em",
 			iconHeight: "1.2em",
