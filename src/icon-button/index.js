@@ -31,4 +31,8 @@ registerBlockType( metadata.name, {
 	icon,
 	edit,
 	save,
+	merge: ( a, { text = '' } ) => ( {
+		...a,
+		text: ( a.text || '' ) + text,
+	} ),
 } );

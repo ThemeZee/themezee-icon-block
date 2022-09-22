@@ -425,7 +425,15 @@ __webpack_require__.r(__webpack_exports__);
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
   icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"],
+  merge: (a, _ref) => {
+    let {
+      text = ''
+    } = _ref;
+    return { ...a,
+      text: (a.text || '') + text
+    };
+  }
 });
 
 /***/ }),
