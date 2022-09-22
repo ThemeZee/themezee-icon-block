@@ -7,13 +7,18 @@ import {
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
-const TEMPLATE = [ [ 'themezee/icon-list-item' ] ];
+/**
+ * Internal dependencies
+ */
+import './editor.scss';
 
-export default function Edit( { attributes, setAttributes, clientId, style } ) {
-	const blockProps = useBlockProps( {} );
+export default function Edit( {
+	className,
+ } ) {
+	const blockProps = useBlockProps( { className } );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: [ 'themezee/icon-list-item' ],
-		template: TEMPLATE,
+		template: [ [ 'themezee/icon-list-item' ] ],
 		templateLock: false,
 		templateInsertUpdatesSelection: true,
 	} );

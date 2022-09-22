@@ -24,7 +24,6 @@
   },
   "supports": {
     "anchor": true,
-    "className": false,
     "typography": {
       "fontSize": true,
       "lineHeight": true,

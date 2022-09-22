@@ -3,12 +3,11 @@
  */
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-export default function save( { attributes } ) {
-	const { ordered, type, reversed, start } = attributes;
-	const TagName = ordered ? 'ol' : 'ul';
+export default function save( { className } ) {
+	const blockProps = useBlockProps.save( { className } );
 	return (
-		<TagName { ...useBlockProps.save( { type, reversed, start } ) }>
+		<ul { ...blockProps }>
 			<InnerBlocks.Content />
-		</TagName>
+		</ul>
 	);
 }

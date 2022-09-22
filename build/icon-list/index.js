@@ -46,6 +46,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/icon-list/editor.scss");
 
 
 /**
@@ -53,18 +54,21 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-const TEMPLATE = [['themezee/icon-list-item']];
+/**
+ * Internal dependencies
+ */
+
+
 function Edit(_ref) {
   let {
-    attributes,
-    setAttributes,
-    clientId,
-    style
+    className
   } = _ref;
-  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({});
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+    className
+  });
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useInnerBlocksProps)(blockProps, {
     allowedBlocks: ['themezee/icon-list-item'],
-    template: TEMPLATE,
+    template: [['themezee/icon-list-item']],
     templateLock: false,
     templateInsertUpdatesSelection: true
   });
@@ -139,21 +143,25 @@ __webpack_require__.r(__webpack_exports__);
 
 function save(_ref) {
   let {
-    attributes
+    className
   } = _ref;
-  const {
-    ordered,
-    type,
-    reversed,
-    start
-  } = attributes;
-  const TagName = ordered ? 'ol' : 'ul';
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(TagName, _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-    type,
-    reversed,
-    start
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null));
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+    className
+  });
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null));
 }
+
+/***/ }),
+
+/***/ "./src/icon-list/editor.scss":
+/*!***********************************!*\
+  !*** ./src/icon-list/editor.scss ***!
+  \***********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -225,7 +233,7 @@ module.exports = window["wp"]["primitives"];
   \**********************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themezee/icon-list","version":"0.1.0","title":"Icon List","category":"text","description":"Create an icon list.","attributes":{"values":{"type":"string","source":"html","selector":"ul","multiline":"li","__unstableMultilineWrapperTags":["ul"],"default":"","__experimentalRole":"content"},"placeholder":{"type":"string"}},"supports":{"anchor":true,"className":false,"typography":{"fontSize":true,"lineHeight":true,"__experimentalFontFamily":true,"__experimentalFontWeight":true,"__experimentalFontStyle":true,"__experimentalTextTransform":true,"__experimentalTextDecoration":true,"__experimentalLetterSpacing":true,"__experimentalDefaultControls":{"fontSize":true}},"color":{"gradients":true,"link":true,"__experimentalDefaultControls":{"background":true,"text":true}},"spacing":{"margin":true,"padding":true},"__unstablePasteTextInline":true,"__experimentalSelector":"ol,ul","__experimentalSlashInserter":true},"textdomain":"advanced-icon-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themezee/icon-list","version":"0.1.0","title":"Icon List","category":"text","description":"Create an icon list.","attributes":{"values":{"type":"string","source":"html","selector":"ul","multiline":"li","__unstableMultilineWrapperTags":["ul"],"default":"","__experimentalRole":"content"},"placeholder":{"type":"string"}},"supports":{"anchor":true,"typography":{"fontSize":true,"lineHeight":true,"__experimentalFontFamily":true,"__experimentalFontWeight":true,"__experimentalFontStyle":true,"__experimentalTextTransform":true,"__experimentalTextDecoration":true,"__experimentalLetterSpacing":true,"__experimentalDefaultControls":{"fontSize":true}},"color":{"gradients":true,"link":true,"__experimentalDefaultControls":{"background":true,"text":true}},"spacing":{"margin":true,"padding":true},"__unstablePasteTextInline":true,"__experimentalSelector":"ol,ul","__experimentalSlashInserter":true},"textdomain":"advanced-icon-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
