@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Icon Buttons",
 	"category": "design",
-	"description": "Arrange an icon and more blocks horizontally.",
+	"description": "Prompt visitors to take action with a group of button-style links with icons.",
 	"supports": {
 		"anchor": true,
 		"align": [ "wide", "full" ],

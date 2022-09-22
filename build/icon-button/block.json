@@ -8,7 +8,7 @@
   "parent": [
     "themezee/icon-buttons"
   ],
-  "description": "Arrange an icon and more blocks horizontally.",
+  "description": "Prompt visitors to take action with a button-style link with icon.",
   "attributes": {
     "url": {
       "type": "string",

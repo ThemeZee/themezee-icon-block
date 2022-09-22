@@ -1,19 +1,9 @@
 /**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { buttons as icon } from '@wordpress/icons';
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import './style.scss';
 
 /**
  * Internal dependencies
@@ -21,6 +11,7 @@ import './style.scss';
 import edit from './edit';
 import save from './save';
 import metadata from './block.json';
+import './style.scss';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -29,6 +20,36 @@ import metadata from './block.json';
  */
 registerBlockType( metadata.name, {
 	icon,
+	example: {
+		innerBlocks: [
+			{
+				name: 'themezee/icon-button',
+				attributes: { text: __( 'Find out more' ) },
+				innerBlocks: [ { 
+					name: 'themezee/advanced-icon', 
+					attributes: {
+						iconName: "info",
+						iconLibrary: "wordpress",
+						iconWidth: "1.2em",
+						iconHeight: "1.2em",
+					}
+				} ]
+			},
+			{
+				name: 'themezee/icon-button',
+				attributes: { text: __( 'Contact us' ) },
+				innerBlocks: [ { 
+					name: 'themezee/advanced-icon', 
+					attributes: {
+						iconName: "atSymbol",
+						iconLibrary: "wordpress",
+						iconWidth: "1.2em",
+						iconHeight: "1.2em",
+					}
+				} ]
+			},
+		],
+	},
 	edit,
 	save,
 } );
