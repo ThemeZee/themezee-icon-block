@@ -253,7 +253,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const TEMPLATE = [['core/list-item']];
+const TEMPLATE = [['themezee/icon-list-item']];
 const NATIVE_MARGIN_SPACING = 8;
 /**
  * At the moment, deprecations don't handle create blocks from attributes
@@ -299,7 +299,7 @@ function useOutdentList(clientId) {
     } = innerSelect(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.store);
     const parentId = getBlockRootClientId(clientId);
     return {
-      canOutdent: !!parentId && getBlock(parentId).name === 'core/list-item'
+      canOutdent: !!parentId && getBlock(parentId).name === 'themezee/icon-list-item'
     };
   }, [clientId]);
   const {
@@ -315,7 +315,7 @@ function useOutdentList(clientId) {
     const parentBlockId = getBlockRootClientId(clientId);
     const parentBlockAttributes = getBlockAttributes(parentBlockId); // Create a new parent block without the inner blocks.
 
-    const newParentBlock = (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_6__.createBlock)('core/list-item', parentBlockAttributes);
+    const newParentBlock = (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_6__.createBlock)('themezee/icon-list-item', parentBlockAttributes);
     const {
       innerBlocks
     } = getBlock(clientId); // Replace the parent block with a new parent block without inner blocks,
@@ -353,7 +353,7 @@ function Edit(_ref2) {
     })
   });
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)(blockProps, {
-    allowedBlocks: ['core/list-item'],
+    allowedBlocks: ['themezee/icon-list-item'],
     template: TEMPLATE,
     templateLock: false,
     templateInsertUpdatesSelection: true,

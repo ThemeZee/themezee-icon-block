@@ -1,81 +1,48 @@
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
+import { useRef } from '@wordpress/element';
 import {
 	RichText,
 	useBlockProps,
 	useInnerBlocksProps,
-	BlockControls,
 } from '@wordpress/block-editor';
-import { isRTL, __ } from '@wordpress/i18n';
-import { ToolbarButton } from '@wordpress/components';
-import {
-	formatOutdent,
-	formatOutdentRTL,
-	formatIndentRTL,
-	formatIndent,
-} from '@wordpress/icons';
-import { useMergeRefs } from '@wordpress/compose';
-
-/**
- * Internal dependencies
- */
-import {
-	useEnter,
-	useSpace,
-	useIndentListItem,
-	useOutdentListItem,
-	useSplit,
-	useMerge,
-	useCopy,
-} from './hooks';
-import { convertToListItems } from './utils';
-
-export function IndentUI( { clientId } ) {
-	const [ canIndent, indentListItem ] = useIndentListItem( clientId );
-	const [ canOutdent, outdentListItem ] = useOutdentListItem( clientId );
-
-	return (
-		<>
-			<ToolbarButton
-				icon={ isRTL() ? formatOutdentRTL : formatOutdent }
-				title={ __( 'Outdent' ) }
-				describedBy={ __( 'Outdent list item' ) }
-				disabled={ ! canOutdent }
-				onClick={ () => outdentListItem() }
-			/>
-			<ToolbarButton
-				icon={ isRTL() ? formatIndentRTL : formatIndent }
-				title={ __( 'Indent' ) }
-				describedBy={ __( 'Indent list item' ) }
-				isDisabled={ ! canIndent }
-				onClick={ () => indentListItem() }
-			/>
-		</>
-	);
-}
+import { createBlock } from '@wordpress/blocks';
+import { useSelect } from '@wordpress/data';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 
 export default function ListItemEdit( {
 	attributes,
 	setAttributes,
 	onReplace,
+	mergeBlocks,
 	clientId,
 } ) {
 	const { placeholder, content } = attributes;
-	const blockProps = useBlockProps( { ref: useCopy( clientId ) } );
+
+	const ref = useRef();
+	const richTextRef = useRef();
+	const blockProps = useBlockProps( { ref } );
+
+	const { getBlock } = useSelect( blockEditorStore );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		allowedBlocks: [ 'core/list' ],
+		allowedBlocks: [ 'themezee/advanced-icon' ],
+		template: [ [ 'themezee/advanced-icon', {
+			iconName: "download",
+			iconLibrary: "wordpress",
+			iconWidth: "1.2em",
+			iconHeight: "1.2em",
+		} ] ],
 		renderAppender: false,
 	} );
-	const useEnterRef = useEnter( { content, clientId } );
-	const useSpaceRef = useSpace( clientId );
-	const onSplit = useSplit( clientId );
-	const onMerge = useMerge( clientId );
+
 	return (
 		<>
 			<li { ...innerBlocksProps }>
+				{ innerBlocksProps.children }
 				<RichText
-					ref={ useMergeRefs( [ useEnterRef, useSpaceRef ] ) }
+					ref={ richTextRef }
 					identifier="content"
 					tagName="div"
 					onChange={ ( nextContent ) =>
@@ -84,17 +51,21 @@ export default function ListItemEdit( {
 					value={ content }
 					aria-label={ __( 'List text' ) }
 					placeholder={ placeholder || __( 'List' ) }
-					onSplit={ onSplit }
-					onMerge={ onMerge }
-					onReplace={ ( blocks, ...args ) => {
-						onReplace( convertToListItems( blocks ), ...args );
+					onSplit={ ( value ) => {
+						const innerBlocks = getBlock( clientId ).innerBlocks;
+						return createBlock(
+							'themezee/icon-list-item',
+							{
+								...attributes,
+								content: value,
+							},
+							innerBlocks.length > 0 ? [ createBlock( innerBlocks[0].name, innerBlocks[0].attributes ) ] : []
+						);
 					} }
+					onReplace={ onReplace }
+					onMerge={ mergeBlocks }
 				/>
-				{ innerBlocksProps.children }
 			</li>
-			<BlockControls group="block">
-				<IndentUI clientId={ clientId } />
-			</BlockControls>
 		</>
 	);
 }

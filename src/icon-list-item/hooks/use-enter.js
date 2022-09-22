@@ -37,10 +37,7 @@ export default function useEnter( props ) {
 					return;
 				}
 				event.preventDefault();
-				if ( canOutdent ) {
-					outdentListItem();
-					return;
-				}
+
 				// Here we are in top level list so we need to split.
 				const topParentListBlock = getBlock(
 					getBlockRootClientId( clientId )

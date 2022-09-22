@@ -29,7 +29,7 @@ import OrderedListSettings from './ordered-list-settings';
 import { migrateToListV2 } from './utils';
 import TagName from './tag-name';
 
-const TEMPLATE = [ [ 'core/list-item' ] ];
+const TEMPLATE = [ [ 'themezee/icon-list-item' ] ];
 const NATIVE_MARGIN_SPACING = 8;
 
 /**
@@ -76,7 +76,7 @@ function useOutdentList( clientId ) {
 			return {
 				canOutdent:
 					!! parentId &&
-					getBlock( parentId ).name === 'core/list-item',
+					getBlock( parentId ).name === 'themezee/icon-list-item',
 			};
 		},
 		[ clientId ]
@@ -92,7 +92,7 @@ function useOutdentList( clientId ) {
 			const parentBlockAttributes = getBlockAttributes( parentBlockId );
 			// Create a new parent block without the inner blocks.
 			const newParentBlock = createBlock(
-				'core/list-item',
+				'themezee/icon-list-item',
 				parentBlockAttributes
 			);
 			const { innerBlocks } = getBlock( clientId );
@@ -128,7 +128,7 @@ export default function Edit( { attributes, setAttributes, clientId, style } ) {
 		...( Platform.isNative && { style } ),
 	} );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		allowedBlocks: [ 'core/list-item' ],
+		allowedBlocks: [ 'themezee/icon-list-item' ],
 		template: TEMPLATE,
 		templateLock: false,
 		templateInsertUpdatesSelection: true,
