@@ -84,7 +84,7 @@ function ListItemEdit(_ref) {
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useInnerBlocksProps)(blockProps, {
     allowedBlocks: ['themezee/advanced-icon'],
     template: [['themezee/advanced-icon', {
-      iconName: "download",
+      iconName: "check",
       iconLibrary: "wordpress",
       iconWidth: "1.2em",
       iconHeight: "1.2em"
