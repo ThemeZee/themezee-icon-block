@@ -43,10 +43,11 @@ export default function SearchPopover( props ) {
 	const [ filteredIcons, setFilteredIcons ] = useState( icons );
 	const [ searchInput, setSearchInput ] = useState( '' );
 
-	function updateIconName( name, library ) {
+	function updateIconName( name, library, svg ) {
 		setAttributes( {
 			iconName: name,
 			iconLibrary: library,
+			iconSVG: svg,
 		} );
 		setSearchPopoverOpen( false );
 	}
@@ -134,7 +135,7 @@ export default function SearchPopover( props ) {
 												className={ classnames( 'tz-icon-list__item', {
 													'is-active': icon.name === attributes?.iconName && icon.library === attributes?.iconLibrary,
 												} ) }
-												onClick={ () => updateIconName( icon.name, icon.library ) }
+												onClick={ () => updateIconName( icon.name, icon.library, icon.icon ) }
 											>
 												<span className="tz-icon-list__item-icon">
 													{ icon.icon }

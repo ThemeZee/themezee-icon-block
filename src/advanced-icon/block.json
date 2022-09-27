@@ -18,6 +18,12 @@
 			"type": "string",
 			"default": "wordpress"
 		},
+		"iconSVG": {
+			"type": "string",
+			"source": "html",
+			"selector": "figure",
+			"default": ""
+		},
 		"iconWidth": {
 			"type": "string",
 			"default": "48px"

@@ -1,1 +1,0 @@
-{"version":3,"file":"icon-list-item/style-index.css","mappings":";;;AAAA;EACC;EACA;EACA;EACA;AACD,C","sources":["webpack://advanced-icon-block/./src/icon-list-item/style.scss"],"sourcesContent":[".wp-block-themezee-icon-list-item {\n\tdisplay: flex;\n\tflex-wrap: nowrap;\n\talign-items: center;\n\tgap: 0.3em;\n}\n"],"names":[],"sourceRoot":""}

@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames';
+import parse from 'html-react-parser';
 
 /**
  * WordPress dependencies
@@ -45,7 +46,6 @@ import {
 /**
  * Internal dependencies
  */
-import { getSingleIcon } from './icons';
 import IconModal from './components/icon-modal';
 import SearchPopover from './components/search-popover';
 import UnitRangeControl from './components/unit-range-control';
@@ -68,6 +68,7 @@ function Edit( {
 		blockWidth,
 		iconName,
 		iconLibrary,
+		iconSVG,
 		iconWidth,
 		iconHeight,
 		justification,
@@ -193,19 +194,12 @@ function Edit( {
 		height: iconHeight,
 	};
 
-	// Get icon SVG.
-	const iconSVG = getSingleIcon( iconName, iconLibrary );
-
-	const screenReaderText = label && (
-		<span className="screen-reader-text">
-			{ label }
-		</span>
-	);
+	// If icon is retrieved from post body as string, then parse and convert it to React element.
+	const iconElement = typeof iconSVG === 'string' ? parse( iconSVG, { trim: true } ) : iconSVG;
 
 	const figure = (
-		<figure className={ iconClasses } style={ iconStyles }>
-			{ iconSVG }
-			{ screenReaderText }
+		<figure className={ iconClasses } style={ iconStyles } aria-label={ label ? label : undefined }>
+			{ iconElement }
 		</figure>
 	);
 
@@ -362,7 +356,7 @@ function Edit( {
 								<TextControl
 									label={ __( 'Icon label' ) }
 									help={ __(
-										'Briefly describe the link to help screen reader users.'
+										'Briefly describe the icon to help screen reader users.'
 									) }
 									value={ label }
 									onChange={ ( value ) =>

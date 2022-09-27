@@ -60,10 +60,11 @@ export default function IconModal( props ) {
 	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'iconSize' ) );
 	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'showIconNames' ) );
 
-	function updateIconName( name, library ) {
+	function updateIconName( name, library, svg ) {
 		setAttributes( {
 			iconName: name,
 			iconLibrary: library,
+			iconSVG: svg,
 		} );
 		setIconModalOpen( false );
 	}
@@ -214,7 +215,7 @@ export default function IconModal( props ) {
 											className={ classnames( 'tz-icon-list__item', {
 												'is-active': icon.name === attributes?.iconName && icon.library === attributes?.iconLibrary,
 											} ) }
-											onClick={ () => updateIconName( icon.name, icon.library ) }
+											onClick={ () => updateIconName( icon.name, icon.library, icon.icon ) }
 										>
 											<span className="tz-icon-list__item-icon" style={ { width: `${iconSize}px`, height: `${iconSize}px` } }>
 												{ icon.icon }

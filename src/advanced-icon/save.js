@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames';
+import parse from 'html-react-parser';
 
 /**
  * WordPress dependencies
@@ -12,11 +13,6 @@ import {
 	__experimentalGetColorClassesAndStyles as getColorClassesAndStyles,
 	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
 } from '@wordpress/block-editor';
-
-/**
- * Internal dependencies
- */
-import { getSingleIcon } from './icons';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -32,6 +28,7 @@ export default function save( {attributes} ) {
 		blockWidth,
 		iconName,
 		iconLibrary,
+		iconSVG,
 		iconWidth,
 		iconHeight,
 		justification,
@@ -80,19 +77,12 @@ export default function save( {attributes} ) {
 		height: iconHeight,
 	};
 
-	// Get icon SVG.
-	const iconSVG = getSingleIcon( iconName, iconLibrary );
-
-	const screenReaderText = label && (
-		<span className="screen-reader-text">
-			{ label }
-		</span>
-	);
+	// If icon is retrieved from post body as string, then parse and convert it to React element.
+	const iconElement = typeof iconSVG === 'string' ? parse( iconSVG, { trim: true } ) : iconSVG;
 
 	const figure = (
-		<figure className={ iconClasses } style={ iconStyles }>
-			{ iconSVG }
-			{ screenReaderText }
+		<figure className={ iconClasses } style={ iconStyles } aria-label={ label ? label : undefined }>
+			{ iconElement }
 		</figure>
 	);
 
