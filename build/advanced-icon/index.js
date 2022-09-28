@@ -8224,8 +8224,7 @@ const icons = _icons__WEBPACK_IMPORTED_MODULE_4__.faRegular.map(i => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getIconSets": function() { return /* binding */ getIconSets; },
-/* harmony export */   "getIcons": function() { return /* binding */ getIcons; },
-/* harmony export */   "getSingleIcon": function() { return /* binding */ getSingleIcon; }
+/* harmony export */   "getIcons": function() { return /* binding */ getIcons; }
 /* harmony export */ });
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "lodash");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
@@ -8288,34 +8287,6 @@ const sets = [{
 }];
 function getIconSets() {
   return sets;
-} // Allow third parties to add their own icon types via filter.
-
-function getSingleIcon() {
-  let iconName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  let iconLibrary = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'wordpress';
-
-  // Return early if icon name is empty.
-  if (iconName === '') {
-    return '';
-  }
-
-  const iconsObject = getIcons();
-  const icons = iconsObject.icons;
-  const findIcon = icons.filter(i => i.name === iconName && i.library === iconLibrary);
-  const selectedIcon = !(0,lodash__WEBPACK_IMPORTED_MODULE_0__.isEmpty)(findIcon) ? findIcon[0].icon : null; // Return if icon is missing.
-
-  if (!selectedIcon) {
-    return '';
-  } // Make sure all icons have aria-hidden and focusable attributes.
-
-
-  const iconSVG = { ...selectedIcon,
-    props: { ...selectedIcon.props,
-      'aria-hidden': true,
-      'focusable': false
-    }
-  };
-  return iconSVG;
 }
 
 /***/ }),
