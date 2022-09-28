@@ -12,20 +12,21 @@ import {
 	BaseControl,
 	Button,
 	ButtonGroup,
+	CheckboxControl,
 	MenuGroup,
 	MenuItem,
 	Modal,
 	SearchControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { select, dispatch } from '@wordpress/data';
 import { store as preferencesStore } from '@wordpress/preferences';
 
 /**
  * Internal dependencies
  */
-import { getIcons } from './../../icons';
+import { getIcons, getIconSets } from './../../icons';
 import './style.scss';
 
 export default function IconModal( props ) {
@@ -40,25 +41,58 @@ export default function IconModal( props ) {
 		return null;
 	}
 
-	const iconsObject = getIcons();
-	const icons = iconsObject.icons;
-	const libraries = iconsObject.libraries;
+	const icons = getIcons();
+	const iconSets = getIconSets();
 
 	// Store default preferences.
 	dispatch( preferencesStore ).setDefaults(
 		'themezee/advanced-icon-block',
 		{
+			enabledIconSets: [ '__all', 'wordpress', 'fa-regular' ],
 			showIconNames: true,
 			iconSize: 32,
 		}
 	);
 
 	// State Hooks.
-	const [ filteredIcons, setFilteredIcons ] = useState( icons );
-	const [ searchInput, setSearchInput ] = useState( '' );
+	const [ allIcons, setAllIcons ] = useState( icons );
+	const [ filteredIcons, setFilteredIcons ] = useState( allIcons );
+	const [ enabledIconSets, setEnabledIconSets ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'enabledIconSets' ) );
+	const [ loadedIconSets, setLoadedIconSets ] = useState( [ '__all', 'wordpress', 'fa-regular' ] );
 	const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
-	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'iconSize' ) );
+	const [ searchInput, setSearchInput ] = useState( '' );
 	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'showIconNames' ) );
+	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'iconSize' ) );
+
+	// Load Icon Sets.
+	useEffect( () => {
+		iconSets.filter( set => ( 'scriptId' in set ) && enabledIconSets.includes( set.name ) ).map( set => {
+			if ( ! document.getElementById( set.scriptId ) ) {
+				const script = document.createElement( 'script' );
+				script.id = set.scriptId;
+				script.type = "text/javascript";
+				script.src = set.scriptUrl;
+				script.async = true;
+				document.body.appendChild( script );
+
+				script.onload = () => {
+					setLoadedIconSets( currentSets => [ ...currentSets, set.name ] );
+				};
+
+				script.onerror = () => {
+					console.log( "There was an error loading ", set.scriptUrl );
+					setEnabledIconSets( enabledIconSets.filter( current => current !== set.name ) );
+					dispatch( 'core/preferences' ).set( 'themezee/advanced-icon-block', 'enabledIconSets', enabledIconSets.filter( current => current !== set.name ) );
+					script.remove();
+				};
+			} else {
+				setLoadedIconSets( currentSets => [ ...currentSets, set.name ] );
+			}
+		} );
+	}, [ enabledIconSets ] );
+
+	// Set isLoading variable if icon sets are loaded.
+	const isLoading = enabledIconSets.filter( set => ! loadedIconSets.includes( set ) ).length > 0;
 
 	function updateIconName( name, library, svg ) {
 		setAttributes( {
@@ -74,7 +108,7 @@ export default function IconModal( props ) {
 
 		// Filter icons if search is active.
 		if ( search ) {
-			newIcons = icons.filter( ( icon ) => {
+			newIcons = allIcons.filter( ( icon ) => {
 				const input = search.toLowerCase();
 				const iconName = icon.name.toLowerCase();
 	
@@ -86,7 +120,7 @@ export default function IconModal( props ) {
 				return false;
 			} );
 		} else {
-			newIcons = icons;
+			newIcons = allIcons;
 		}
 
 		// Update state.
@@ -96,6 +130,23 @@ export default function IconModal( props ) {
 
 	function onClickLibrary( library ) {
 		setCurrentLibrary( library );
+	}
+
+	function toggleIconSet( value ) {
+		let newSet;
+
+		// Check if icon set is already enabled.
+		if ( enabledIconSets.includes( value ) ) {
+			// Remove set from enabled icon sets.
+			newSet = enabledIconSets.filter( set => set !== value );
+		} else {
+			// Add icon set to enabled icon sets.
+			newSet = [ ...enabledIconSets, value ];
+		}
+
+		// Update State and preferences.
+		setEnabledIconSets( newSet );
+		dispatch( 'core/preferences' ).set( 'themezee/advanced-icon-block', 'enabledIconSets', newSet );
 	}
 
 	let renderedIcons = [];
@@ -130,7 +181,13 @@ export default function IconModal( props ) {
 					<MenuGroup
 						className="tz-icon-modal__sidebar__library"
 					>
-						{ libraries.map( ( library ) => {
+						{ iconSets.map( ( library ) => {
+
+							// Return early if icon set is not enabled or loaded.
+							if ( ! enabledIconSets.includes( library.name ) || ! loadedIconSets.includes( library.name ) ) {
+								return;
+							}
+
 							const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
 							const libraryIcons = filteredIcons.filter( icon => library.name === icon?.library );
 
@@ -152,8 +209,8 @@ export default function IconModal( props ) {
 						} ) }
 					</MenuGroup>
 					<MenuGroup
-						className="tz-icon-modal__sidebar__settings"
-						label={ __( 'Settings' ) }
+						className="tz-icon-modal__sidebar__preferences"
+						label={ __( 'Preferences' ) }
 					>
 						<ToggleControl
 							label={ __( 'Show icon names' ) }
@@ -182,6 +239,29 @@ export default function IconModal( props ) {
 								} ) }
 							</ButtonGroup>
 						</BaseControl>
+					</MenuGroup>
+					<MenuGroup
+						className="tz-icon-modal__sidebar__icon-sets"
+						label={ __( 'Icon Sets' ) }
+					>
+						{ iconSets.map( ( set ) => {
+							// Return early for all icon sets.
+							if ( set.name === '__all' ) {
+								return;
+							}
+
+							const showLoadingText = enabledIconSets.includes( set.name ) && ! loadedIconSets.includes( set.name );
+							return (
+								<CheckboxControl
+									key={ set.name }
+									label={ set.title }
+									checked={ enabledIconSets.includes( set.name ) }
+									onChange={ () => toggleIconSet( set.name ) }
+									disabled={ isLoading }
+									help={ showLoadingText ? __( 'Icon Set is loaded...' ) : '' }
+								/>
+							);
+						} ) }
 					</MenuGroup>
 				</div>
 				<div className="tz-icon-modal__content">
