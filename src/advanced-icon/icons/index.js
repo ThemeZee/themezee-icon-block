@@ -12,45 +12,15 @@ import { applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import { icons as faIcons } from './fontawesome';
-//import { icons as materialIcons } from './material';
+import { icons as faIcons } from './fa-regular';
 import { icons as wordPressIcons } from './wordpress';
 
 const icons = [].concat( faIcons, wordPressIcons );
 
-const libraries = [
-	{
-		name: '__all',
-		title: __( 'All Icons' ),
-	},
-	{
-		name: 'fa-brands',
-		title: __( 'Font Awesome (Brands)' ),
-	},
-	{
-		name: 'fa-regular',
-		title: __( 'Font Awesome (Regular)' ),
-	},
-	{
-		name: 'fa-solid',
-		title: __( 'Font Awesome (Solid)' ),
-	},
-	{
-		name: 'wordpress',
-		title: __( 'WordPress' ),
-	},
-];
-
 // Allow third parties to add their own icon types via filter.
 export function getIcons() {
-	const iconsObject = { 
-		icons : applyFilters( 'themezeeAdvancedIconBlock.icons', icons ),
-		libraries : applyFilters( 'themezeeAdvancedIconBlock.libraries', libraries ),
-	};
-
 	return applyFilters( 'themezeeAdvancedIconBlock.icons', icons );
 }
-
 
 const sets = [
 	{
@@ -76,14 +46,14 @@ const sets = [
 	{
 		name: 'material-filled',
 		title: __( 'Material Icons (Filled)' ),
-		scriptId: 'themezee-advanced-icon-block-material-icons-filled',
-		scriptUrl: 'http://localhost/wp-content/plugins/advanced-icon-block/build/material-icons/index.js',
+		scriptId: 'themezee-advanced-icon-block-material-filled',
+		scriptUrl: 'http://localhost/wp-content/plugins/advanced-icon-block/build/material-filled/index.js',
 	},
 	{
 		name: 'material-outlined',
 		title: __( 'Material Icons (Outlined)' ),
-		scriptId: 'themezee-advanced-icon-block-material-icons-outlined',
-		scriptUrl: 'http://localhost/wp-content/plugins/advanced-icon-block/build/material-icons-outlined/index.js',
+		scriptId: 'themezee-advanced-icon-block-material-outlined',
+		scriptUrl: 'http://localhost/wp-content/plugins/advanced-icon-block/build/material-outlined/index.js',
 	},
 	{
 		name: 'wordpress',
