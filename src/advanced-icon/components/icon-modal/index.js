@@ -231,18 +231,16 @@ export default function IconModal( props ) {
 			iconSize,
 			controls,
 		} = props;
-	
+
 		const icons = applyFilters( 'themezeeAdvancedIconBlock.icons', [] );
 		const librarySlugs = libraries.map( lib => lib.name );
 		const availableIcons = icons.filter( icon => librarySlugs.includes( icon.library ) );
-	
+
 		// State Hooks.
 		const [ filteredIcons, setFilteredIcons ] = useState( availableIcons );
 		const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
 		const [ searchInput, setSearchInput ] = useState( '' );
-	
-		console.log( filteredIcons );
-	
+
 		function updateIconName( name, library, svg ) {
 			setAttributes( {
 				iconName: name,
@@ -251,38 +249,38 @@ export default function IconModal( props ) {
 			} );
 			setIconModalOpen( false );
 		}
-	
+
 		function filterIcons( search ) {
 			let newIcons;
-	
+
 			// Filter icons if search is active.
 			if ( search ) {
 				newIcons = availableIcons.filter( ( icon ) => {
 					const input = search.toLowerCase();
 					const iconName = icon.name.toLowerCase();
-		
+
 					// First check if the name matches.
 					if ( iconName.includes( input ) ) {
 						return true;
 					}
-		
+
 					return false;
 				} );
 			} else {
 				newIcons = availableIcons;
 			}
-	
+
 			// Update state.
 			setFilteredIcons( newIcons );
 			setSearchInput( search );
 		}
-	
+
 		function onClickLibrary( library ) {
 			setCurrentLibrary( library );
 		}
-	
+
 		let renderedIcons = [];
-	
+
 		// Fetch all icons if no library is selected.
 		if ( currentLibrary === '__all' ) {
 			renderedIcons = filteredIcons;
@@ -290,7 +288,7 @@ export default function IconModal( props ) {
 			// Fetch icons from current library.
 			renderedIcons = filteredIcons.filter( icon => currentLibrary === icon?.library );
 		}
-	
+
 		return (
 			<div
 				className={ classnames( 'tz-icon-modal', {
@@ -328,9 +326,9 @@ export default function IconModal( props ) {
 							);
 						} ) }
 					</MenuGroup>
-	
+
 					{ controls }
-	
+
 				</div>
 				<div className="tz-icon-modal__content">
 					<div className="tz-icon-modal__content-header">
@@ -378,7 +376,7 @@ export default function IconModal( props ) {
 								} ) }
 							</div>
 						) }
-	
+
 						{ isEmpty( renderedIcons ) && (
 							<div className="block-editor-modal__no-results">
 								<p>{ __( 'No results found.' ) }</p>

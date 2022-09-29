@@ -15,11 +15,11 @@ import {
 	Tooltip,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks'; 
 
 /**
  * Internal dependencies
  */
-import { getIcons } from './../../icons';
 import './style.scss';
 
 export default function SearchPopover( props ) {
@@ -36,8 +36,7 @@ export default function SearchPopover( props ) {
 		return null;
 	}
 
-	const iconsObject = getIcons();
-	const icons = iconsObject.icons;
+	const icons = applyFilters( 'themezeeAdvancedIconBlock.icons', [] );
 
 	// State Hooks.
 	const [ filteredIcons, setFilteredIcons ] = useState( icons );
