@@ -22,7 +22,8 @@ export default function IconPicker( props ) {
 		setIconModalOpen,
 		attributes,
 		setAttributes,
-		libraries,
+		enabledLibraries,
+		loadedLibraries,
 		currentLibrary,
 		showIconNames,
 		iconSize,
@@ -60,12 +61,12 @@ export default function IconPicker( props ) {
 
 	// Update available icons if libraries change.
 	useEffect( () => {
-		const librarySlugs = libraries.map( lib => lib.name );
-		const newIcons = icons.filter( icon => librarySlugs.includes( icon.library ) );
+		const availableLibraries = enabledLibraries.filter( lib => loadedLibraries.includes( lib ) );
+		const newIcons = icons.filter( icon => availableLibraries.includes( icon.library ) );
 
 		setAvailableIcons( newIcons );
 		setFilteredIcons( filterIcons( searchInput, newIcons ) );
-	}, [ libraries ] );
+	}, [ enabledLibraries, loadedLibraries, searchInput ] );
 
 	// Update filtered icons if search term changes.
 	useEffect( () => {

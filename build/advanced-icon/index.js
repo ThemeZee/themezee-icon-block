@@ -218,7 +218,8 @@ function IconPicker(props) {
     setIconModalOpen,
     attributes,
     setAttributes,
-    libraries,
+    enabledLibraries,
+    loadedLibraries,
     currentLibrary,
     showIconNames,
     iconSize,
@@ -253,11 +254,11 @@ function IconPicker(props) {
 
 
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const librarySlugs = libraries.map(lib => lib.name);
-    const newIcons = icons.filter(icon => librarySlugs.includes(icon.library));
+    const availableLibraries = enabledLibraries.filter(lib => loadedLibraries.includes(lib));
+    const newIcons = icons.filter(icon => availableLibraries.includes(icon.library));
     setAvailableIcons(newIcons);
     setFilteredIcons(filterIcons(searchInput, newIcons));
-  }, [libraries]); // Update filtered icons if search term changes.
+  }, [enabledLibraries, loadedLibraries, searchInput]); // Update filtered icons if search term changes.
 
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     setFilteredIcons(filterIcons(searchInput, availableIcons));
@@ -559,7 +560,8 @@ function IconModal(props) {
     setIconModalOpen: setIconModalOpen,
     attributes: attributes,
     setAttributes: setAttributes,
-    libraries: availableLibraries,
+    enabledLibraries: enabledLibraries,
+    loadedLibraries: loadedLibraries,
     currentLibrary: currentLibrary,
     showIconNames: showIconNames,
     iconSize: iconSize,

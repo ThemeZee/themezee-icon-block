@@ -275,7 +275,8 @@ export default function IconModal( props ) {
 					setIconModalOpen={ setIconModalOpen }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
-					libraries={ availableLibraries }
+					enabledLibraries={ enabledLibraries }
+					loadedLibraries={ loadedLibraries }
 					currentLibrary={ currentLibrary }
 					showIconNames={ showIconNames }
 					iconSize={ iconSize }
