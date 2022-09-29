@@ -28,6 +28,7 @@ export default function IconPicker( props ) {
 		showIconNames,
 		iconSize,
 		searchInput,
+		updateDisplayedIcons,
 	} = props;
 
 	// Retrieve icons from loaded icon scripts.
@@ -41,10 +42,12 @@ export default function IconPicker( props ) {
 	 * Filter icons array based on search term.
 	 */
 	function filterIcons( search, icons ) {
+		let newIcons;
+
 		// Filter icons if search is active.
 		if ( search ) {
 			const input = search.toLowerCase();
-			return icons.filter( ( icon ) => {
+			newIcons = icons.filter( ( icon ) => {
 				const iconName = icon.name.toLowerCase();
 
 				// First check if the name matches.
@@ -55,8 +58,11 @@ export default function IconPicker( props ) {
 				return false;
 			} );
 		} else {
-			return icons;
+			newIcons = icons; // Use all icons if search is inactive.
 		}
+
+		updateDisplayedIcons( newIcons ); // Pass icons to parent component.
+		return newIcons;
 	}
 
 	// Update available icons if libraries change.

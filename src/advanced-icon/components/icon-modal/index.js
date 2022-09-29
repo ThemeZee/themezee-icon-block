@@ -105,6 +105,11 @@ export default function IconModal( props ) {
 	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'iconSize' ) );
 	const [ searchInput, setSearchInput ] = useState( '' );
 	const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
+	const [ displayedIcons, setDisplayedIcons ] = useState( [] );
+
+	const updateDisplayedIcons = icons => {
+		setDisplayedIcons( icons );
+	};
 
 	// Load Icon Sets.
 	useEffect( () => {
@@ -176,23 +181,27 @@ export default function IconModal( props ) {
 
 			<MenuGroup
 				className="tz-icon-modal__sidebar__library"
-			>
+			>		
 				{ availableLibraries.map( ( library ) => {
-					const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
+						const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
+						const libraryIcons = displayedIcons.filter( icon => library.name === icon?.library );
 
-					return (
-						<MenuItem
-							key={ `library-${ library.name }` }
-							className={ classnames( {
-								'is-active': isActive,
-							} ) }
-							onClick={ () => onClickLibrary( library.name ) }
-							isPressed={ isActive }
-						>
-							{ library.title }
-						</MenuItem>
-					);
-				} ) }
+						return (
+							<MenuItem
+								key={ `library-${ library.name }` }
+								className={ classnames( {
+									'is-active': isActive,
+								} ) }
+								onClick={ () => onClickLibrary( library.name ) }
+								isPressed={ isActive }
+							>
+								{ library.title }
+								<span className="tz-icon__library__count">
+									{ library.name === '__all' ? displayedIcons.length : libraryIcons.length }
+								</span>
+							</MenuItem>
+						);
+					} ) }
 			</MenuGroup>
 
 			<MenuGroup
@@ -281,6 +290,7 @@ export default function IconModal( props ) {
 					showIconNames={ showIconNames }
 					iconSize={ iconSize }
 					searchInput={ searchInput }
+					updateDisplayedIcons={ updateDisplayedIcons }
 				/>
 			</div>
 		</div>
