@@ -104,6 +104,7 @@ export default function IconModal( props ) {
 	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'showIconNames' ) );
 	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'iconSize' ) );
 	const [ searchInput, setSearchInput ] = useState( '' );
+	const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
 
 	// Load Icon Sets.
 	useEffect( () => {
@@ -149,6 +150,10 @@ export default function IconModal( props ) {
 		dispatch( 'core/preferences' ).set( 'themezee/advanced-icon-block', 'enabledLibraries', newLibrary );
 	}
 
+	function onClickLibrary( library ) {
+		setCurrentLibrary( library );
+	}
+
 	const availableLibraries = libraries.filter( library => {
 		// Return early if icon library is not enabled or loaded.
 		if ( ! enabledLibraries.includes( library.name ) || ! loadedLibraries.includes( library.name ) ) {
@@ -168,6 +173,27 @@ export default function IconModal( props ) {
 					onChange={ ( value ) => setSearchInput( value ) }
 				/>
 			</div>
+
+			<MenuGroup
+				className="tz-icon-modal__sidebar__library"
+			>
+				{ availableLibraries.map( ( library ) => {
+					const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
+
+					return (
+						<MenuItem
+							key={ `library-${ library.name }` }
+							className={ classnames( {
+								'is-active': isActive,
+							} ) }
+							onClick={ () => onClickLibrary( library.name ) }
+							isPressed={ isActive }
+						>
+							{ library.title }
+						</MenuItem>
+					);
+				} ) }
+			</MenuGroup>
 
 			<MenuGroup
 				className="tz-icon-modal__sidebar__preferences"
@@ -235,16 +261,29 @@ export default function IconModal( props ) {
 			onRequestClose={ () => setIconModalOpen( false ) }
 			isFullScreen
 		>
-			<IconPicker
-				setIconModalOpen={ setIconModalOpen }
-				attributes={ attributes }
-				setAttributes={ setAttributes }
-				libraries={ availableLibraries }
-				showIconNames={ showIconNames }
-				iconSize={ iconSize }
-				searchInput={ searchInput }
-				controls={ sidebarControls }
-			/>
+			<div
+			className={ classnames( 'tz-icon-modal', {
+				'is-searching': searchInput,
+			} ) }
+		>
+			<div className="tz-icon-modal__sidebar">
+				{ sidebarControls }
+			</div>
+
+			<div className="tz-icon-modal__content">
+				<IconPicker
+					setIconModalOpen={ setIconModalOpen }
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					libraries={ availableLibraries }
+					currentLibrary={ currentLibrary }
+					showIconNames={ showIconNames }
+					iconSize={ iconSize }
+					searchInput={ searchInput }
+				/>
+			</div>
+		</div>
+
 		</Modal>
 	);
 }
