@@ -25,6 +25,7 @@ export default function IconPicker( props ) {
 		libraries,
 		showIconNames,
 		iconSize,
+		searchInput,
 		controls,
 	} = props;
 
@@ -35,35 +36,15 @@ export default function IconPicker( props ) {
 	const [ availableIcons, setAvailableIcons ] = useState( icons );
 	const [ filteredIcons, setFilteredIcons ] = useState( icons );
 	const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
-	const [ searchInput, setSearchInput ] = useState( '' );
 
-	// Update available icons if libraries change.
-	useEffect( () => {
-		const librarySlugs = libraries.map( lib => lib.name );
-		const availableIcons = icons.filter( icon => librarySlugs.includes( icon.library ) );
-
-		setAvailableIcons( availableIcons );
-		setFilteredIcons( availableIcons ); // this resets search term when library is added.
-	}, [ libraries ] );
-
-	console.log( filteredIcons, availableIcons );
-
-	function updateIconName( name, library, svg ) {
-		setAttributes( {
-			iconName: name,
-			iconLibrary: library,
-			iconSVG: svg,
-		} );
-		setIconModalOpen( false );
-	}
-
-	function filterIcons( search ) {
-		let newIcons;
-
+	/**
+	 * Filter icons array based on search term.
+	 */
+	function filterIcons( search, icons ) {
 		// Filter icons if search is active.
 		if ( search ) {
-			newIcons = availableIcons.filter( ( icon ) => {
-				const input = search.toLowerCase();
+			const input = search.toLowerCase();
+			return icons.filter( ( icon ) => {
 				const iconName = icon.name.toLowerCase();
 
 				// First check if the name matches.
@@ -74,12 +55,31 @@ export default function IconPicker( props ) {
 				return false;
 			} );
 		} else {
-			newIcons = availableIcons;
+			return icons;
 		}
+	}
 
-		// Update state.
-		setFilteredIcons( newIcons );
-		setSearchInput( search );
+	// Update available icons if libraries change.
+	useEffect( () => {
+		const librarySlugs = libraries.map( lib => lib.name );
+		const newIcons = icons.filter( icon => librarySlugs.includes( icon.library ) );
+
+		setAvailableIcons( newIcons );
+		setFilteredIcons( filterIcons( searchInput, newIcons ) );
+	}, [ libraries ] );
+
+	// Update filtered icons if search term changes.
+	useEffect( () => {
+		setFilteredIcons( filterIcons( searchInput, availableIcons ) );
+	}, [ searchInput ] );
+
+	function updateIconName( name, library, svg ) {
+		setAttributes( {
+			iconName: name,
+			iconLibrary: library,
+			iconSVG: svg,
+		} );
+		setIconModalOpen( false );
 	}
 
 	function onClickLibrary( library ) {
@@ -103,12 +103,6 @@ export default function IconPicker( props ) {
 			} ) }
 		>
 			<div className="tz-icon-modal__sidebar">
-				<div className="tz-icon-modal__sidebar__search">
-					<SearchControl
-						value={ searchInput }
-						onChange={ filterIcons }
-					/>
-				</div>
 				<MenuGroup
 					className="tz-icon-modal__sidebar__library"
 				>

@@ -103,6 +103,7 @@ export default function IconModal( props ) {
 	const [ loadedLibraries, setLoadedLibraries ] = useState( [ '__all', 'wordpress' ] );
 	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'showIconNames' ) );
 	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'iconSize' ) );
+	const [ searchInput, setSearchInput ] = useState( '' );
 
 	// Load Icon Sets.
 	useEffect( () => {
@@ -161,6 +162,13 @@ export default function IconModal( props ) {
 
 	const sidebarControls = (
 		<>
+			<div className="tz-icon-modal__sidebar__search">
+				<SearchControl
+					value={ searchInput }
+					onChange={ ( value ) => setSearchInput( value ) }
+				/>
+			</div>
+
 			<MenuGroup
 				className="tz-icon-modal__sidebar__preferences"
 				label={ __( 'Preferences' ) }
@@ -234,6 +242,7 @@ export default function IconModal( props ) {
 				libraries={ availableLibraries }
 				showIconNames={ showIconNames }
 				iconSize={ iconSize }
+				searchInput={ searchInput }
 				controls={ sidebarControls }
 			/>
 		</Modal>
