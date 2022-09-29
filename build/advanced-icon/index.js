@@ -7279,7 +7279,9 @@ const libraries = [{
   scriptUrl: 'fa-brands/index.js'
 }, {
   name: 'fa-regular',
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Font Awesome (Regular)')
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Font Awesome (Regular)'),
+  scriptId: 'themezee-advanced-icon-block-fa-regular',
+  scriptUrl: 'fa-regular/index.js'
 }, {
   name: 'fa-solid',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Font Awesome (Solid)'),
@@ -7420,7 +7422,7 @@ function IconModal(props) {
       disabled: isLoading,
       help: showLoadingText ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Icon Set is loaded...') : ''
     });
-  })));
+  }))); // We use an wrapper component here to force re-mounting and updating the applyFilter hook.
 
   const IconPicker = props => {
     const {

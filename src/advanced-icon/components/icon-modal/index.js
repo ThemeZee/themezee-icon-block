@@ -44,6 +44,8 @@ const libraries = [
 	{
 		name: 'fa-regular',
 		title: __( 'Font Awesome (Regular)' ),
+		scriptId: 'themezee-advanced-icon-block-fa-regular',
+		scriptUrl: 'fa-regular/index.js',
 	},
 	{
 		name: 'fa-solid',
@@ -218,6 +220,7 @@ export default function IconModal( props ) {
 		</>
 	);
 
+	// We use an wrapper component here to force re-mounting and updating the applyFilter hook.
 	const IconPicker = ( props ) => {
 		const {
 			setIconModalOpen,
