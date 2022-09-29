@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import { isEmpty } from 'lodash';
- 
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -22,7 +17,7 @@ export function getIcons() {
 	return applyFilters( 'themezeeAdvancedIconBlock.icons', icons );
 }
 
-const sets = [
+const libraries = [
 	{
 		name: '__all',
 		title: __( 'All Icons' ),
@@ -61,6 +56,6 @@ const sets = [
 	},
 ];
 
-export function getIconSets() {
-	return sets;
+export function getLibraries() {
+	return libraries;
 }
