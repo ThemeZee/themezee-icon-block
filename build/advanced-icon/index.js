@@ -175,6 +175,177 @@ const siteLogo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElemen
 
 /***/ }),
 
+/***/ "./src/advanced-icon/components/icon-modal/icon-picker.js":
+/*!****************************************************************!*\
+  !*** ./src/advanced-icon/components/icon-modal/icon-picker.js ***!
+  \****************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ IconPicker; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__);
+
+
+/**
+ * External dependencies
+ */
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+
+function IconPicker(props) {
+  const {
+    setIconModalOpen,
+    attributes,
+    setAttributes,
+    libraries,
+    showIconNames,
+    iconSize,
+    controls
+  } = props; // Retrieve icons from loaded icon scripts.
+
+  const icons = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_5__.applyFilters)('themezeeAdvancedIconBlock.icons', []); // State Hooks.
+
+  const [availableIcons, setAvailableIcons] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(icons);
+  const [filteredIcons, setFilteredIcons] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(icons);
+  const [currentLibrary, setCurrentLibrary] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.iconLibrary);
+  const [searchInput, setSearchInput] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(''); // Update available icons if libraries change.
+
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    const librarySlugs = libraries.map(lib => lib.name);
+    const availableIcons = icons.filter(icon => librarySlugs.includes(icon.library));
+    setAvailableIcons(availableIcons);
+    setFilteredIcons(availableIcons); // this resets search term when library is added.
+  }, [libraries]);
+  console.log(filteredIcons, availableIcons);
+
+  function updateIconName(name, library, svg) {
+    setAttributes({
+      iconName: name,
+      iconLibrary: library,
+      iconSVG: svg
+    });
+    setIconModalOpen(false);
+  }
+
+  function filterIcons(search) {
+    let newIcons; // Filter icons if search is active.
+
+    if (search) {
+      newIcons = availableIcons.filter(icon => {
+        const input = search.toLowerCase();
+        const iconName = icon.name.toLowerCase(); // First check if the name matches.
+
+        if (iconName.includes(input)) {
+          return true;
+        }
+
+        return false;
+      });
+    } else {
+      newIcons = availableIcons;
+    } // Update state.
+
+
+    setFilteredIcons(newIcons);
+    setSearchInput(search);
+  }
+
+  function onClickLibrary(library) {
+    setCurrentLibrary(library);
+  }
+
+  let renderedIcons = []; // Fetch all icons if no library is selected.
+
+  if (currentLibrary === '__all') {
+    renderedIcons = filteredIcons;
+  } else {
+    // Fetch icons from current library.
+    renderedIcons = filteredIcons.filter(icon => currentLibrary === (icon === null || icon === void 0 ? void 0 : icon.library));
+  }
+
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('tz-icon-modal', {
+      'is-searching': searchInput
+    })
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "tz-icon-modal__sidebar"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "tz-icon-modal__sidebar__search"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SearchControl, {
+    value: searchInput,
+    onChange: filterIcons
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.MenuGroup, {
+    className: "tz-icon-modal__sidebar__library"
+  }, libraries.map(library => {
+    const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
+    const libraryIcons = filteredIcons.filter(icon => library.name === (icon === null || icon === void 0 ? void 0 : icon.library));
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.MenuItem, {
+      key: `library-${library.name}`,
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()({
+        'is-active': isActive
+      }),
+      onClick: () => onClickLibrary(library.name),
+      isPressed: isActive
+    }, library.title, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "tz-icon__library__count"
+    }, library.name === '__all' ? filteredIcons.length : libraryIcons.length));
+  })), controls), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "tz-icon-modal__content"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "tz-icon-modal__content-header"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "search-results"
+  }, searchInput && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( // translators: %1$s: Number of icons retruned from search, %2$s: the search input
+  (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__._n)('%1$s search result for "%2$s"', '%1$s search results for "%2$s"', renderedIcons.length), renderedIcons.length, searchInput))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "tz-icon-modal__content-grid"
+  }, !(0,lodash__WEBPACK_IMPORTED_MODULE_2__.isEmpty)(renderedIcons) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('tz-icon-list', {
+      'show-icon-names': showIconNames
+    })
+  }, renderedIcons.map(icon => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+      key: `icon-${icon.library}-${icon.name}`,
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('tz-icon-list__item', {
+        'is-active': icon.name === (attributes === null || attributes === void 0 ? void 0 : attributes.iconName) && icon.library === (attributes === null || attributes === void 0 ? void 0 : attributes.iconLibrary)
+      }),
+      onClick: () => updateIconName(icon.name, icon.library, icon.icon)
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "tz-icon-list__item-icon",
+      style: {
+        width: `${iconSize}px`,
+        height: `${iconSize}px`
+      }
+    }, icon.icon), showIconNames && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      className: "tz-icon-list__item-name"
+    }, icon.name));
+  })), (0,lodash__WEBPACK_IMPORTED_MODULE_2__.isEmpty)(renderedIcons) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "block-editor-modal__no-results"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('No results found.'))))));
+}
+
+/***/ }),
+
 /***/ "./src/advanced-icon/components/icon-modal/index.js":
 /*!**********************************************************!*\
   !*** ./src/advanced-icon/components/icon-modal/index.js ***!
@@ -202,7 +373,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_preferences__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_preferences__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
 /* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./style.scss */ "./src/advanced-icon/components/icon-modal/style.scss");
+/* harmony import */ var _icon_picker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icon-picker */ "./src/advanced-icon/components/icon-modal/icon-picker.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./style.scss */ "./src/advanced-icon/components/icon-modal/style.scss");
 
 
 /**
@@ -223,7 +395,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
-//import IconPicker from './icon-picker';
+
 
 
 const libraries = [{
@@ -379,137 +551,13 @@ function IconModal(props) {
       disabled: isLoading,
       help: showLoadingText ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Icon Set is loaded...') : ''
     });
-  }))); // We use an wrapper component here to force re-mounting and updating the applyFilter hook.
-
-  const IconPicker = props => {
-    const {
-      setIconModalOpen,
-      attributes,
-      setAttributes,
-      libraries,
-      showIconNames,
-      iconSize,
-      controls
-    } = props;
-    const icons = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_7__.applyFilters)('themezeeAdvancedIconBlock.icons', []);
-    const librarySlugs = libraries.map(lib => lib.name);
-    const availableIcons = icons.filter(icon => librarySlugs.includes(icon.library)); // State Hooks.
-
-    const [filteredIcons, setFilteredIcons] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(availableIcons);
-    const [currentLibrary, setCurrentLibrary] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(attributes.iconLibrary);
-    const [searchInput, setSearchInput] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-
-    function updateIconName(name, library, svg) {
-      setAttributes({
-        iconName: name,
-        iconLibrary: library,
-        iconSVG: svg
-      });
-      setIconModalOpen(false);
-    }
-
-    function filterIcons(search) {
-      let newIcons; // Filter icons if search is active.
-
-      if (search) {
-        newIcons = availableIcons.filter(icon => {
-          const input = search.toLowerCase();
-          const iconName = icon.name.toLowerCase(); // First check if the name matches.
-
-          if (iconName.includes(input)) {
-            return true;
-          }
-
-          return false;
-        });
-      } else {
-        newIcons = availableIcons;
-      } // Update state.
-
-
-      setFilteredIcons(newIcons);
-      setSearchInput(search);
-    }
-
-    function onClickLibrary(library) {
-      setCurrentLibrary(library);
-    }
-
-    let renderedIcons = []; // Fetch all icons if no library is selected.
-
-    if (currentLibrary === '__all') {
-      renderedIcons = filteredIcons;
-    } else {
-      // Fetch icons from current library.
-      renderedIcons = filteredIcons.filter(icon => currentLibrary === (icon === null || icon === void 0 ? void 0 : icon.library));
-    }
-
-    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('tz-icon-modal', {
-        'is-searching': searchInput
-      })
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "tz-icon-modal__sidebar"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "tz-icon-modal__sidebar__search"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SearchControl, {
-      value: searchInput,
-      onChange: filterIcons
-    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.MenuGroup, {
-      className: "tz-icon-modal__sidebar__library"
-    }, libraries.map(library => {
-      const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
-      const libraryIcons = filteredIcons.filter(icon => library.name === (icon === null || icon === void 0 ? void 0 : icon.library));
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.MenuItem, {
-        key: `library-${library.name}`,
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()({
-          'is-active': isActive
-        }),
-        onClick: () => onClickLibrary(library.name),
-        isPressed: isActive
-      }, library.title, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-        className: "tz-icon__library__count"
-      }, library.name === '__all' ? filteredIcons.length : libraryIcons.length));
-    })), controls), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "tz-icon-modal__content"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "tz-icon-modal__content-header"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "search-results"
-    }, searchInput && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.sprintf)( // translators: %1$s: Number of icons retruned from search, %2$s: the search input
-    (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__._n)('%1$s search result for "%2$s"', '%1$s search results for "%2$s"', renderedIcons.length), renderedIcons.length, searchInput))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "tz-icon-modal__content-grid"
-    }, !(0,lodash__WEBPACK_IMPORTED_MODULE_2__.isEmpty)(renderedIcons) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('tz-icon-list', {
-        'show-icon-names': showIconNames
-      })
-    }, renderedIcons.map(icon => {
-      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
-        key: `icon-${icon.library}-${icon.name}`,
-        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('tz-icon-list__item', {
-          'is-active': icon.name === (attributes === null || attributes === void 0 ? void 0 : attributes.iconName) && icon.library === (attributes === null || attributes === void 0 ? void 0 : attributes.iconLibrary)
-        }),
-        onClick: () => updateIconName(icon.name, icon.library, icon.icon)
-      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-        className: "tz-icon-list__item-icon",
-        style: {
-          width: `${iconSize}px`,
-          height: `${iconSize}px`
-        }
-      }, icon.icon), showIconNames && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-        className: "tz-icon-list__item-name"
-      }, icon.name));
-    })), (0,lodash__WEBPACK_IMPORTED_MODULE_2__.isEmpty)(renderedIcons) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-      className: "block-editor-modal__no-results"
-    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('No results found.'))))));
-  };
-
+  })));
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Modal, {
     className: "wp-block-themezee-advanced-icon-block__icon_modal",
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Icons'),
     onRequestClose: () => setIconModalOpen(false),
     isFullScreen: true
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(IconPicker, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_icon_picker__WEBPACK_IMPORTED_MODULE_8__["default"], {
     setIconModalOpen: setIconModalOpen,
     attributes: attributes,
     setAttributes: setAttributes,
