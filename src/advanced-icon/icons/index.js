@@ -26,7 +26,7 @@ const libraries = [
 		name: 'fa-brands',
 		title: __( 'Font Awesome (Brands)' ),
 		scriptId: 'themezee-advanced-icon-block-fa-brands',
-		scriptUrl: 'http://localhost/wp-content/plugins/advanced-icon-block/build/fa-brands/index.js',
+		scriptUrl: 'fa-brands/index.js',
 	},
 	{
 		name: 'fa-regular',
@@ -36,19 +36,19 @@ const libraries = [
 		name: 'fa-solid',
 		title: __( 'Font Awesome (Solid)' ),
 		scriptId: 'themezee-advanced-icon-block-fa-solid',
-		scriptUrl: 'http://localhost/wp-content/plugins/advanced-icon-block/build/fa-solid/index.js',
+		scriptUrl: 'fa-solid/index.js',
 	},
 	{
 		name: 'material-filled',
 		title: __( 'Material Icons (Filled)' ),
 		scriptId: 'themezee-advanced-icon-block-material-filled',
-		scriptUrl: 'http://localhost/wp-content/plugins/advanced-icon-block/build/material-filled/index.js',
+		scriptUrl: 'material-filled/index.js',
 	},
 	{
 		name: 'material-outlined',
 		title: __( 'Material Icons (Outlined)' ),
 		scriptId: 'themezee-advanced-icon-block-material-outlined',
-		scriptUrl: 'http://localhost/wp-content/plugins/advanced-icon-block/build/material-outlined/index.js',
+		scriptUrl: 'material-outlined/index.js',
 	},
 	{
 		name: 'wordpress',
