@@ -44,6 +44,52 @@
 .wp-block-themezee-advanced-icon.flip-horizontal.flip-vertical figure svg {
   transform: scale(-1, -1);
 }
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/advanced-icon/components/icon-picker/style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+.tz-icon-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.tz-icon-list .tz-icon-list__item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  height: auto;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  color: #1e1e1e;
+  cursor: pointer;
+  transition: all 0.05s ease-in-out;
+  word-break: break-word;
+}
+.tz-icon-list .tz-icon-list__item:hover {
+  border-color: var(--wp-admin-theme-color);
+  color: var(--wp-admin-theme-color) !important;
+}
+.tz-icon-list .tz-icon-list__item .tz-icon-list__item-icon svg {
+  width: inherit;
+  height: inherit;
+  fill: currentColor;
+}
+.tz-icon-list .tz-icon-list__item.is-active {
+  background-color: var(--wp-admin-theme-color);
+  color: #fff;
+}
+.tz-icon-list .tz-icon-list__item.is-active:hover {
+  color: #fff !important;
+}
+.tz-icon-list.show-icon-names .tz-icon-list__item {
+  flex-direction: column;
+  width: 150px;
+}
+.tz-icon-list.show-icon-names .tz-icon-list__item .tz-icon-list__item-name {
+  margin-top: 12px;
+  font-size: 12px;
+}
 /*!***************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/advanced-icon/components/icon-modal/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************************************************/
@@ -124,49 +170,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.wp-block-themezee-advanced-icon-block__icon_modal .tz-icon-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-.wp-block-themezee-advanced-icon-block__icon_modal .tz-icon-list .tz-icon-list__item {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
-  height: auto;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  color: #1e1e1e;
-  cursor: pointer;
-  transition: all 0.05s ease-in-out;
-  word-break: break-word;
-}
-.wp-block-themezee-advanced-icon-block__icon_modal .tz-icon-list .tz-icon-list__item:hover {
-  border-color: var(--wp-admin-theme-color);
-  color: var(--wp-admin-theme-color) !important;
-}
-.wp-block-themezee-advanced-icon-block__icon_modal .tz-icon-list .tz-icon-list__item .tz-icon-list__item-icon svg {
-  width: inherit;
-  height: inherit;
-  fill: currentColor;
-}
-.wp-block-themezee-advanced-icon-block__icon_modal .tz-icon-list .tz-icon-list__item.is-active {
-  background-color: var(--wp-admin-theme-color);
-  color: #fff;
-}
-.wp-block-themezee-advanced-icon-block__icon_modal .tz-icon-list .tz-icon-list__item.is-active:hover {
-  color: #fff !important;
-}
-.wp-block-themezee-advanced-icon-block__icon_modal .tz-icon-list.show-icon-names .tz-icon-list__item {
-  flex-direction: column;
-  width: 150px;
-}
-.wp-block-themezee-advanced-icon-block__icon_modal .tz-icon-list.show-icon-names .tz-icon-list__item .tz-icon-list__item-name {
-  margin-top: 12px;
-  font-size: 12px;
 }
 /*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/advanced-icon/components/search-popover/style.scss ***!

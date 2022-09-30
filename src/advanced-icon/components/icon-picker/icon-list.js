@@ -8,18 +8,12 @@ import { isEmpty } from 'lodash';
  * WordPress dependencies
  */
 import { __, _n, sprintf } from '@wordpress/i18n';
-import {
-	Button,
-	MenuGroup,
-	MenuItem,
-	SearchControl,
-} from '@wordpress/components';
+import { Button } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks'; 
 
-export default function IconPicker( props ) {
+export default function IconList( props ) {
 	const {
-		setIconModalOpen,
 		attributes,
 		setAttributes,
 		enabledLibraries,
@@ -28,7 +22,8 @@ export default function IconPicker( props ) {
 		showIconNames,
 		iconSize,
 		searchInput,
-		updateDisplayedIcons,
+		updateIcons,
+		onClose,
 	} = props;
 
 	// Retrieve icons from loaded icon scripts.
@@ -61,7 +56,7 @@ export default function IconPicker( props ) {
 			newIcons = icons; // Use all icons if search is inactive.
 		}
 
-		updateDisplayedIcons( newIcons ); // Pass icons to parent component.
+		updateIcons( newIcons ); // Pass icons to parent component.
 		return newIcons;
 	}
 
@@ -85,7 +80,7 @@ export default function IconPicker( props ) {
 			iconLibrary: library,
 			iconSVG: svg,
 		} );
-		setIconModalOpen( false );
+		onClose( false );
 	}
 
 	let renderedIcons = [];

@@ -27,7 +27,7 @@ import { applyFilters } from '@wordpress/hooks';
 /**
  * Internal dependencies
  */
-import IconPicker from './icon-picker';
+import IconPicker from '../icon-picker';
 import './style.scss';
 
 const libraries = [
@@ -83,11 +83,6 @@ export default function IconModal( props ) {
 		return null;
 	}
 
-	// Return early if public icon variable is not available.
-	if ( ! themezeeIconBlockBundle ) {
-		return null;
-	}
-
 	// Store default preferences.
 	dispatch( preferencesStore ).setDefaults(
 		'themezee/advanced-icon-block',
@@ -100,43 +95,22 @@ export default function IconModal( props ) {
 
 	// State Hooks.
 	const [ enabledLibraries, setEnabledLibraries ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'enabledLibraries' ) );
-	const [ loadedLibraries, setLoadedLibraries ] = useState( [ '__all', 'wordpress' ] );
 	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'showIconNames' ) );
 	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'iconSize' ) );
 	const [ searchInput, setSearchInput ] = useState( '' );
 	const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
-	const [ displayedIcons, setDisplayedIcons ] = useState( [] );
+	const [ icons, setIcons ] = useState( [] );
+	const [ childData, setChildData ] = useState( {} );
 
-	const updateDisplayedIcons = icons => {
-		setDisplayedIcons( icons );
+	// Get data from child component (IconPicker).
+	const updateChildData = ( data ) => {
+		setChildData( data );
 	};
 
-	// Load Icon Sets.
-	useEffect( () => {
-		libraries.filter( library => ( 'scriptId' in library ) && enabledLibraries.includes( library.name ) ).map( library => {
-			if ( ! document.getElementById( library.scriptId ) ) {
-				const script = document.createElement( 'script' );
-				script.id = library.scriptId;
-				script.type = "text/javascript";
-				script.src = themezeeIconBlockBundle.url + library.scriptUrl;
-				script.async = true;
-				document.body.appendChild( script );
-
-				script.onload = () => {
-					setLoadedLibraries( currentSets => [ ...currentSets, library.name ] );
-				};
-
-				script.onerror = () => {
-					console.log( "There was an error loading ", library.scriptUrl );
-					setEnabledLibraries( enabledLibraries.filter( current => current !== library.name ) );
-					dispatch( 'core/preferences' ).set( 'themezee/advanced-icon-block', 'enabledLibraries', enabledLibraries.filter( current => current !== library.name ) );
-					script.remove();
-				};
-			} else {
-				setLoadedLibraries( currentSets => [ ...currentSets, library.name ] );
-			}
-		} );
-	}, [ enabledLibraries ] );
+	// Get icon from child component (IconList).
+	const updateIcons = icons => {
+		setIcons( icons );
+	}
 
 	function toggleLibrary( value ) {
 		let newLibrary;
@@ -159,109 +133,9 @@ export default function IconModal( props ) {
 		setCurrentLibrary( library );
 	}
 
-	const availableLibraries = libraries.filter( library => {
-		// Return early if icon library is not enabled or loaded.
-		if ( ! enabledLibraries.includes( library.name ) || ! loadedLibraries.includes( library.name ) ) {
-			return false;
-		}
-		return true;
-	} );
-
-	// Set isLoading variable if icon libraries are loaded.
-	const isLoading = enabledLibraries.filter( library => ! loadedLibraries.includes( library ) ).length > 0;
-
-	const sidebarControls = (
-		<>
-			<div className="tz-icon-modal__sidebar__search">
-				<SearchControl
-					value={ searchInput }
-					onChange={ ( value ) => setSearchInput( value ) }
-				/>
-			</div>
-
-			<MenuGroup
-				className="tz-icon-modal__sidebar__library"
-			>		
-				{ availableLibraries.map( ( library ) => {
-						const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
-						const libraryIcons = displayedIcons.filter( icon => library.name === icon?.library );
-
-						return (
-							<MenuItem
-								key={ `library-${ library.name }` }
-								className={ classnames( {
-									'is-active': isActive,
-								} ) }
-								onClick={ () => onClickLibrary( library.name ) }
-								isPressed={ isActive }
-							>
-								{ library.title }
-								<span className="tz-icon__library__count">
-									{ library.name === '__all' ? displayedIcons.length : libraryIcons.length }
-								</span>
-							</MenuItem>
-						);
-					} ) }
-			</MenuGroup>
-
-			<MenuGroup
-				className="tz-icon-modal__sidebar__preferences"
-				label={ __( 'Preferences' ) }
-			>
-				<ToggleControl
-					label={ __( 'Show icon names' ) }
-					checked={ showIconNames }
-					onChange={ () => {
-						setShowIconNames( ( state ) => ! state );
-						dispatch( 'core/preferences' ).toggle( 'themezee/advanced-icon-block', 'showIconNames' );
-					} }
-				/>
-				<BaseControl  label={ __( 'Preview Size' ) }>					
-					<ButtonGroup>
-						{ [ 16, 24, 32, 48, 64 ].map( ( size ) => {
-							return (
-								<Button
-									key={ size }
-									isSmall
-									variant={ size === iconSize ? 'primary' : undefined }
-									onClick={ () => ( function ( value ) {
-										setIconSize( value );
-										dispatch( 'core/preferences' ).set( 'themezee/advanced-icon-block', 'iconSize', value );
-									} )( size ) }
-								>
-									{ size }px
-								</Button>
-							);
-						} ) }
-					</ButtonGroup>
-				</BaseControl>
-			</MenuGroup>
-
-			<MenuGroup
-				className="tz-icon-modal__sidebar__icon-libraries"
-				label={ __( 'Icon Sets' ) }
-			>
-				{ libraries.map( ( library ) => {
-					// Return early for all icon libraries.
-					if ( library.name === '__all' ) {
-						return;
-					}
-
-					const showLoadingText = enabledLibraries.includes( library.name ) && ! loadedLibraries.includes( library.name );
-					return (
-						<CheckboxControl
-							key={ library.name }
-							label={ library.title }
-							checked={ enabledLibraries.includes( library.name ) }
-							onChange={ () => toggleLibrary( library.name ) }
-							disabled={ isLoading }
-							help={ showLoadingText ? __( 'Icon Set is loaded...' ) : '' }
-						/>
-					);
-				} ) }
-			</MenuGroup>
-		</>
-	);
+	const availableIcons = icons ? icons : [];
+	const availableLibraries = childData?.availableLibraries ? childData?.availableLibraries : libraries;
+	const isLoading = childData?.isLoading ? childData?.isLoading : false;
 
 	return (
 		<Modal
@@ -276,21 +150,109 @@ export default function IconModal( props ) {
 			} ) }
 		>
 			<div className="tz-icon-modal__sidebar">
-				{ sidebarControls }
+				<div className="tz-icon-modal__sidebar__search">
+					<SearchControl
+						value={ searchInput }
+						onChange={ ( value ) => setSearchInput( value ) }
+					/>
+				</div>
+
+				<MenuGroup
+					className="tz-icon-modal__sidebar__library"
+				>		
+					{ availableLibraries.map( ( library ) => {
+							const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
+							const libraryIcons = availableIcons.filter( icon => library.name === icon?.library );
+
+							return (
+								<MenuItem
+									key={ `library-${ library.name }` }
+									className={ classnames( {
+										'is-active': isActive,
+									} ) }
+									onClick={ () => onClickLibrary( library.name ) }
+									isPressed={ isActive }
+								>
+									{ library.title }
+									<span className="tz-icon__library__count">
+										{ library.name === '__all' ? availableIcons.length : libraryIcons.length }
+									</span>
+								</MenuItem>
+							);
+						} ) }
+				</MenuGroup>
+
+				<MenuGroup
+					className="tz-icon-modal__sidebar__preferences"
+					label={ __( 'Preferences' ) }
+				>
+					<ToggleControl
+						label={ __( 'Show icon names' ) }
+						checked={ showIconNames }
+						onChange={ () => {
+							setShowIconNames( ( state ) => ! state );
+							dispatch( 'core/preferences' ).toggle( 'themezee/advanced-icon-block', 'showIconNames' );
+						} }
+					/>
+					<BaseControl  label={ __( 'Preview Size' ) }>					
+						<ButtonGroup>
+							{ [ 16, 24, 32, 48, 64 ].map( ( size ) => {
+								return (
+									<Button
+										key={ size }
+										isSmall
+										variant={ size === iconSize ? 'primary' : undefined }
+										onClick={ () => ( function ( value ) {
+											setIconSize( value );
+											dispatch( 'core/preferences' ).set( 'themezee/advanced-icon-block', 'iconSize', value );
+										} )( size ) }
+									>
+										{ size }px
+									</Button>
+								);
+							} ) }
+						</ButtonGroup>
+					</BaseControl>
+				</MenuGroup>
+
+				<MenuGroup
+					className="tz-icon-modal__sidebar__icon-libraries"
+					label={ __( 'Icon Sets' ) }
+				>
+					{ libraries.map( ( library ) => {
+						// Return early for all icon libraries.
+						if ( library.name === '__all' ) {
+							return;
+						}
+
+						const showLoadingText = enabledLibraries.includes( library.name ) && ! availableLibraries.map( lib => lib.name ).includes( library.name );
+						return (
+							<CheckboxControl
+								key={ library.name }
+								label={ library.title }
+								checked={ enabledLibraries.includes( library.name ) }
+								onChange={ () => toggleLibrary( library.name ) }
+								disabled={ isLoading }
+								help={ showLoadingText ? __( 'Icon Set is loaded...' ) : '' }
+							/>
+						);
+					} ) }
+				</MenuGroup>
 			</div>
 
 			<div className="tz-icon-modal__content">
 				<IconPicker
-					setIconModalOpen={ setIconModalOpen }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
+					libraries={ libraries }
 					enabledLibraries={ enabledLibraries }
-					loadedLibraries={ loadedLibraries }
 					currentLibrary={ currentLibrary }
 					showIconNames={ showIconNames }
 					iconSize={ iconSize }
 					searchInput={ searchInput }
-					updateDisplayedIcons={ updateDisplayedIcons }
+					updateChildData={ updateChildData }
+					updateIcons={ updateIcons }
+					onClose={ setIconModalOpen }
 				/>
 			</div>
 		</div>
