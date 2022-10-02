@@ -34,7 +34,7 @@ add_action( 'init', 'register_themezee_advanced_icon_block' );
 function register_themezee_advanced_icon_block_default_icons() {
 	wp_enqueue_script(
 		'themezee-advanced-icon-block-default-icons',
-		plugins_url( '/build/default-icons/index.js', __FILE__ ),
+		plugins_url( '/assets/icons/default-icons.js', __FILE__ ),
 		array( 'wp-i18n', 'wp-hooks', 'wp-dom' ),
 		'20220927',
 		true
@@ -42,7 +42,7 @@ function register_themezee_advanced_icon_block_default_icons() {
 
 	// Passing url to default-icons.js.
 	wp_localize_script( 'themezee-advanced-icon-block-default-icons', 'themezeeIconBlockBundle', array(
-		'url' => plugins_url( '/build/', __FILE__ ),
+		'url' => plugins_url( '/assets/icons/', __FILE__ ),
 	) );
 }
 add_action( 'enqueue_block_editor_assets', 'register_themezee_advanced_icon_block_default_icons' );

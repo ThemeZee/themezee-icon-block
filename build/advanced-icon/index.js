@@ -234,27 +234,27 @@ const libraries = [{
   name: 'fa-brands',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Font Awesome (Brands)'),
   scriptId: 'themezee-advanced-icon-block-fa-brands',
-  scriptUrl: 'fa-brands/index.js'
+  scriptUrl: 'fa-brands.js'
 }, {
   name: 'fa-regular',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Font Awesome (Regular)'),
   scriptId: 'themezee-advanced-icon-block-fa-regular',
-  scriptUrl: 'fa-regular/index.js'
+  scriptUrl: 'fa-regular.js'
 }, {
   name: 'fa-solid',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Font Awesome (Solid)'),
   scriptId: 'themezee-advanced-icon-block-fa-solid',
-  scriptUrl: 'fa-solid/index.js'
+  scriptUrl: 'fa-solid.js'
 }, {
   name: 'material-filled',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Material Icons (Filled)'),
   scriptId: 'themezee-advanced-icon-block-material-filled',
-  scriptUrl: 'material-filled/index.js'
+  scriptUrl: 'material-filled.js'
 }, {
   name: 'material-outlined',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Material Icons (Outlined)'),
   scriptId: 'themezee-advanced-icon-block-material-outlined',
-  scriptUrl: 'material-outlined/index.js'
+  scriptUrl: 'material-outlined.js'
 }, {
   name: 'wordpress',
   title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('WordPress')
