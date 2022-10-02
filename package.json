@@ -12,7 +12,8 @@
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start"
+		"start": "wp-scripts start",
+		"export": "git archive HEAD -9 --prefix advanced-icon-block/ --format=zip > ../../advanced-icon-block.zip"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^24.0.0"
