@@ -1,7 +1,3 @@
-/**
- * WordPress dependencies
- */
-import { addFilter } from '@wordpress/hooks'; 
 import {
 	addCard,
 	addSubmenu,
@@ -1395,7 +1391,7 @@ const icons = [
 ];
 
 wp.domReady( () => {
-	addFilter(
+	wp.hooks.addFilter(
 		'themezeeAdvancedIconBlock.icons',
 		'themezee/advanced-icon-block/default-icons',
 		() => icons

@@ -1,8 +1,3 @@
-/**
- * WordPress dependencies
- */
-import { addFilter } from '@wordpress/hooks';
-
  /**
  * Internal dependencies
  */
@@ -14,7 +9,7 @@ wp.domReady( () => {
 		return [].concat( icons, iconsOutlined );
 	}
 
-	addFilter(
+	wp.hooks.addFilter(
 		'themezeeAdvancedIconBlock.icons',
 		'themezee/advanced-icon-block/material-outlined',
 		addMaterialIcons

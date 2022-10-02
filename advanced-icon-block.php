@@ -35,7 +35,7 @@ function register_themezee_advanced_icon_block_default_icons() {
 	wp_enqueue_script(
 		'themezee-advanced-icon-block-default-icons',
 		plugins_url( '/assets/icons/default-icons.js', __FILE__ ),
-		array( 'wp-i18n', 'wp-hooks', 'wp-dom' ),
+		array( 'wp-hooks', 'wp-dom' ),
 		'20220927',
 		true
 	);

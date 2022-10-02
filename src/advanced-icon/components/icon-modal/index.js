@@ -2,12 +2,11 @@
  * External dependencies
  */
 import classnames from 'classnames';
-import { isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies
  */
-import { __, _n, sprintf } from '@wordpress/i18n';
+import { __, _n } from '@wordpress/i18n';
 import {
 	BaseControl,
 	Button,
@@ -19,10 +18,9 @@ import {
 	SearchControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { useEffect, useState } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import { select, dispatch } from '@wordpress/data';
 import { store as preferencesStore } from '@wordpress/preferences';
-import { applyFilters } from '@wordpress/hooks'; 
 
 /**
  * Internal dependencies

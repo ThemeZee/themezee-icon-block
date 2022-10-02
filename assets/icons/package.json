@@ -16,9 +16,9 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@material-design-icons/svg": "^0.12.1",
-    "@wordpress/hooks": "^3.18.0",
     "@wordpress/icons": "^9.9.0",
-    "react": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

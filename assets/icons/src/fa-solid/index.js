@@ -7,11 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 library.add(fas);
 
 /**
- * WordPress dependencies
- */
-import { addFilter } from '@wordpress/hooks';
-
-/**
  * Internal dependencies
  */
 import { faSolid } from './icons';
@@ -31,7 +26,7 @@ wp.domReady( () => {
 		return [].concat( icons, solidIcons );
 	}
 
-	addFilter(
+	wp.hooks.addFilter(
 		'themezeeAdvancedIconBlock.icons',
 		'themezee/advanced-icon-block/fa-solid',
 		addFontAwesomeIcons
