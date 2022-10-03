@@ -392,6 +392,7 @@ function IconList(props) {
     currentLibrary,
     showIconNames,
     iconSize,
+    limit,
     searchInput,
     updateIcons,
     onClose
@@ -421,6 +422,11 @@ function IconList(props) {
       });
     } else {
       newIcons = icons; // Use all icons if search is inactive.
+    } // Limit icons to a certain number if prop exists.
+
+
+    if (limit) {
+      newIcons = newIcons.slice(0, limit);
     }
 
     updateIcons(newIcons); // Pass icons to parent component.
@@ -529,6 +535,7 @@ function IconPicker(props) {
     currentLibrary = "__all",
     showIconNames = false,
     iconSize = 32,
+    limit = false,
     searchInput,
     updateChildData,
     updateIcons,
@@ -592,6 +599,7 @@ function IconPicker(props) {
     currentLibrary: currentLibrary,
     showIconNames: showIconNames,
     iconSize: iconSize,
+    limit: limit,
     searchInput: searchInput,
     updateIcons: updateIcons,
     onClose: onClose
@@ -674,11 +682,6 @@ function SearchPopover(props) {
     setIcons(icons);
   };
 
-  function getDefaultIcons(icons) {
-    const defaultIcons = ['bell', 'calendar', 'clock', 'comment', 'envelope', 'heart', 'image', 'lightbulb', 'pen-to-square', 'star', 'thumbs-up', 'user'];
-    return icons.filter(icon => defaultIcons.includes(icon.name) && icon.library === 'fa-regular');
-  }
-
   const availableIcons = icons ? icons : [];
   const availableLibraries = childData !== null && childData !== void 0 && childData.availableLibraries ? childData === null || childData === void 0 ? void 0 : childData.availableLibraries : _libraries__WEBPACK_IMPORTED_MODULE_5__.libraries;
   const isLoading = childData !== null && childData !== void 0 && childData.isLoading ? childData === null || childData === void 0 ? void 0 : childData.isLoading : false;
@@ -705,6 +708,7 @@ function SearchPopover(props) {
     setAttributes: setAttributes,
     libraries: _libraries__WEBPACK_IMPORTED_MODULE_5__.libraries,
     enabledLibraries: enabledLibraries,
+    limit: 12,
     searchInput: searchInput,
     updateChildData: updateChildData,
     updateIcons: updateIcons,

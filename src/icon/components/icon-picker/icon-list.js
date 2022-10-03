@@ -21,6 +21,7 @@ export default function IconList( props ) {
 		currentLibrary,
 		showIconNames,
 		iconSize,
+		limit,
 		searchInput,
 		updateIcons,
 		onClose,
@@ -54,6 +55,11 @@ export default function IconList( props ) {
 			} );
 		} else {
 			newIcons = icons; // Use all icons if search is inactive.
+		}
+
+		// Limit icons to a certain number if prop exists.
+		if ( limit ) {
+			newIcons = newIcons.slice( 0, limit );
 		}
 
 		updateIcons( newIcons ); // Pass icons to parent component.

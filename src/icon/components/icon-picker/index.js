@@ -19,6 +19,7 @@ export default function IconPicker( props ) {
 		currentLibrary = "__all",
 		showIconNames = false,
 		iconSize = 32,
+		limit = false,
 		searchInput,
 		updateChildData,
 		updateIcons,
@@ -88,6 +89,7 @@ export default function IconPicker( props ) {
 			currentLibrary={ currentLibrary }
 			showIconNames={ showIconNames }
 			iconSize={ iconSize }
+			limit={ limit }
 			searchInput={ searchInput }
 			updateIcons={ updateIcons }
 			onClose={ onClose }

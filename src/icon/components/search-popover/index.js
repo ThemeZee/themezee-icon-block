@@ -52,25 +52,6 @@ export default function SearchPopover( props ) {
 		setIcons( icons );
 	}
 
-	function getDefaultIcons( icons ) {
-		const defaultIcons = [
-			'bell',
-			'calendar',
-			'clock',
-			'comment',
-			'envelope',
-			'heart',
-			'image',
-			'lightbulb',
-			'pen-to-square',
-			'star',
-			'thumbs-up',
-			'user',
-		];
-
-		return icons.filter( ( icon ) => ( defaultIcons.includes( icon.name ) && icon.library === 'fa-regular' ) );
-	}
-
 	const availableIcons = icons ? icons : [];
 	const availableLibraries = childData?.availableLibraries ? childData?.availableLibraries : libraries;
 	const isLoading = childData?.isLoading ? childData?.isLoading : false;
@@ -99,6 +80,7 @@ export default function SearchPopover( props ) {
 							setAttributes={ setAttributes }
 							libraries={ libraries }
 							enabledLibraries={ enabledLibraries }
+							limit={ 12 }
 							searchInput={ searchInput }
 							updateChildData={ updateChildData }
 							updateIcons={ updateIcons }
