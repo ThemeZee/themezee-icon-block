@@ -1,1 +1,11 @@
-.wp-block-themezee-icon-button .wp-block-button__link{align-items:center;display:flex;flex-wrap:nowrap;gap:.3em}
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/icon-button/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+.wp-block-themezee-icon-button .wp-block-button__link {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.3em;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

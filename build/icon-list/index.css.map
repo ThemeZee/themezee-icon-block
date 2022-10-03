@@ -1,0 +1,1 @@
+{"version":3,"file":"icon-list/index.css","mappings":";;;AAAA;;EAEC;AACD,C","sources":["webpack://advanced-icon-block/./src/icon-list/editor.scss"],"sourcesContent":[".editor-styles-wrapper ul.wp-block-themezee-icon-list,\r\nul.wp-block-themezee-icon-list {\r\n\tpadding: 0;\r\n}\r\n"],"names":[],"sourceRoot":""}

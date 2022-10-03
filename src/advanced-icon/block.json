@@ -4,7 +4,7 @@
 	"name": "themezee/advanced-icon",
 	"version": "0.1.0",
 	"title": "Advanced Icon",
-	"category": "media",
+	"category": "design",
 	"description": "Display a SVG icon.",
 	"textdomain": "advanced-icon-block",
 	"attributes": {
