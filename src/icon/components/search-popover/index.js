@@ -80,6 +80,7 @@ export default function SearchPopover( props ) {
 							setAttributes={ setAttributes }
 							libraries={ libraries }
 							enabledLibraries={ enabledLibraries }
+							currentLibrary="wordpress"
 							limit={ 12 }
 							searchInput={ searchInput }
 							updateChildData={ updateChildData }

@@ -99,6 +99,9 @@ export default function IconList( props ) {
 		renderedIcons = filteredIcons.filter( icon => currentLibrary === icon?.library );
 	}
 
+	// Set isLoading variable if icon libraries are loaded.
+	const isLoading = enabledLibraries.filter( library => ! loadedLibraries.includes( library ) ).length > 0;
+
 	return (
 		<div className="themezee-icon-picker">
 			{ searchInput && (
@@ -116,7 +119,7 @@ export default function IconList( props ) {
 				</div>
 			) }
 
-			{ ! isEmpty( renderedIcons ) && (
+			{ ( ! isEmpty( renderedIcons ) && ! isLoading ) && (
 				<div
 					className={ classnames( 'tz-icon-list', {
 						'show-icon-names': showIconNames,
@@ -145,9 +148,9 @@ export default function IconList( props ) {
 				</div>
 			) }
 
-			{ isEmpty( renderedIcons ) && (
+			{ isLoading && (
 				<div className="block-editor-modal__no-results">
-					<p>{ __( 'No results found.' ) }</p>
+					<p>{ __( 'Icon Sets are loaded...' ) }</p>
 				</div>
 			) }
 		</div>
