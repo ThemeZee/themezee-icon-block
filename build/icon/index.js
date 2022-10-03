@@ -713,7 +713,7 @@ function SearchPopover(props) {
     setAttributes: setAttributes,
     libraries: _libraries__WEBPACK_IMPORTED_MODULE_5__.libraries,
     enabledLibraries: enabledLibraries,
-    currentLibrary: "wordpress",
+    currentLibrary: "__all",
     limit: 12,
     searchInput: searchInput,
     updateChildData: updateChildData,
