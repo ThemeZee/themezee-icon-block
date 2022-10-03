@@ -134,8 +134,8 @@ function ButtonEdit( props ) {
 
 	const { getBlock } = useSelect( blockEditorStore );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		allowedBlocks: [ 'themezee/advanced-icon' ],
-		template: [ [ 'themezee/advanced-icon', {
+		allowedBlocks: [ 'themezee/icon' ],
+		template: [ [ 'themezee/icon', {
 			iconName: "download",
 			iconLibrary: "wordpress",
 			iconWidth: "1.2em",

@@ -32,7 +32,7 @@ registerBlockType( metadata.name, {
 				name: 'themezee/icon-button',
 				attributes: { text: __( 'Find out more' ) },
 				innerBlocks: [ { 
-					name: 'themezee/advanced-icon', 
+					name: 'themezee/icon', 
 					attributes: {
 						iconName: "info",
 						iconLibrary: "wordpress",
@@ -45,7 +45,7 @@ registerBlockType( metadata.name, {
 				name: 'themezee/icon-button',
 				attributes: { text: __( 'Contact us' ) },
 				innerBlocks: [ { 
-					name: 'themezee/advanced-icon', 
+					name: 'themezee/icon', 
 					attributes: {
 						iconName: "atSymbol",
 						iconLibrary: "wordpress",

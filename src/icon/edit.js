@@ -283,7 +283,7 @@ function Edit( {
 					<BlockControls>
 						<ToolbarGroup>
 							<ToolbarButton
-								className={ `themezee-advanced-icon-block__rotate-button-${ rotate }` }
+								className={ `themezee-icon-block__rotate-button-${ rotate }` }
 								icon={ rotateRight }
 								label={ __( 'Rotate' ) }
 								onClick={ () =>
@@ -420,7 +420,7 @@ function Edit( {
 					<Placeholder
 						icon={ placeholderIcon }
 						label={ __( 'Advanced Icon' ) }
-						className="wp-block-themezee-advanced-icon-placeholder"
+						className="wp-block-themezee-icon-placeholder"
 					>
 							<Button
 								isPrimary

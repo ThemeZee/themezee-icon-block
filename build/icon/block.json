@@ -1,9 +1,9 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "themezee/advanced-icon",
+  "name": "themezee/icon",
   "version": "0.1.0",
-  "title": "Advanced Icon",
+  "title": "Icon",
   "category": "design",
   "description": "Display a SVG icon.",
   "textdomain": "advanced-icon-block",

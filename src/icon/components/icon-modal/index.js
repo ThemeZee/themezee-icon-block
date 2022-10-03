@@ -137,7 +137,7 @@ export default function IconModal( props ) {
 
 	return (
 		<Modal
-			className="wp-block-themezee-advanced-icon-block__icon_modal"
+			className="wp-block-themezee-icon-block__icon_modal"
 			title={ __( 'Icons' ) }
 			onRequestClose={ () => setIconModalOpen( false ) }
 			isFullScreen

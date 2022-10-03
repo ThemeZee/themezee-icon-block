@@ -27,8 +27,8 @@ export default function ListItemEdit( {
 
 	const { getBlock } = useSelect( blockEditorStore );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		allowedBlocks: [ 'themezee/advanced-icon' ],
-		template: [ [ 'themezee/advanced-icon', {
+		allowedBlocks: [ 'themezee/icon' ],
+		template: [ [ 'themezee/icon', {
 			iconName: "check",
 			iconLibrary: "wordpress",
 			iconWidth: "1.2em",

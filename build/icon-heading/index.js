@@ -162,7 +162,7 @@ const icon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_
 
     return ((_blockAttributes$layo = blockAttributes.layout) === null || _blockAttributes$layo === void 0 ? void 0 : _blockAttributes$layo.type) === 'flex' && (!((_blockAttributes$layo2 = blockAttributes.layout) !== null && _blockAttributes$layo2 !== void 0 && _blockAttributes$layo2.orientation) || ((_blockAttributes$layo3 = blockAttributes.layout) === null || _blockAttributes$layo3 === void 0 ? void 0 : _blockAttributes$layo3.orientation) === 'horizontal');
   },
-  innerBlocks: [['themezee/advanced-icon', {
+  innerBlocks: [['themezee/icon', {
     iconName: "cover",
     iconLibrary: "wordpress",
     iconWidth: "36px",
@@ -180,7 +180,7 @@ const icon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_
       }
     },
     innerBlocks: [{
-      name: 'themezee/advanced-icon',
+      name: 'themezee/icon',
       attributes: {
         iconName: "cover",
         iconLibrary: "wordpress",

@@ -134,7 +134,7 @@ const icon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_
         text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Find out more')
       },
       innerBlocks: [{
-        name: 'themezee/advanced-icon',
+        name: 'themezee/icon',
         attributes: {
           iconName: "info",
           iconLibrary: "wordpress",
@@ -148,7 +148,7 @@ const icon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_
         text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Contact us')
       },
       innerBlocks: [{
-        name: 'themezee/advanced-icon',
+        name: 'themezee/icon',
         attributes: {
           iconName: "atSymbol",
           iconLibrary: "wordpress",

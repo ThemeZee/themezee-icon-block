@@ -28,7 +28,7 @@ registerBlockVariation(
 			( ! blockAttributes.layout?.orientation ||
 				blockAttributes.layout?.orientation === 'horizontal' ),
 		innerBlocks: [
-			[ 'themezee/advanced-icon', {
+			[ 'themezee/icon', {
 				iconName: "cover",
 				iconLibrary: "wordpress",
 				iconWidth: "36px",
@@ -49,7 +49,7 @@ registerBlockVariation(
 			},
 			innerBlocks: [
 				{
-					name: 'themezee/advanced-icon',
+					name: 'themezee/icon',
 					attributes: {
 						iconName: "cover",
 						iconLibrary: "wordpress",

@@ -107,7 +107,7 @@ export default function SearchPopover( props ) {
 
 	return (
 		<Popover
-			className="wp-block-themezee-advanced-icon-block__search-popover block-editor-inserter__popover is-quick"
+			className="wp-block-themezee-icon-block__search-popover block-editor-inserter__popover is-quick"
 			position="bottom center"
 			onClose={ () => {
 				setSearchPopoverOpen( false );

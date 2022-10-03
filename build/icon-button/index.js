@@ -217,8 +217,8 @@ function ButtonEdit(props) {
     getBlock
   } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.useSelect)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.store);
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useInnerBlocksProps)(blockProps, {
-    allowedBlocks: ['themezee/advanced-icon'],
-    template: [['themezee/advanced-icon', {
+    allowedBlocks: ['themezee/icon'],
+    template: [['themezee/icon', {
       iconName: "download",
       iconLibrary: "wordpress",
       iconWidth: "1.2em",
