@@ -81,7 +81,8 @@ export default function SearchPopover( props ) {
 							libraries={ libraries }
 							enabledLibraries={ enabledLibraries }
 							currentLibrary="__all"
-							limit={ 12 }
+							iconSize = { 25 }
+							limit={ 15 }
 							searchInput={ searchInput }
 							updateChildData={ updateChildData }
 							updateIcons={ updateIcons }
