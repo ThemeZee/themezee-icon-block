@@ -109,21 +109,8 @@
     width: calc(100% - 281px);
   }
 }
-.wp-block-themezee-icon-block__icon_modal .tz-icon-modal__content .tz-icon-modal__content-header {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-.wp-block-themezee-icon-block__icon_modal .tz-icon-modal__content .tz-icon-modal__content-header .search-results {
-  color: #757575;
-}
-.wp-block-themezee-icon-block__icon_modal .tz-icon-modal__content .block-editor-modal__no-results {
-  height: calc(100% - 56px);
-  margin-top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.wp-block-themezee-icon-block__icon_modal .tz-icon-modal__content .search-results {
+  margin-bottom: 16px;
 }
 /*!**********************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/icon/components/search-popover/style.scss ***!

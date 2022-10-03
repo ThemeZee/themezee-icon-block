@@ -72,23 +72,8 @@
 			width: calc(100% - 281px);
 		}
 
-		.tz-icon-modal__content-header {
-			align-items: center;
-			display: flex;
-			justify-content: space-between;
-			margin-bottom: 12px;
-
-			.search-results {
-				color: #757575;
-			}
-		}
-
-		.block-editor-modal__no-results {
-			height: calc(100% - 56px);
-			margin-top: 0;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
+		.search-results {
+			margin-bottom: 16px;
 		}
 	}
 }

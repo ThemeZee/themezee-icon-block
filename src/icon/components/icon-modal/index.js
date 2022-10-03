@@ -201,6 +201,31 @@ export default function IconModal( props ) {
 			</div>
 
 			<div className="tz-icon-modal__content">
+				{ searchInput && (
+					<div className="search-results">
+						{ sprintf(
+							// translators: %1$s: Number of icons returned from search, %2$s: the search input, %3$s: current icon set
+							_n(
+								'%1$s search result for "%2$s" in %3$s. ',
+								'%1$s search results for "%2$s" in %3$s. ',
+								currentLibrary === '__all' ? availableIcons.length : availableIcons.filter( icon => currentLibrary === icon?.library ).length,
+							),
+							currentLibrary === '__all' ? availableIcons.length : availableIcons.filter( icon => currentLibrary === icon?.library ).length,
+							searchInput,
+							libraries.filter( lib => lib.name === currentLibrary )[0].title
+						) }
+
+						{ ! ( currentLibrary === '__all' ) && (
+							<Button
+								variant="link"
+								onClick={ () => onClickLibrary( '__all' ) }
+							>
+								{ __( 'Search all icon sets' ) }
+							</Button>
+						) }
+					</div>
+				) }
+
 				<IconPicker
 					attributes={ attributes }
 					setAttributes={ setAttributes }

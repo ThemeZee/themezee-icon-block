@@ -104,21 +104,6 @@ export default function IconList( props ) {
 
 	return (
 		<div className="themezee-icon-picker">
-			{ searchInput && (
-				<div className="search-results">
-					{ sprintf(
-						// translators: %1$s: Number of icons retruned from search, %2$s: the search input
-						_n(
-							'%1$s search result for "%2$s"',
-							'%1$s search results for "%2$s"',
-							renderedIcons.length,
-						),
-						renderedIcons.length,
-						searchInput
-					) }
-				</div>
-			) }
-
 			{ ( ! isEmpty( renderedIcons ) && ! isLoading ) && (
 				<div
 					className={ classnames( 'tz-icon-list', {
@@ -149,8 +134,8 @@ export default function IconList( props ) {
 			) }
 
 			{ isLoading && (
-				<div className="block-editor-modal__no-results">
-					<p>{ __( 'Icon Sets are loaded...' ) }</p>
+				<div className="themezee-icon-picker__is-loading">
+					{ __( 'Icon Sets are loaded...' ) }
 				</div>
 			) }
 		</div>
