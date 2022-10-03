@@ -1,25 +1,25 @@
 /**
  * External dependencies
  */
-import classnames from 'classnames';
 import { isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, _n } from '@wordpress/i18n';
 import {
 	Button,
 	Popover,
 	SearchControl,
-	Tooltip,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { applyFilters } from '@wordpress/hooks'; 
+import { select } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
+import { libraries } from '../../libraries';
+import IconPicker from '../icon-picker';
 import './style.scss';
 
 export default function SearchPopover( props ) {
@@ -36,19 +36,20 @@ export default function SearchPopover( props ) {
 		return null;
 	}
 
-	const icons = applyFilters( 'themezeeAdvancedIconBlock.icons', [] );
-
 	// State Hooks.
-	const [ filteredIcons, setFilteredIcons ] = useState( icons );
+	const [ enabledLibraries, setEnabledLibraries ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'enabledLibraries' ) );
 	const [ searchInput, setSearchInput ] = useState( '' );
+	const [ icons, setIcons ] = useState( [] );
+	const [ childData, setChildData ] = useState( {} );
 
-	function updateIconName( name, library, svg ) {
-		setAttributes( {
-			iconName: name,
-			iconLibrary: library,
-			iconSVG: svg,
-		} );
-		setSearchPopoverOpen( false );
+	// Get data from child component (IconPicker).
+	const updateChildData = ( data ) => {
+		setChildData( data );
+	};
+
+	// Get icon from child component (IconList).
+	const updateIcons = icons => {
+		setIcons( icons );
 	}
 
 	function getDefaultIcons( icons ) {
@@ -70,41 +71,11 @@ export default function SearchPopover( props ) {
 		return icons.filter( ( icon ) => ( defaultIcons.includes( icon.name ) && icon.library === 'fa-regular' ) );
 	}
 
-	function filterIcons( search ) {
-		let newIcons;
+	const availableIcons = icons ? icons : [];
+	const availableLibraries = childData?.availableLibraries ? childData?.availableLibraries : libraries;
+	const isLoading = childData?.isLoading ? childData?.isLoading : false;
 
-		// Filter icons if search is active.
-		if ( search ) {
-			newIcons = icons.filter( ( icon ) => {
-				const input = search.toLowerCase();
-				const iconName = icon.name.toLowerCase();
-	
-				// First check if the name matches.
-				if ( iconName.includes( input ) ) {
-					return true;
-				}
-	
-				return false;
-			} );
-		} else {
-			newIcons = icons;
-		}
-
-		// Update state.
-		setFilteredIcons( newIcons );
-		setSearchInput( search );
-	}
-
-	// Only render a few icons.
-	let renderedIcons;
-	if ( ! searchInput ) {
-		// Set popular default icons if not searched.
-		renderedIcons = getDefaultIcons( filteredIcons );
-	} else {
-		// Limit search results to 12 icons.
-		renderedIcons = filteredIcons.slice( 0, 12 );
-	}
-
+	console.log( availableIcons, searchInput, isLoading );
 	return (
 		<Popover
 			className="wp-block-themezee-icon-block__search-popover block-editor-inserter__popover is-quick"
@@ -121,32 +92,24 @@ export default function SearchPopover( props ) {
 					label={ __( 'Search icons' ) }
 					hideLabelFromVision={ true }
 					value={ searchInput }
-					onChange={ filterIcons }
+					onChange={ ( value ) => setSearchInput( value ) }
 				/>
 					<div className="block-editor-inserter__quick-inserter-results">			
-						{ ! isEmpty( renderedIcons ) && (
-							<div className="tz-icon-list">
-								{ renderedIcons.map( ( icon ) => {
-									return (
-										<Tooltip text={ icon.name }>
-												<Button
-												key={ `icon-${ icon.library }-${ icon.name }` }
-												className={ classnames( 'tz-icon-list__item', {
-													'is-active': icon.name === attributes?.iconName && icon.library === attributes?.iconLibrary,
-												} ) }
-												onClick={ () => updateIconName( icon.name, icon.library, icon.icon ) }
-											>
-												<span className="tz-icon-list__item-icon">
-													{ icon.icon }
-												</span>
-											</Button>
-										</Tooltip>
-									);
-								} ) }
-							</div>
-						) }
+						<IconPicker
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							libraries={ libraries }
+							enabledLibraries={ enabledLibraries }
+							currentLibrary="__all"
+							showIconNames={ false }
+							iconSize={ 32 }
+							searchInput={ searchInput }
+							updateChildData={ updateChildData }
+							updateIcons={ updateIcons }
+							onClose={ setSearchPopoverOpen }
+						/>
 
-						{ isEmpty( renderedIcons ) && (
+						{ isEmpty( availableIcons ) && (
 							<div className="block-editor-modal__no-results">
 								<p>{ __( 'No results found.' ) }</p>
 								<Button
