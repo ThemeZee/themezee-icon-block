@@ -75,7 +75,6 @@ export default function SearchPopover( props ) {
 	const availableLibraries = childData?.availableLibraries ? childData?.availableLibraries : libraries;
 	const isLoading = childData?.isLoading ? childData?.isLoading : false;
 
-	console.log( availableIcons, searchInput, isLoading );
 	return (
 		<Popover
 			className="wp-block-themezee-icon-block__search-popover block-editor-inserter__popover is-quick"
@@ -100,9 +99,6 @@ export default function SearchPopover( props ) {
 							setAttributes={ setAttributes }
 							libraries={ libraries }
 							enabledLibraries={ enabledLibraries }
-							currentLibrary="__all"
-							showIconNames={ false }
-							iconSize={ 32 }
 							searchInput={ searchInput }
 							updateChildData={ updateChildData }
 							updateIcons={ updateIcons }

@@ -526,9 +526,9 @@ function IconPicker(props) {
     setAttributes,
     libraries,
     enabledLibraries,
-    currentLibrary,
-    showIconNames,
-    iconSize,
+    currentLibrary = "__all",
+    showIconNames = false,
+    iconSize = 32,
     searchInput,
     updateChildData,
     updateIcons,
@@ -682,7 +682,6 @@ function SearchPopover(props) {
   const availableIcons = icons ? icons : [];
   const availableLibraries = childData !== null && childData !== void 0 && childData.availableLibraries ? childData === null || childData === void 0 ? void 0 : childData.availableLibraries : _libraries__WEBPACK_IMPORTED_MODULE_5__.libraries;
   const isLoading = childData !== null && childData !== void 0 && childData.isLoading ? childData === null || childData === void 0 ? void 0 : childData.isLoading : false;
-  console.log(availableIcons, searchInput, isLoading);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Popover, {
     className: "wp-block-themezee-icon-block__search-popover block-editor-inserter__popover is-quick",
     position: "bottom center",
@@ -706,9 +705,6 @@ function SearchPopover(props) {
     setAttributes: setAttributes,
     libraries: _libraries__WEBPACK_IMPORTED_MODULE_5__.libraries,
     enabledLibraries: enabledLibraries,
-    currentLibrary: "__all",
-    showIconNames: false,
-    iconSize: 32,
     searchInput: searchInput,
     updateChildData: updateChildData,
     updateIcons: updateIcons,
