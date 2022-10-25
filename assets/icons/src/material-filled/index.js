@@ -10,8 +10,8 @@ wp.domReady( () => {
 	}
 
 	wp.hooks.addFilter(
-		'themezeeAdvancedIconBlock.icons',
-		'themezee/advanced-icon-block/material-filled',
+		'themezeeIconBlock.icons',
+		'themezee/icon-block/material-filled',
 		addMaterialIcons
 	);
 } );

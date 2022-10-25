@@ -99,7 +99,7 @@
 		{ "name": "fill", "label": "Fill", "isDefault": true },
 		{ "name": "outline", "label": "Outline" }
 	],
-	"textdomain": "advanced-icon-block",
+	"textdomain": "themezee-icon-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"

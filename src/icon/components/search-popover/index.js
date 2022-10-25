@@ -37,7 +37,7 @@ export default function SearchPopover( props ) {
 	}
 
 	// State Hooks.
-	const [ enabledLibraries, setEnabledLibraries ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'enabledLibraries' ) );
+	const [ enabledLibraries, setEnabledLibraries ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'enabledLibraries' ) );
 	const [ searchInput, setSearchInput ] = useState( '' );
 	const [ icons, setIcons ] = useState( [] );
 	const [ childData, setChildData ] = useState( {} );

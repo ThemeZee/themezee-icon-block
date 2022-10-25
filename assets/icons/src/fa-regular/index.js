@@ -27,8 +27,8 @@ wp.domReady( () => {
 	}
 
 	wp.hooks.addFilter(
-		'themezeeAdvancedIconBlock.icons',
-		'themezee/advanced-icon-block/fa-regular',
+		'themezeeIconBlock.icons',
+		'themezee/icon-block/fa-regular',
 		addFontAwesomeIcons
 	);
 } );

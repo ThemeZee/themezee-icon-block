@@ -27,7 +27,7 @@ export default function IconPicker( props ) {
 	} = props;
 
 	// Return early if public icon variable is not available.
-	if ( ! themezeeIconBlockBundle ) {
+	if ( ! themezeeIconBlock ) {
 		return null;
 	}
 
@@ -41,7 +41,7 @@ export default function IconPicker( props ) {
 				const script = document.createElement( 'script' );
 				script.id = library.scriptId;
 				script.type = "text/javascript";
-				script.src = themezeeIconBlockBundle.url + library.scriptUrl;
+				script.src = themezeeIconBlock.url + library.scriptUrl;
 				script.async = true;
 				document.body.appendChild( script );
 

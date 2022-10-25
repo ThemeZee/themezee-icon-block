@@ -28,7 +28,7 @@ export default function IconList( props ) {
 	} = props;
 
 	// Retrieve icons from loaded icon scripts.
-	const icons = applyFilters( 'themezeeAdvancedIconBlock.icons', [] );
+	const icons = applyFilters( 'themezeeIconBlock.icons', [] );
 
 	// State Hooks.
 	const [ availableIcons, setAvailableIcons ] = useState( icons );

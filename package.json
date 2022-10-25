@@ -1,5 +1,5 @@
 {
-	"name": "advanced-icon-block",
+	"name": "themezee-icon-block",
 	"version": "0.1.0",
 	"description": "Example block scaffolded with Create Block tool.",
 	"author": "The WordPress Contributors",
@@ -13,7 +13,7 @@
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start",
-		"export": "git archive HEAD -9 --prefix advanced-icon-block/ --format=zip > ../../advanced-icon-block.zip"
+		"export": "git archive HEAD -9 --prefix themezee-icon-block/ --format=zip > ../../themezee-icon-block.zip"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^24.0.0"

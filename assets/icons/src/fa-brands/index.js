@@ -27,8 +27,8 @@ wp.domReady( () => {
 	}
 
 	wp.hooks.addFilter(
-		'themezeeAdvancedIconBlock.icons',
-		'themezee/advanced-icon-block/fa-brands',
+		'themezeeIconBlock.icons',
+		'themezee/icon-block/fa-brands',
 		addFontAwesomeIcons
 	);
 } );

@@ -6,7 +6,7 @@
 	"title": "Icon",
 	"category": "design",
 	"description": "Display a SVG icon.",
-	"textdomain": "advanced-icon-block",
+	"textdomain": "themezee-icon-block",
 	"attributes": {
 		"blockWidth": {
 			"type": "string"

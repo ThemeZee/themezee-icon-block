@@ -43,7 +43,7 @@ export default function IconModal( props ) {
 
 	// Store default preferences.
 	dispatch( preferencesStore ).setDefaults(
-		'themezee/advanced-icon-block',
+		'themezee/icon-block',
 		{
 			enabledLibraries: [ '__all', 'wordpress', 'fa-regular' ],
 			showIconNames: true,
@@ -52,9 +52,9 @@ export default function IconModal( props ) {
 	);
 
 	// State Hooks.
-	const [ enabledLibraries, setEnabledLibraries ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'enabledLibraries' ) );
-	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'showIconNames' ) );
-	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/advanced-icon-block', 'iconSize' ) );
+	const [ enabledLibraries, setEnabledLibraries ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'enabledLibraries' ) );
+	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'showIconNames' ) );
+	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'iconSize' ) );
 	const [ searchInput, setSearchInput ] = useState( '' );
 	const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
 	const [ icons, setIcons ] = useState( [] );
@@ -84,7 +84,7 @@ export default function IconModal( props ) {
 
 		// Update State and preferences.
 		setEnabledLibraries( newLibrary );
-		dispatch( 'core/preferences' ).set( 'themezee/advanced-icon-block', 'enabledLibraries', newLibrary );
+		dispatch( 'core/preferences' ).set( 'themezee/icon-block', 'enabledLibraries', newLibrary );
 	}
 
 	function onClickLibrary( library ) {
@@ -151,7 +151,7 @@ export default function IconModal( props ) {
 						checked={ showIconNames }
 						onChange={ () => {
 							setShowIconNames( ( state ) => ! state );
-							dispatch( 'core/preferences' ).toggle( 'themezee/advanced-icon-block', 'showIconNames' );
+							dispatch( 'core/preferences' ).toggle( 'themezee/icon-block', 'showIconNames' );
 						} }
 					/>
 					<BaseControl  label={ __( 'Preview Size' ) }>					
@@ -164,7 +164,7 @@ export default function IconModal( props ) {
 										variant={ size === iconSize ? 'primary' : undefined }
 										onClick={ () => ( function ( value ) {
 											setIconSize( value );
-											dispatch( 'core/preferences' ).set( 'themezee/advanced-icon-block', 'iconSize', value );
+											dispatch( 'core/preferences' ).set( 'themezee/icon-block', 'iconSize', value );
 										} )( size ) }
 									>
 										{ size }px

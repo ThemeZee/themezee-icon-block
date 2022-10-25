@@ -2,6 +2,6 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
 	"name": "themezee/icon-heading",
-	"textdomain": "advanced-icon-block",
+	"textdomain": "themezee-icon-block",
 	"editorScript": "file:./index.js"
 }

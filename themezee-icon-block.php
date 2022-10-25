@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Advanced Icon Block
+ * Plugin Name:       ThemeZee Icon Block
  * Description:       Display a SVG icon.
  * Requires at least: 6.0
  * Requires PHP:      7.0
@@ -8,9 +8,9 @@
  * Author:            ThemeZee
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       advanced-icon-block
+ * Text Domain:       themezee-icon-block
  *
- * @package           Advanced Icon Block
+ * @package           ThemeZee Icon Block
  */
 
 /**
@@ -33,7 +33,7 @@ add_action( 'init', 'register_themezee_advanced_icon_block' );
 
 function register_themezee_advanced_icon_block_default_icons() {
 	wp_enqueue_script(
-		'themezee-advanced-icon-block-default-icons',
+		'themezee-icon-block-default-icons',
 		plugins_url( '/assets/icons/default-icons.js', __FILE__ ),
 		array( 'wp-hooks', 'wp-dom' ),
 		'20220927',
@@ -41,7 +41,7 @@ function register_themezee_advanced_icon_block_default_icons() {
 	);
 
 	// Passing url to default-icons.js.
-	wp_localize_script( 'themezee-advanced-icon-block-default-icons', 'themezeeIconBlockBundle', array(
+	wp_localize_script( 'themezee-icon-block-default-icons', 'themezeeIconBlock', array(
 		'url' => plugins_url( '/assets/icons/', __FILE__ ),
 	) );
 }

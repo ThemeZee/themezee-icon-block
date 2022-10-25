@@ -1392,8 +1392,8 @@ const icons = [
 
 wp.domReady( () => {
 	wp.hooks.addFilter(
-		'themezeeAdvancedIconBlock.icons',
-		'themezee/advanced-icon-block/default-icons',
+		'themezeeIconBlock.icons',
+		'themezee/icon-block/default-icons',
 		() => icons
 	);
 } );
