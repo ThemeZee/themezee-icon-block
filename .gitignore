@@ -30,5 +30,4 @@ node_modules/
 .env
 
 # Custom
-build/block-variations/block.json
-build/block-variations/index.asset.php
+build/
