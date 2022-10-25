@@ -21,12 +21,7 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function register_themezee_icon_block() {
-	register_block_type( __DIR__ . '/build/icon' );
-	register_block_type( __DIR__ . '/build/icon-button' );
-	register_block_type( __DIR__ . '/build/icon-buttons' );
-	register_block_type( __DIR__ . '/build/icon-heading' );
-	register_block_type( __DIR__ . '/build/icon-list' );
-	register_block_type( __DIR__ . '/build/icon-list-item' );
+	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', 'register_themezee_icon_block' );
 
