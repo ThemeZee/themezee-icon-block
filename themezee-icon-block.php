@@ -20,7 +20,7 @@
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function register_themezee_advanced_icon_block() {
+function register_themezee_icon_block() {
 	register_block_type( __DIR__ . '/build/icon' );
 	register_block_type( __DIR__ . '/build/icon-button' );
 	register_block_type( __DIR__ . '/build/icon-buttons' );
@@ -28,10 +28,10 @@ function register_themezee_advanced_icon_block() {
 	register_block_type( __DIR__ . '/build/icon-list' );
 	register_block_type( __DIR__ . '/build/icon-list-item' );
 }
-add_action( 'init', 'register_themezee_advanced_icon_block' );
+add_action( 'init', 'register_themezee_icon_block' );
 
 
-function register_themezee_advanced_icon_block_default_icons() {
+function register_themezee_icon_block_default_icons() {
 	wp_enqueue_script(
 		'themezee-icon-block-default-icons',
 		plugins_url( '/assets/icons/default-icons.js', __FILE__ ),
@@ -45,4 +45,4 @@ function register_themezee_advanced_icon_block_default_icons() {
 		'url' => plugins_url( '/assets/icons/', __FILE__ ),
 	) );
 }
-add_action( 'enqueue_block_editor_assets', 'register_themezee_advanced_icon_block_default_icons' );
+add_action( 'enqueue_block_editor_assets', 'register_themezee_icon_block_default_icons' );
