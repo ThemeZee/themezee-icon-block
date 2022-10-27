@@ -26,6 +26,9 @@ function register_themezee_icon_block() {
 add_action( 'init', 'register_themezee_icon_block' );
 
 
+/**
+ * Load the default icon set.
+ */
 function register_themezee_icon_block_default_icons() {
 	wp_enqueue_script(
 		'themezee-icon-block-default-icons',
@@ -41,3 +44,52 @@ function register_themezee_icon_block_default_icons() {
 	) );
 }
 add_action( 'enqueue_block_editor_assets', 'register_themezee_icon_block_default_icons' );
+
+
+/**
+ * Set up the Plugin Updater Constants.
+ */
+define( 'THEMEZEE_ICON_BLOCK_VERSION', '1.0' );
+define( 'THEMEZEE_ICON_BLOCK_NAME', 'Icon Block' );
+define( 'THEMEZEE_ICON_BLOCK_ID', 53694 );
+define( 'THEMEZEE_ICON_BLOCK_STORE_URL', 'https://themezee.com' );
+
+
+/**
+ * Include License Settings and Plugin Updater.
+ */
+include dirname( __FILE__ ) . '/includes/class-themezee-blocks-admin-page.php';
+include dirname( __FILE__ ) . '/includes/class-themezee-icon-block-license-settings.php';
+include dirname( __FILE__ ) . '/includes/class-themezee-icon-block-updater.php';
+
+
+/**
+ * Initialize the updater. Hooked into `init` to work with the
+ * wp_version_check cron job, which allows auto-updates.
+ */
+function update_themezee_icon_block() {
+
+	// To support auto-updates, this needs to run during the wp_version_check cron job for privileged users.
+	$doing_cron = defined( 'DOING_CRON' ) && DOING_CRON;
+	if ( ! current_user_can( 'manage_options' ) && ! $doing_cron ) {
+		return;
+	}
+
+	// Retrieve our license key from the DB.
+	$options     = get_option( 'themezee_blocks_settings', array() );
+	$license_key = ! empty( $options['icon_block_license_key'] ) ? trim( $options['icon_block_license_key'] ) : false;
+
+	// Setup the updater.
+	$edd_updater = new ThemeZee_Icon_Block_Updater(
+		THEMEZEE_ICON_BLOCK_STORE_URL,
+		__FILE__,
+		array(
+			'version' => THEMEZEE_ICON_BLOCK_VERSION,
+			'license' => $license_key,
+			'item_id' => THEMEZEE_ICON_BLOCK_ID,
+			'author'  => 'ThemeZee',
+			'beta'    => false,
+		)
+	);
+}
+add_action( 'init', 'update_themezee_icon_block' );
