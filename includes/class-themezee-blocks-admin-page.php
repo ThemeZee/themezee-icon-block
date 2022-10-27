@@ -80,7 +80,7 @@ if ( ! class_exists( 'ThemeZee_Blocks_Admin_Page' ) ) :
 			// Add Section.
 			add_settings_section(
 				'themezee_blocks_license_section',
-				esc_html__( 'Automatic Updates', 'themezee-icon-block' ),
+				esc_html__( 'License Settings', 'themezee-icon-block' ),
 				array( __CLASS__, 'license_section_intro' ),
 				'themezee_blocks_settings'
 			);
@@ -97,7 +97,7 @@ if ( ! class_exists( 'ThemeZee_Blocks_Admin_Page' ) ) :
 		 * License Section Intro
 		 */
 		static function license_section_intro() {
-			esc_html_e( 'Please enter your license key. An active license key is needed for automatic updates and support.', 'themezee-icon-block' );
+			esc_html_e( 'An active license key is needed to install updates and receive support.', 'themezee-icon-block' );
 		}
 
 		/**
