@@ -67,7 +67,7 @@ class ThemeZee_Icon_Block_License_Settings {
 
 		$html = '';
 		if ( 'valid' === $license_status && ! empty( $license_key ) ) {
-			$html .= '<span style="display: inline-block; width: 25em; margin: 0 1px; padding: 0 8px;line-height: 2;border-radius: 4px;border: 1px solid #8c8f94;">*************************' . esc_html( substr( stripslashes( $license_key ), 25 ) ) . '</span>';
+			$html .= '<span style="display: inline-block; box-sizing: border-box; width: 25em; margin: 0 1px; padding: 0 8px;line-height: 2;border-radius: 4px;border: 1px solid #8c8f94;">*************************' . esc_html( substr( stripslashes( $license_key ), 25 ) ) . '</span>';
 			$html .= '<input type="submit" class="button" name="themezee_icon_block_deactivate_license" value="' . esc_attr__( 'Deactivate License', 'themezee-icon-block' ) . '"/>';
 			$html .= '<br/><span class="description">' . esc_html__( 'Active. You are receiving updates.', 'themezee-icon-block' ) . '</span>';
 		} else {
@@ -273,15 +273,10 @@ class ThemeZee_Icon_Block_License_Settings {
 			exit();
 		}
 
-		// Decode the license data.
-		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
-		// $license_data->license will be either "deactivated" or "failed"
-		if ( 'deactivated' === $license_data->license ) {
-			$options['icon_block_license_key']    = '';
-			$options['icon_block_license_status'] = $license_data->license;
-			update_option( 'themezee_blocks_settings', $options );
-		}
+		// Deactivate the License key in DB.
+		$options['icon_block_license_key']    = '';
+		$options['icon_block_license_status'] = 'inactive';
+		update_option( 'themezee_blocks_settings', $options );
 
 		wp_safe_redirect( admin_url( 'options-general.php?page=themezee-blocks' ) );
 		exit();

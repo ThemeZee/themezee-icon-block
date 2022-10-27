@@ -50,8 +50,8 @@ add_action( 'enqueue_block_editor_assets', 'register_themezee_icon_block_default
  * Set up the Plugin Updater Constants.
  */
 define( 'THEMEZEE_ICON_BLOCK_VERSION', '1.0' );
-define( 'THEMEZEE_ICON_BLOCK_NAME', 'Icon Block' );
-define( 'THEMEZEE_ICON_BLOCK_ID', 53694 );
+define( 'THEMEZEE_ICON_BLOCK_NAME', 'Harrison Pro' );
+define( 'THEMEZEE_ICON_BLOCK_ID', 214389 );
 define( 'THEMEZEE_ICON_BLOCK_STORE_URL', 'https://themezee.com' );
 
 
