@@ -170,23 +170,8 @@ export default function IconModal( props ) {
 				</MenuGroup>
 
 				<MenuGroup
-					className="tz-icon-modal__sidebar__icon-libraries"
-				>
-					
-				</MenuGroup>
-
-				<MenuGroup
 					className="tz-icon-modal__sidebar__preferences"
-					label={ __( 'Preferences' ) }
 				>
-					<ToggleControl
-						label={ __( 'Show icon names' ) }
-						checked={ showIconNames }
-						onChange={ () => {
-							setShowIconNames( ( state ) => ! state );
-							dispatch( 'core/preferences' ).toggle( 'themezee/icon-block', 'showIconNames' );
-						} }
-					/>
 					<BaseControl  label={ __( 'Preview Size' ) }>					
 						<ButtonGroup>
 							{ [ 16, 24, 32, 48, 64 ].map( ( size ) => {
@@ -206,6 +191,15 @@ export default function IconModal( props ) {
 							} ) }
 						</ButtonGroup>
 					</BaseControl>
+
+					<ToggleControl
+						label={ __( 'Show icon names' ) }
+						checked={ showIconNames }
+						onChange={ () => {
+							setShowIconNames( ( state ) => ! state );
+							dispatch( 'core/preferences' ).toggle( 'themezee/icon-block', 'showIconNames' );
+						} }
+					/>
 				</MenuGroup>
 			</div>
 

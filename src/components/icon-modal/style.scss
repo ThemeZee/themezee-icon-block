@@ -37,8 +37,7 @@
 		}
 
 		&__library,
-		&__preferences,
-		&__icon-libraries {
+		&__preferences {
 			border: none;
 
 			.components-menu-group__label {
@@ -65,6 +64,12 @@
 				.components-base-control__label {
 					margin: 0;
 				}
+			}
+		}
+
+		&__preferences {
+			.components-base-control {
+				margin-top: 16px;
 			}
 		}
 	}
