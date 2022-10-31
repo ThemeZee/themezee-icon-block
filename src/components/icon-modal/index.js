@@ -11,7 +11,6 @@ import {
 	BaseControl,
 	Button,
 	ButtonGroup,
-	CheckboxControl,
 	MenuGroup,
 	MenuItem,
 	Modal,
@@ -26,6 +25,7 @@ import { store as preferencesStore } from '@wordpress/preferences';
  * Internal dependencies
  */
 import { libraries } from '../../libraries';
+import LibrariesControl from '../libraries-control';
 import IconPicker from '../icon-picker';
 import './style.scss';
 
@@ -143,6 +143,18 @@ export default function IconModal( props ) {
 				</MenuGroup>
 
 				<MenuGroup
+					className="tz-icon-modal__sidebar__icon-libraries"
+				>
+					<LibrariesControl
+						availableLibraries={ availableLibraries }
+						enabledLibraries={ enabledLibraries }
+						isLoading={ isLoading }
+						label={ __( 'Icon Sets' ) }
+						onChange={ toggleLibrary }
+					/>
+				</MenuGroup>
+
+				<MenuGroup
 					className="tz-icon-modal__sidebar__preferences"
 					label={ __( 'Preferences' ) }
 				>
@@ -173,30 +185,6 @@ export default function IconModal( props ) {
 							} ) }
 						</ButtonGroup>
 					</BaseControl>
-				</MenuGroup>
-
-				<MenuGroup
-					className="tz-icon-modal__sidebar__icon-libraries"
-					label={ __( 'Icon Sets' ) }
-				>
-					{ libraries.map( ( library ) => {
-						// Return early for all icon libraries.
-						if ( library.name === '__all' ) {
-							return;
-						}
-
-						const showLoadingText = enabledLibraries.includes( library.name ) && ! availableLibraries.map( lib => lib.name ).includes( library.name );
-						return (
-							<CheckboxControl
-								key={ library.name }
-								label={ library.title }
-								checked={ enabledLibraries.includes( library.name ) }
-								onChange={ () => toggleLibrary( library.name ) }
-								disabled={ isLoading }
-								help={ showLoadingText ? __( 'Icon Set is loaded...' ) : '' }
-							/>
-						);
-					} ) }
 				</MenuGroup>
 			</div>
 
