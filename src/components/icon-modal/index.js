@@ -58,7 +58,7 @@ export default function IconModal( props ) {
 	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'showIconNames' ) );
 	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'iconSize' ) );
 	const [ searchInput, setSearchInput ] = useState( '' );
-	const [ currentLibrary, setCurrentLibrary ] = useState( attributes.iconLibrary );
+	const [ currentLibrary, setCurrentLibrary ] = useState( '__all' );
 	const [ icons, setIcons ] = useState( [] );
 	const [ childData, setChildData ] = useState( {} );
 

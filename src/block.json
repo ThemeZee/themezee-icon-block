@@ -15,8 +15,7 @@
 			"type": "string"
 		},
 		"iconLibrary": {
-			"type": "string",
-			"default": "wordpress"
+			"type": "string"
 		},
 		"iconSVG": {
 			"type": "string",
