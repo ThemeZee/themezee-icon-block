@@ -11,6 +11,7 @@ import {
 	BaseControl,
 	Button,
 	ButtonGroup,
+	Flex,
 	MenuGroup,
 	MenuItem,
 	Modal,
@@ -53,6 +54,7 @@ export default function IconModal( props ) {
 
 	// State Hooks.
 	const [ enabledLibraries, setEnabledLibraries ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'enabledLibraries' ) );
+	const [ isSettingsOpen, setSettingsOpen ] = useState( false );
 	const [ showIconNames, setShowIconNames ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'showIconNames' ) );
 	const [ iconSize, setIconSize ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'iconSize' ) );
 	const [ searchInput, setSearchInput ] = useState( '' );
@@ -120,7 +122,30 @@ export default function IconModal( props ) {
 				<MenuGroup
 					className="tz-icon-modal__sidebar__library"
 				>		
-					{ availableLibraries.map( ( library ) => {
+					<Flex className="modal__sidebar__library-label">
+						<BaseControl.VisualLabel as="legend">
+							{ __( 'Icon Sets' ) }
+						</BaseControl.VisualLabel>
+
+						<Button
+							variant="link"
+							onClick={ () => setSettingsOpen( ! isSettingsOpen ) }
+						>
+							{ __( 'Settings', 'icon-block' ) }
+						</Button>
+					</Flex>
+
+					{ isSettingsOpen && (
+						<LibrariesControl
+							availableLibraries={ availableLibraries }
+							enabledLibraries={ enabledLibraries }
+							isLoading={ isLoading }
+							onChange={ toggleLibrary }
+						/>
+					) }
+
+					{ ! isSettingsOpen && (
+						availableLibraries.map( ( library ) => {
 							const isActive = currentLibrary ? library.name === currentLibrary : library.name === '__all';
 							const libraryIcons = availableIcons.filter( icon => library.name === icon?.library );
 
@@ -139,19 +164,15 @@ export default function IconModal( props ) {
 									</span>
 								</MenuItem>
 							);
-						} ) }
+						} )
+					) }
+
 				</MenuGroup>
 
 				<MenuGroup
 					className="tz-icon-modal__sidebar__icon-libraries"
 				>
-					<LibrariesControl
-						availableLibraries={ availableLibraries }
-						enabledLibraries={ enabledLibraries }
-						isLoading={ isLoading }
-						label={ __( 'Icon Sets' ) }
-						onChange={ toggleLibrary }
-					/>
+					
 				</MenuGroup>
 
 				<MenuGroup

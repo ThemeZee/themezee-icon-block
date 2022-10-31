@@ -39,7 +39,6 @@
 		&__library,
 		&__preferences,
 		&__icon-libraries {
-			// Override core component styles.
 			border: none;
 
 			.components-menu-group__label {
@@ -55,6 +54,16 @@
 
 				&>span {
 					opacity: 0.5;
+				}
+			}
+		}
+
+		&__library {
+			.modal__sidebar__library-label {
+				margin-bottom: 16px;
+
+				.components-base-control__label {
+					margin: 0;
 				}
 			}
 		}
