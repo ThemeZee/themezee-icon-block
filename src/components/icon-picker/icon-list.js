@@ -8,7 +8,7 @@ import classnames from 'classnames';
  */
 import { __, _n } from '@wordpress/i18n';
 import { Button, Flex, FlexItem } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { chevronLeft, chevronRight } from '@wordpress/icons';
 
 export default function IconList( props ) {
@@ -37,6 +37,12 @@ export default function IconList( props ) {
 	const [ currentPage, setCurrentPage ] = useState( 1 );
 	const [ iconsLimit, setIconsLimit ] = useState( iconsPerPage );
 
+	// Reset pagination if search term or current library changes.
+	useEffect( () => {
+		setCurrentPage( 1 );
+		setIconsLimit( iconsPerPage );
+	}, [ filteredIcons, currentLibrary ] );
+
 	let selectedIcons = [];
 	let renderedIcons = [];
 
@@ -53,8 +59,6 @@ export default function IconList( props ) {
 
 	// Calculate number of pages.
 	const pageCount = Math.ceil( selectedIcons.length / iconsPerPage );
-
-	console.log( currentPage, ( currentPage - 1 ) * iconsPerPage, iconsLimit, pageCount );
 
 	return (
 		<>
