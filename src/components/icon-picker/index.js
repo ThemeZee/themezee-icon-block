@@ -1,98 +1,148 @@
 /**
+ * External dependencies
+ */
+import classnames from 'classnames';
+import { isEmpty } from 'lodash';
+
+/**
  * WordPress dependencies
  */
 import { __, _n } from '@wordpress/i18n';
+import { Button } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks'; 
 
 /**
  * Internal dependencies
  */
-import IconList from './icon-list';
 import './style.scss';
-
+ 
 export default function IconPicker( props ) {
 	const {
 		attributes,
 		setAttributes,
-		libraries,
 		enabledLibraries,
-		currentLibrary = "__all",
-		showIconNames = false,
-		iconSize = 32,
-		limit = false,
+		loadedLibraries,
+		currentLibrary,
+		showIconNames,
+		iconSize,
+		limit,
 		searchInput,
-		updateChildData,
 		updateIcons,
 		onClose,
 	} = props;
 
-	// Return early if public icon variable is not available.
-	if ( ! themezeeIconBlock ) {
-		return null;
-	}
+	// Retrieve icons from loaded icon scripts.
+	const icons = applyFilters( 'themezeeIconBlock.icons', [] );
 
 	// State Hooks.
-	const [ loadedLibraries, setLoadedLibraries ] = useState( [ '__all', 'wordpress' ] );
+	const [ availableIcons, setAvailableIcons ] = useState( icons );
+	const [ filteredIcons, setFilteredIcons ] = useState( icons );
 
-	// Load Icon Sets.
-	useEffect( () => {
-		libraries.filter( library => ( 'scriptId' in library ) && enabledLibraries.includes( library.name ) ).map( library => {
-			if ( ! document.getElementById( library.scriptId ) ) {
-				const script = document.createElement( 'script' );
-				script.id = library.scriptId;
-				script.type = "text/javascript";
-				script.src = themezeeIconBlock.url + library.scriptUrl;
-				script.async = true;
-				document.body.appendChild( script );
+	/**
+	 * Filter icons array based on search term.
+	 */
+	function filterIcons( search, icons ) {
+		let newIcons;
 
-				script.onload = () => {
-					setLoadedLibraries( currentSets => [ ...currentSets, library.name ] );
-				};
+		// Filter icons if search is active.
+		if ( search ) {
+			const input = search.toLowerCase();
+			newIcons = icons.filter( ( icon ) => {
+				const iconName = icon.name.toLowerCase();
 
-				script.onerror = () => {
-					console.log( "There was an error loading ", library.scriptUrl );
-					script.remove();
-				};
-			} else {
-				setLoadedLibraries( currentSets => [ ...currentSets, library.name ] );
-			}
-		} );
-	}, [ enabledLibraries ] );
+				// First check if the name matches.
+				if ( iconName.includes( input ) ) {
+					return true;
+				}
 
-	// Pass data to parent component.
-	useEffect( () => {
-		// Set available libraries, which are enabled and loaded.
-		const availableLibraries = libraries.filter( library => {
-			// Return early if icon library is not enabled or loaded.
-			if ( ! enabledLibraries.includes( library.name ) || ! loadedLibraries.includes( library.name ) ) {
 				return false;
-			}
-			return true;
-		} );
+			} );
+		} else {
+			newIcons = icons; // Use all icons if search is inactive.
+		}
 
-		// Set isLoading variable if icon libraries are loaded.
-		const isLoading = enabledLibraries.filter( library => ! loadedLibraries.includes( library ) ).length > 0;
+		// Limit icons to a certain number if prop exists.
+		if ( limit ) {
+			newIcons = newIcons.slice( 0, limit );
+		}
 
-		// Pass data to parent component.
-		updateChildData( {
-			availableLibraries,
-			isLoading,
+		updateIcons( newIcons ); // Pass icons to parent component.
+		return newIcons;
+	}
+
+	// Update available icons if libraries change.
+	useEffect( () => {
+		const availableLibraries = enabledLibraries.filter( lib => loadedLibraries.includes( lib ) );
+		const newIcons = icons.filter( icon => availableLibraries.includes( icon.library ) );
+
+		setAvailableIcons( newIcons );
+		setFilteredIcons( filterIcons( searchInput, newIcons ) );
+	}, [ enabledLibraries, loadedLibraries, searchInput ] );
+
+	// Update filtered icons if search term changes.
+	useEffect( () => {
+		setFilteredIcons( filterIcons( searchInput, availableIcons ) );
+	}, [ searchInput ] );
+
+	function updateIconName( name, library, svg ) {
+		setAttributes( {
+			iconName: name,
+			iconLibrary: library,
+			iconSVG: svg,
 		} );
-	}, [ enabledLibraries, loadedLibraries ] );
+		onClose( false );
+	}
+
+	let renderedIcons = [];
+
+	// Fetch all icons if no library is selected.
+	if ( currentLibrary === '__all' ) {
+		renderedIcons = filteredIcons;
+	} else {
+		// Fetch icons from current library.
+		renderedIcons = filteredIcons.filter( icon => currentLibrary === icon?.library );
+	}
+
+	// Set isLoading variable if icon libraries are loaded.
+	const isLoading = enabledLibraries.filter( library => ! loadedLibraries.includes( library ) ).length > 0;
 
 	return (
-		<IconList
-			attributes={ attributes }
-			setAttributes={ setAttributes }
-			enabledLibraries={ enabledLibraries }
-			loadedLibraries={ loadedLibraries }
-			currentLibrary={ currentLibrary }
-			showIconNames={ showIconNames }
-			iconSize={ iconSize }
-			limit={ limit }
-			searchInput={ searchInput }
-			updateIcons={ updateIcons }
-			onClose={ onClose }
-		/>
+		<div className="themezee-icon-picker">
+			{ ( ! isEmpty( renderedIcons ) && ! isLoading ) && (
+				<div
+					className={ classnames( 'tz-icon-list', {
+						'show-icon-names': showIconNames,
+					} ) }
+				>
+					{ renderedIcons.map( ( icon ) => {
+						return (
+							<Button
+								key={ `icon-${ icon.library }-${ icon.name }` }
+								className={ classnames( 'tz-icon-list__item', {
+									'is-active': icon.name === attributes?.iconName && icon.library === attributes?.iconLibrary,
+								} ) }
+								onClick={ () => updateIconName( icon.name, icon.library, icon.icon ) }
+							>
+								<span className="tz-icon-list__item-icon" style={ { width: `${iconSize}px`, height: `${iconSize}px` } }>
+									{ icon.icon }
+								</span>
+								{ showIconNames && (
+									<span className="tz-icon-list__item-name">
+										{ icon.name }
+									</span>
+								) }
+							</Button>
+						);
+					} ) }
+				</div>
+			) }
+
+			{ isLoading && (
+				<div className="themezee-icon-picker__is-loading">
+					{ __( 'Icon Sets are loaded...' ) }
+				</div>
+			) }
+		</div>
 	);
 }

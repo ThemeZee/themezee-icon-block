@@ -27,7 +27,7 @@ import { store as preferencesStore } from '@wordpress/preferences';
  */
 import { libraries } from '../../libraries';
 import LibrariesControl from '../libraries-control';
-import IconPicker from '../icon-picker';
+import IconLoader from '../icon-loader';
 import './style.scss';
 
 export default function IconModal( props ) {
@@ -62,12 +62,12 @@ export default function IconModal( props ) {
 	const [ icons, setIcons ] = useState( [] );
 	const [ childData, setChildData ] = useState( {} );
 
-	// Get data from child component (IconPicker).
+	// Get data from child component (IconLoader).
 	const updateChildData = ( data ) => {
 		setChildData( data );
 	};
 
-	// Get icon from child component (IconList).
+	// Get icon from child component (IconPicker).
 	const updateIcons = icons => {
 		setIcons( icons );
 	}
@@ -229,7 +229,7 @@ export default function IconModal( props ) {
 					</div>
 				) }
 
-				<IconPicker
+				<IconLoader
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 					libraries={ libraries }

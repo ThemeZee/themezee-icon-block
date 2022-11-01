@@ -19,7 +19,7 @@ import { select } from '@wordpress/data';
  * Internal dependencies
  */
 import { libraries } from '../../libraries';
-import IconPicker from '../icon-picker';
+import IconLoader from '../icon-loader';
 import './style.scss';
 
 export default function SearchPopover( props ) {
@@ -42,12 +42,12 @@ export default function SearchPopover( props ) {
 	const [ icons, setIcons ] = useState( [] );
 	const [ childData, setChildData ] = useState( {} );
 
-	// Get data from child component (IconPicker).
+	// Get data from child component (IconLoader).
 	const updateChildData = ( data ) => {
 		setChildData( data );
 	};
 
-	// Get icon from child component (IconList).
+	// Get icon from child component (IconPicker).
 	const updateIcons = icons => {
 		setIcons( icons );
 	}
@@ -75,7 +75,7 @@ export default function SearchPopover( props ) {
 					onChange={ ( value ) => setSearchInput( value ) }
 				/>
 					<div className="block-editor-inserter__quick-inserter-results">			
-						<IconPicker
+						<IconLoader
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							libraries={ libraries }
