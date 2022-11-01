@@ -98,6 +98,7 @@ export default function IconPicker( props ) {
 					showIconNames={ showIconNames }
 					iconSize={ iconSize }
 					onClose={ onClose }
+					showPagination={ true }
 					iconsPerPage={ 150 }
 				/>
 			) }

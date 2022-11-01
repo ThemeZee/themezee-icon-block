@@ -1,16 +1,22 @@
 .themezee-icon-picker {
-    display: flex;
-    flex-direction: column;
-
-	.components-button {
+	.show-more-button {
 		display: flex;
 		justify-content: center;
+		width: 100%;
+		margin-top: 24px;
+	}
+
+	.pagination {
+		margin-top: 16px;
+
+		.components-button {
+			margin-right: 3px;
+		}
 	}
 
 	.tz-icon-list {
 		display: flex;
 		flex-wrap: wrap;
-		margin-bottom: 24px;
 	
 		.tz-icon-list__item {
 			position: relative;

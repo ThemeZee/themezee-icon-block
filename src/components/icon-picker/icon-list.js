@@ -7,9 +7,10 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { __, _n } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
+import { Button, Flex, FlexItem } from '@wordpress/components';
 import { useState } from '@wordpress/element';
- 
+import { chevronLeft, chevronRight } from '@wordpress/icons';
+
 export default function IconList( props ) {
 	const {
 		attributes,
@@ -19,6 +20,7 @@ export default function IconList( props ) {
 		showIconNames,
 		iconSize,
 		onClose,
+		showPagination = false,
 		iconsPerPage = 100,
 	} = props;
 
@@ -32,7 +34,7 @@ export default function IconList( props ) {
 	}
 
 	// State Hooks.
-	const [ currentPage, setCurrentPage ] = useState( 0 );
+	const [ currentPage, setCurrentPage ] = useState( 1 );
 	const [ iconsLimit, setIconsLimit ] = useState( iconsPerPage );
 
 	let selectedIcons = [];
@@ -47,7 +49,12 @@ export default function IconList( props ) {
 	}
 
 	// Do not show all icons at once.
-	renderedIcons = selectedIcons.slice(currentPage * iconsPerPage, iconsLimit);
+	renderedIcons = selectedIcons.slice( ( currentPage - 1 ) * iconsPerPage, iconsLimit );
+
+	// Calculate number of pages.
+	const pageCount = Math.ceil( selectedIcons.length / iconsPerPage );
+
+	console.log( currentPage, ( currentPage - 1 ) * iconsPerPage, iconsLimit, pageCount );
 
 	return (
 		<>
@@ -78,13 +85,51 @@ export default function IconList( props ) {
 				} ) }
 			</div>
 
-			{ ( selectedIcons.length > iconsLimit ) && (
+			{ ( selectedIcons.length > iconsLimit && ! showPagination ) && (
 				<Button
 					isPrimary
+					className="show-more-button"
 					onClick={ () => setIconsLimit( iconsLimit + iconsPerPage ) }
 				>
 					{ __( 'Show more' ) }
 				</Button>
+			) }
+
+			{ showPagination && (
+				<Flex className="pagination">
+					<FlexItem>
+						<Button
+							isSecondary
+							isSmall
+							icon={ chevronLeft }
+							label={ __( 'Previous' ) }
+							disabled={ currentPage > 1 ? false : true }
+							onClick={ () => {
+								if ( currentPage > 1 ) {
+									setIconsLimit( iconsLimit - iconsPerPage );
+									setCurrentPage( currentPage - 1 );
+								}
+							} }
+						/>
+						<Button
+							isSecondary
+							isSmall
+							icon={ chevronRight }
+							label={ __( 'Next' ) }
+							disabled={ currentPage < pageCount ? false : true }
+							onClick={ () => {
+								if ( currentPage < pageCount ) {
+									setIconsLimit( iconsLimit + iconsPerPage );
+									setCurrentPage( currentPage + 1 );
+								}
+							} }
+						/>
+					</FlexItem>
+
+					<FlexItem className="page-numbers">
+						{ currentPage } / { pageCount }
+					</FlexItem>
+				</Flex>
 			) }
 		</>
 	);
