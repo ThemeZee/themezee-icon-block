@@ -1,20 +1,19 @@
 /**
  * External dependencies
  */
-import classnames from 'classnames';
 import { isEmpty } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { __, _n } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks'; 
 
 /**
  * Internal dependencies
  */
+import IconList from './icon-list';
 import './style.scss';
  
 export default function IconPicker( props ) {
@@ -85,57 +84,21 @@ export default function IconPicker( props ) {
 		setFilteredIcons( filterIcons( searchInput, availableIcons ) );
 	}, [ searchInput ] );
 
-	function updateIconName( name, library, svg ) {
-		setAttributes( {
-			iconName: name,
-			iconLibrary: library,
-			iconSVG: svg,
-		} );
-		onClose( false );
-	}
-
-	let renderedIcons = [];
-
-	// Fetch all icons if no library is selected.
-	if ( currentLibrary === '__all' ) {
-		renderedIcons = filteredIcons;
-	} else {
-		// Fetch icons from current library.
-		renderedIcons = filteredIcons.filter( icon => currentLibrary === icon?.library );
-	}
-
 	// Set isLoading variable if icon libraries are loaded.
 	const isLoading = enabledLibraries.filter( library => ! loadedLibraries.includes( library ) ).length > 0;
 
 	return (
 		<div className="themezee-icon-picker">
-			{ ( ! isEmpty( renderedIcons ) && ! isLoading ) && (
-				<div
-					className={ classnames( 'tz-icon-list', {
-						'show-icon-names': showIconNames,
-					} ) }
-				>
-					{ renderedIcons.map( ( icon ) => {
-						return (
-							<Button
-								key={ `icon-${ icon.library }-${ icon.name }` }
-								className={ classnames( 'tz-icon-list__item', {
-									'is-active': icon.name === attributes?.iconName && icon.library === attributes?.iconLibrary,
-								} ) }
-								onClick={ () => updateIconName( icon.name, icon.library, icon.icon ) }
-							>
-								<span className="tz-icon-list__item-icon" style={ { width: `${iconSize}px`, height: `${iconSize}px` } }>
-									{ icon.icon }
-								</span>
-								{ showIconNames && (
-									<span className="tz-icon-list__item-name">
-										{ icon.name }
-									</span>
-								) }
-							</Button>
-						);
-					} ) }
-				</div>
+			{ ( ! isEmpty( filteredIcons ) && ! isLoading ) && (
+				<IconList
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					filteredIcons={ filteredIcons }
+					currentLibrary={ currentLibrary }
+					showIconNames={ showIconNames }
+					iconSize={ iconSize }
+					onClose={ onClose }
+				/>
 			) }
 
 			{ isLoading && (
