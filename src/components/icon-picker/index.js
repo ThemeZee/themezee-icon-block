@@ -25,10 +25,11 @@ export default function IconPicker( props ) {
 		currentLibrary,
 		showIconNames,
 		iconSize,
-		limit,
 		searchInput,
 		updateIcons,
 		onClose,
+		showPagination,
+		iconsPerPage,
 	} = props;
 
 	// Retrieve icons from loaded icon scripts.
@@ -59,11 +60,6 @@ export default function IconPicker( props ) {
 			} );
 		} else {
 			newIcons = icons; // Use all icons if search is inactive.
-		}
-
-		// Limit icons to a certain number if prop exists.
-		if ( limit ) {
-			newIcons = newIcons.slice( 0, limit );
 		}
 
 		updateIcons( newIcons ); // Pass icons to parent component.
@@ -98,8 +94,8 @@ export default function IconPicker( props ) {
 					showIconNames={ showIconNames }
 					iconSize={ iconSize }
 					onClose={ onClose }
-					showPagination={ true }
-					iconsPerPage={ 150 }
+					showPagination={ showPagination }
+					iconsPerPage={ iconsPerPage }
 				/>
 			) }
 

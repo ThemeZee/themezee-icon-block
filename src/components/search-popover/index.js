@@ -82,11 +82,12 @@ export default function SearchPopover( props ) {
 							enabledLibraries={ enabledLibraries }
 							currentLibrary="__all"
 							iconSize = { 25 }
-							limit={ 15 }
 							searchInput={ searchInput }
 							updateChildData={ updateChildData }
 							updateIcons={ updateIcons }
 							onClose={ setSearchPopoverOpen }
+							showPagination={ true }
+							iconsPerPage={ 15 }
 						/>
 
 						{ isEmpty( availableIcons ) && (

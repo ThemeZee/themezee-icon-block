@@ -241,6 +241,8 @@ export default function IconModal( props ) {
 					updateChildData={ updateChildData }
 					updateIcons={ updateIcons }
 					onClose={ setIconModalOpen }
+					showPagination={ false }
+					iconsPerPage={ 150 }
 				/>
 			</div>
 		</div>

@@ -19,11 +19,12 @@ export default function IconLoader( props ) {
 		currentLibrary = "__all",
 		showIconNames = false,
 		iconSize = 32,
-		limit = false,
 		searchInput,
 		updateChildData,
 		updateIcons,
 		onClose,
+		showPagination,
+		iconsPerPage,
 	} = props;
 
 	// Return early if public icon variable is not available.
@@ -89,10 +90,11 @@ export default function IconLoader( props ) {
 			currentLibrary={ currentLibrary }
 			showIconNames={ showIconNames }
 			iconSize={ iconSize }
-			limit={ limit }
 			searchInput={ searchInput }
 			updateIcons={ updateIcons }
 			onClose={ onClose }
+			showPagination={ showPagination }
+			iconsPerPage={ iconsPerPage }
 		/>
 	);
 }
