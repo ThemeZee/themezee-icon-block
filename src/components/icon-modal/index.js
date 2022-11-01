@@ -72,7 +72,7 @@ export default function IconModal( props ) {
 		setIcons( icons );
 	}
 
-	function toggleLibrary( value ) {
+	function enableLibrary( value ) {
 		let newLibrary;
 
 		// Check if icon library is already enabled.
@@ -89,7 +89,7 @@ export default function IconModal( props ) {
 		dispatch( 'core/preferences' ).set( 'themezee/icon-block', 'enabledLibraries', newLibrary );
 	}
 
-	function onClickLibrary( library ) {
+	function changeCurrentLibrary( library ) {
 		setCurrentLibrary( library );
 	}
 
@@ -140,7 +140,7 @@ export default function IconModal( props ) {
 							availableLibraries={ availableLibraries }
 							enabledLibraries={ enabledLibraries }
 							isLoading={ isLoading }
-							onChange={ toggleLibrary }
+							onChange={ enableLibrary }
 						/>
 					) }
 
@@ -155,7 +155,7 @@ export default function IconModal( props ) {
 									className={ classnames( {
 										'is-active': isActive,
 									} ) }
-									onClick={ () => onClickLibrary( library.name ) }
+									onClick={ () => changeCurrentLibrary( library.name ) }
 									isPressed={ isActive }
 								>
 									{ library.title }
@@ -221,7 +221,7 @@ export default function IconModal( props ) {
 						{ ! ( currentLibrary === '__all' ) && (
 							<Button
 								variant="link"
-								onClick={ () => onClickLibrary( '__all' ) }
+								onClick={ () => changeCurrentLibrary( '__all' ) }
 							>
 								{ __( 'Search all icon sets' ) }
 							</Button>
