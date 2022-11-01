@@ -272,7 +272,7 @@ function Edit( {
 								setIsEditingURL( false );
 								ref.current?.focus();
 							} }
-							anchorRef={ ref?.current }
+							anchor={ ref?.current }
 							focusOnMount={ isEditingURL ? 'firstElement' : false }
 							__unstableSlotName={ '__unstable-block-tools-after' }
 						>
@@ -467,7 +467,7 @@ function Edit( {
 				isSearchPopoverOpen={ isSearchPopoverOpen }
 				setSearchPopoverOpen={ setSearchPopoverOpen }
 				setAttributes={ setAttributes }
-				anchorRef={ ref?.current }
+				anchor={ ref?.current }
 			/>
 		</>
 	);

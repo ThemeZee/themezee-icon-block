@@ -32,7 +32,7 @@ export default function SearchPopover( props ) {
 		setSearchPopoverOpen,
 		attributes,
 		setAttributes,
-		anchorRef,
+		anchor,
 	} = props;
 
 	if ( ! isSearchPopoverOpen ) {
@@ -83,9 +83,9 @@ export default function SearchPopover( props ) {
 			position="bottom center"
 			onClose={ () => {
 				setSearchPopoverOpen( false );
-				anchorRef?.focus();
+				anchor?.focus();
 			} }
-			anchorRef={ anchorRef }
+			anchor={ anchor }
 		>
 			<div className="block-editor-inserter__quick-inserter">
 				<div className="block-editor-inserter__quick-inserter-header">
