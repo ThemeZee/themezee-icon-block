@@ -20,7 +20,6 @@ import {
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { select, dispatch } from '@wordpress/data';
-import { store as preferencesStore } from '@wordpress/preferences';
 
 /**
  * Internal dependencies
@@ -41,16 +40,6 @@ export default function IconModal( props ) {
 	if ( ! isIconModalOpen ) {
 		return null;
 	}
-
-	// Store default preferences.
-	dispatch( preferencesStore ).setDefaults(
-		'themezee/icon-block',
-		{
-			enabledLibraries: [ '__all', 'wordpress', 'fa-regular' ],
-			showIconNames: true,
-			iconSize: 32,
-		}
-	);
 
 	// State Hooks.
 	const [ enabledLibraries, setEnabledLibraries ] = useState( select( 'core/preferences' ).get( 'themezee/icon-block', 'enabledLibraries' ) );

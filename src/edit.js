@@ -32,6 +32,7 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';
+import { dispatch } from '@wordpress/data';
 import { useCallback, useEffect, useState, useRef } from '@wordpress/element';
 import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
 import {
@@ -42,6 +43,7 @@ import {
 	linkOff,
 } from '@wordpress/icons';
 import { SVG, Path } from '@wordpress/components';
+import { store as preferencesStore } from '@wordpress/preferences';
 
 /**
  * Internal dependencies
@@ -86,6 +88,16 @@ function Edit( {
 		rel,
 		label,
 	} = attributes;
+
+	// Store default preferences.
+	dispatch( preferencesStore ).setDefaults(
+		'themezee/icon-block',
+		{
+			enabledLibraries: [ '__all', 'wordpress', 'fa-regular' ],
+			showIconNames: true,
+			iconSize: 32,
+		}
+	);
 
 	const [ isIconModalOpen, setIconModalOpen ] = useState( false );
 	const [ isSearchPopoverOpen, setSearchPopoverOpen ] = useState( false );

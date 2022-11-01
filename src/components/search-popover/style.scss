@@ -1,4 +1,29 @@
-.wp-block-themezee-icon-block__search-popover {
+.wp-block-themezee-icon__search-popover {
+	.block-editor-inserter__quick-inserter-header {
+		padding: 16px 16px 0;
+
+		.components-search-control {
+			flex-grow: 1;
+
+			.components-base-control__field {
+				margin-bottom: 0;
+			}
+		}
+
+		.components-button {
+			width: 48px;
+			height: 48px;
+		}
+
+		.wp-block-themezee-icon__libraries-control {
+			margin-top: 16px;
+
+			.components-base-control__help {
+				margin-bottom: 0;
+			}
+		}
+	}
+
 	.block-editor-inserter__quick-inserter-results {
 		padding: 16px;
 	}

@@ -29,6 +29,7 @@ export default function LibrariesControl( props ) {
 
 	return (
 		<BaseControl
+			className="wp-block-themezee-icon__libraries-control"
 			help={ __(
 				'Choose the available icon sets. For performance reasons, do not enable all of them.'
 			) }
