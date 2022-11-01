@@ -41,6 +41,7 @@ import {
 	flipVertical as flipV,
 	link,
 	linkOff,
+	search,
 } from '@wordpress/icons';
 import { SVG, Path } from '@wordpress/components';
 import { store as preferencesStore } from '@wordpress/preferences';
@@ -334,9 +335,14 @@ function Edit( {
 						</ToolbarGroup>
 						<ToolbarGroup>
 							<ToolbarButton
-								onClick={ () => setIconModalOpen(true) }>
+								onClick={ () => setIconModalOpen( true ) }>
 									{ __( 'Replace' ) }
 							</ToolbarButton>
+							<ToolbarButton
+								icon={ search }
+								label={ __( 'Search icon' ) }
+								onClick={ () => setSearchPopoverOpen( true ) }
+							/>
 						</ToolbarGroup>
 					</BlockControls>
 
