@@ -37,6 +37,7 @@ import { dispatch } from '@wordpress/data';
 import { useCallback, useEffect, useState, useRef } from '@wordpress/element';
 import { displayShortcut, isKeyboardEvent } from '@wordpress/keycodes';
 import {
+	Icon,
 	rotateRight,
 	flipHorizontal as flipH,
 	flipVertical as flipV,
@@ -464,20 +465,25 @@ function Edit( {
 					<Placeholder
 						icon={ placeholderIcon }
 						label={ __( 'Icon' ) }
-						className="wp-block-themezee-icon-placeholder"
+						instructions={ __( 'Browse all icons in the library or run a quick search.' ) }
+						className="wp-block-themezee-icon-placeholder has-illustration"
 					>
-							<Button
-								isPrimary
-								onClick={ () => setIconModalOpen( true ) }
-							>
-								{ __( 'Browse all icons', 'icon-block' ) }
-							</Button>
-							<Button
-								isSecondary
-								onClick={ () => setSearchPopoverOpen( true ) }
-							>
-								{ __( 'Search for icon', 'icon-block' ) }
-							</Button>
+						<Icon
+							className="components-placeholder__illustration"
+							icon={ placeholderIcon }
+						/>
+						<Button
+							isPrimary
+							onClick={ () => setIconModalOpen( true ) }
+						>
+							{ __( 'Icon Library', 'icon-block' ) }
+						</Button>
+						<Button
+							isTertiary
+							onClick={ () => setSearchPopoverOpen( true ) }
+						>
+							{ __( 'Quick Search', 'icon-block' ) }
+						</Button>
 					</Placeholder>
 				</div>
 			) }

@@ -27,4 +27,30 @@
 /* Icon Placeholder */
 .components-placeholder.wp-block-themezee-icon-placeholder {
 	min-height: auto;
+
+	svg.components-placeholder__illustration {
+		position: absolute;
+		max-width: 90px;
+		fill: none;
+		stroke-width: 0.5;
+	}
+}
+
+.wp-block-themezee-icon.is-selected {
+	.components-placeholder.wp-block-themezee-icon-placeholder {
+		background-color: #fff;
+		border: none;
+		border-radius: 2px;
+		box-shadow: inset 0 0 0 1px #1e1e1e;
+		color: #1e1e1e;
+		filter: none;
+
+		&:before {
+			opacity: 0;
+		}
+
+		.components-placeholder__illustration {
+			display: none;
+		}
+	}
 }
