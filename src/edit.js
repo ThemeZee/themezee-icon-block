@@ -22,6 +22,7 @@ import {
 import {
 	Button,
 	ButtonGroup,
+	ExternalLink,
 	Popover,
 	Placeholder,
 	TextControl,
@@ -88,6 +89,7 @@ function Edit( {
 		linkTarget,
 		rel,
 		label,
+		title,
 	} = attributes;
 
 	// Store default preferences.
@@ -217,7 +219,7 @@ function Edit( {
 	const iconElement = typeof iconSVG === 'string' ? parse( iconSVG, { trim: true } ) : iconSVG;
 
 	const figure = (
-		<figure className={ iconClasses } style={ iconStyles } aria-label={ label ? label : undefined }>
+		<figure className={ iconClasses } style={ iconStyles } aria-label={ label ? label : undefined } title={ title ? title : undefined }>
 			{ iconElement }
 		</figure>
 	);
@@ -375,7 +377,7 @@ function Edit( {
 								label={ __( 'Icon label' ) }
 								onDeselect={ () => setAttributes( { label: undefined } ) }
 								resetAllFilter={ () => ( { label: undefined } ) }
-								isShownByDefault={ false }
+								isShownByDefault={ true }
 							>
 								<TextControl
 									label={ __( 'Icon label' ) }
@@ -428,6 +430,24 @@ function Edit( {
 							label={ __( 'Link rel' ) }
 							value={ rel || '' }
 							onChange={ onSetLinkRel }
+						/>
+
+						<TextControl
+							label={ __( 'Title attribute' ) }
+							value={ title || '' }
+							onChange={ ( value ) => setAttributes( { title: value } ) }
+							help={
+								<>
+									{ __(
+										'Describe the role of this icon on the page.'
+									) }
+									<ExternalLink href="https://www.w3.org/TR/html52/dom.html#the-title-attribute">
+										{ __(
+											'(Note: many devices and browsers do not display this text.)'
+										) }
+									</ExternalLink>
+								</>
+							}
 						/>
 					</InspectorControls>
 				</> 

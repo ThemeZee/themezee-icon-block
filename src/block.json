@@ -64,6 +64,9 @@
 		},
 		"label": {
 			"type": "string"
+		},
+		"title": {
+			"type": "string"
 		}
 	},
 	"supports": {

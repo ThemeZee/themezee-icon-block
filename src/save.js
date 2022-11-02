@@ -39,6 +39,7 @@ export default function save( {attributes} ) {
 		linkTarget,
 		rel,
 		label,
+		title,
 	} = attributes;
 
 	const blockProps = useBlockProps.save( {
@@ -81,7 +82,7 @@ export default function save( {attributes} ) {
 	const iconElement = typeof iconSVG === 'string' ? parse( iconSVG, { trim: true } ) : iconSVG;
 
 	const figure = (
-		<figure className={ iconClasses } style={ iconStyles } aria-label={ label ? label : undefined }>
+		<figure className={ iconClasses } style={ iconStyles } aria-label={ label ? label : undefined } title={ title }>
 			{ iconElement }
 		</figure>
 	);
