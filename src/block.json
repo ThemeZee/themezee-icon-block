@@ -4,7 +4,7 @@
 	"name": "themezee/icon",
 	"version": "0.1.0",
 	"title": "Icon",
-	"category": "design",
+	"category": "themezee-blocks",
 	"description": "Display a SVG icon.",
 	"textdomain": "themezee-icon-block",
 	"attributes": {
