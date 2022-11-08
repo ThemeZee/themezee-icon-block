@@ -89,7 +89,7 @@ export default function IconModal( props ) {
 	return (
 		<Modal
 			className="wp-block-themezee-icon-block__icon_modal"
-			title={ __( 'Icons' ) }
+			title={ __( 'Icons', 'themezee-icon-block' ) }
 			onRequestClose={ () => setIconModalOpen( false ) }
 			isFullScreen
 		>
@@ -101,7 +101,7 @@ export default function IconModal( props ) {
 			<div className="tz-icon-modal__sidebar">
 				<div className="tz-icon-modal__sidebar__search">
 					<SearchControl
-						label={ __( 'Search icons' ) }
+						label={ __( 'Search icons', 'themezee-icon-block' ) }
 						hideLabelFromVision={ true }
 						value={ searchInput }
 						onChange={ ( value ) => setSearchInput( value ) }
@@ -113,14 +113,14 @@ export default function IconModal( props ) {
 				>		
 					<Flex className="modal__sidebar__library-label">
 						<BaseControl.VisualLabel as="legend">
-							{ __( 'Icon Sets' ) }
+							{ __( 'Icon Sets', 'themezee-icon-block' ) }
 						</BaseControl.VisualLabel>
 
 						<Button
 							variant="link"
 							onClick={ () => setSettingsOpen( ! isSettingsOpen ) }
 						>
-							{ __( 'Settings', 'icon-block' ) }
+							{ __( 'Settings', 'themezee-icon-block' ) }
 						</Button>
 					</Flex>
 
@@ -161,7 +161,7 @@ export default function IconModal( props ) {
 				<MenuGroup
 					className="tz-icon-modal__sidebar__preferences"
 				>
-					<BaseControl  label={ __( 'Preview Size' ) }>					
+					<BaseControl  label={ __( 'Preview Size', 'themezee-icon-block' ) }>					
 						<ButtonGroup>
 							{ [ 16, 24, 32, 48, 64 ].map( ( size ) => {
 								return (
@@ -182,7 +182,7 @@ export default function IconModal( props ) {
 					</BaseControl>
 
 					<ToggleControl
-						label={ __( 'Show icon names' ) }
+						label={ __( 'Show icon names', 'themezee-icon-block' ) }
 						checked={ showIconNames }
 						onChange={ () => {
 							setShowIconNames( ( state ) => ! state );
@@ -201,6 +201,7 @@ export default function IconModal( props ) {
 								'%1$s search result for "%2$s" in %3$s. ',
 								'%1$s search results for "%2$s" in %3$s. ',
 								currentLibrary === '__all' ? availableIcons.length : availableIcons.filter( icon => currentLibrary === icon?.library ).length,
+								'themezee-icon-block',
 							),
 							currentLibrary === '__all' ? availableIcons.length : availableIcons.filter( icon => currentLibrary === icon?.library ).length,
 							searchInput,
@@ -212,7 +213,7 @@ export default function IconModal( props ) {
 								variant="link"
 								onClick={ () => changeCurrentLibrary( '__all' ) }
 							>
-								{ __( 'Search all icon sets' ) }
+								{ __( 'Search all icon sets', 'themezee-icon-block' ) }
 							</Button>
 						) }
 					</div>

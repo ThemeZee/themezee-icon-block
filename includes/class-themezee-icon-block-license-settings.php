@@ -135,7 +135,7 @@ class ThemeZee_Icon_Block_License_Settings {
 			if ( is_wp_error( $response ) ) {
 				$message = $response->get_error_message();
 			} else {
-				$message = __( 'An error occurred, please try again.' );
+				$message = __( 'An error occurred, please try again.', 'themezee-icon-block' );
 			}
 		} else {
 
@@ -258,7 +258,7 @@ class ThemeZee_Icon_Block_License_Settings {
 			if ( is_wp_error( $response ) ) {
 				$message = $response->get_error_message();
 			} else {
-				$message = __( 'An error occurred, please try again.' );
+				$message = __( 'An error occurred, please try again.', 'themezee-icon-block' );
 			}
 
 			$redirect = add_query_arg(

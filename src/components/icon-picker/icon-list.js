@@ -6,7 +6,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-import { __, _n } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { Button, Flex, FlexItem } from '@wordpress/components';
 import { useEffect, useState } from '@wordpress/element';
 import { chevronLeft, chevronRight } from '@wordpress/icons';
@@ -95,7 +95,7 @@ export default function IconList( props ) {
 					className="show-more-button"
 					onClick={ () => setIconsLimit( iconsLimit + iconsPerPage ) }
 				>
-					{ __( 'Show more' ) }
+					{ __( 'Show more', 'themezee-icon-block' ) }
 				</Button>
 			) }
 
@@ -106,7 +106,7 @@ export default function IconList( props ) {
 							isSecondary
 							isSmall
 							icon={ chevronLeft }
-							label={ __( 'Previous' ) }
+							label={ __( 'Previous', 'themezee-icon-block' ) }
 							disabled={ currentPage > 1 ? false : true }
 							onClick={ () => {
 								if ( currentPage > 1 ) {
@@ -119,7 +119,7 @@ export default function IconList( props ) {
 							isSecondary
 							isSmall
 							icon={ chevronRight }
-							label={ __( 'Next' ) }
+							label={ __( 'Next', 'themezee-icon-block' ) }
 							disabled={ currentPage < pageCount ? false : true }
 							onClick={ () => {
 								if ( currentPage < pageCount ) {

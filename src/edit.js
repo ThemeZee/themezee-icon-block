@@ -251,7 +251,7 @@ function Edit( {
 								<ToolbarButton
 									name="link"
 									icon={ link }
-									title={ __( 'Link' ) }
+									title={ __( 'Link', 'themezee-icon-block' ) }
 									shortcut={ displayShortcut.primary( 'k' ) }
 									onClick={ startEditing }
 								/>
@@ -260,7 +260,7 @@ function Edit( {
 								<ToolbarButton
 									name="link"
 									icon={ linkOff }
-									title={ __( 'Unlink' ) }
+									title={ __( 'Unlink', 'themezee-icon-block' ) }
 									shortcut={ displayShortcut.primaryShift( 'k' ) }
 									onClick={ unlink }
 									isActive={ true }
@@ -307,7 +307,7 @@ function Edit( {
 							<ToolbarButton
 								className={ `themezee-icon-block__rotate-button-${ rotate }` }
 								icon={ rotateRight }
-								label={ __( 'Rotate' ) }
+								label={ __( 'Rotate', 'themezee-icon-block' ) }
 								onClick={ () =>
 									setAttributes( {
 										rotate: rotate === 270 ? 0 : rotate + 90,
@@ -317,7 +317,7 @@ function Edit( {
 							/>
 							<ToolbarButton
 								icon={ flipH }
-								label={ __( 'Flip Horizontal' ) }
+								label={ __( 'Flip Horizontal', 'themezee-icon-block' ) }
 								onClick={ () =>
 									setAttributes( {
 										flipHorizontal: ! flipHorizontal,
@@ -327,7 +327,7 @@ function Edit( {
 							/>
 							<ToolbarButton
 								icon={ flipV }
-								label={ __( 'Flip Vertical' ) }
+								label={ __( 'Flip Vertical', 'themezee-icon-block' ) }
 								onClick={ () =>
 									setAttributes( {
 										flipVertical: ! flipVertical,
@@ -339,27 +339,27 @@ function Edit( {
 						<ToolbarGroup>
 							<ToolbarButton
 								onClick={ () => setIconModalOpen( true ) }>
-									{ __( 'Replace' ) }
+									{ __( 'Replace', 'themezee-icon-block' ) }
 							</ToolbarButton>
 							<ToolbarButton
 								icon={ search }
-								label={ __( 'Search icon' ) }
+								label={ __( 'Search icon', 'themezee-icon-block' ) }
 								onClick={ () => setSearchPopoverOpen( true ) }
 							/>
 						</ToolbarGroup>
 					</BlockControls>
 
 					<InspectorControls>
-						<ToolsPanel label={ __( 'Icon settings' ) }>
+						<ToolsPanel label={ __( 'Icon settings', 'themezee-icon-block' ) }>
 							<ToolsPanelItem
 								hasValue={ () => iconWidth === "48px" ? false : true }
-								label={ __( 'Icon size' ) }
+								label={ __( 'Icon size', 'themezee-icon-block' ) }
 								onDeselect={ () => setAttributes( { iconWidth: "48px", iconHeight: "48px" } ) }
 								resetAllFilter={ () => ( { iconWidth: "48px", iconHeight: "48px" } ) }
 								isShownByDefault={ true }
 							>
 								<UnitRangeControl
-									label={ __( 'Icon size' ) }
+									label={ __( 'Icon size', 'themezee-icon-block' ) }
 									value={ iconWidth }
 									onChange={ ( value ) => setAttributes( { iconWidth: value, iconHeight: value } ) }
 									units = {units}
@@ -375,16 +375,14 @@ function Edit( {
 
 							<ToolsPanelItem
 								hasValue={ () => label ? true : false }
-								label={ __( 'Icon label' ) }
+								label={ __( 'Icon label', 'themezee-icon-block' ) }
 								onDeselect={ () => setAttributes( { label: undefined } ) }
 								resetAllFilter={ () => ( { label: undefined } ) }
 								isShownByDefault={ true }
 							>
 								<TextControl
-									label={ __( 'Icon label' ) }
-									help={ __(
-										'Briefly describe the icon to help screen reader users.'
-									) }
+									label={ __( 'Icon label', 'themezee-icon-block' ) }
+									help={ __( 'Briefly describe the icon to help screen reader users.', 'themezee-icon-block' ) }
 									value={ label }
 									onChange={ ( value ) =>
 										setAttributes( { label: value } )
@@ -397,12 +395,12 @@ function Edit( {
 					<InspectorControls __experimentalGroup="dimensions">
 						<div className="components-block-width-control__wrapper">
 							<UnitControl
-								label={ __( 'Block width' ) }
+								label={ __( 'Block width', 'themezee-icon-block' ) }
 								isResetValueOnUnitChange
 								value={ blockWidth }
 								onChange={ ( value ) => setAttributes( { blockWidth: value } ) }
 							/>
-							<ButtonGroup aria-label={ __( 'Button width' ) }>
+							<ButtonGroup aria-label={ __( 'Button width', 'themezee-icon-block' ) }>
 								{ [ "25%", "50%", "75%", "100%" ].map( ( widthValue ) => {
 									return (
 										<Button
@@ -428,24 +426,20 @@ function Edit( {
 
 					<InspectorControls __experimentalGroup="advanced">
 						<TextControl
-							label={ __( 'Link rel' ) }
+							label={ __( 'Link rel', 'themezee-icon-block' ) }
 							value={ rel || '' }
 							onChange={ onSetLinkRel }
 						/>
 
 						<TextControl
-							label={ __( 'Title attribute' ) }
+							label={ __( 'Title attribute', 'themezee-icon-block' ) }
 							value={ title || '' }
 							onChange={ ( value ) => setAttributes( { title: value } ) }
 							help={
 								<>
-									{ __(
-										'Describe the role of this icon on the page.'
-									) }
+									{ __( 'Describe the role of this icon on the page.', 'themezee-icon-block' ) }
 									<ExternalLink href="https://www.w3.org/TR/html52/dom.html#the-title-attribute">
-										{ __(
-											'(Note: many devices and browsers do not display this text.)'
-										) }
+										{ __( '(Note: many devices and browsers do not display this text.)', 'themezee-icon-block' ) }
 									</ExternalLink>
 								</>
 							}
@@ -464,8 +458,8 @@ function Edit( {
 				<div { ...blockProps }>
 					<Placeholder
 						icon={ placeholderIcon }
-						label={ __( 'Icon' ) }
-						instructions={ __( 'Browse all icons in the library or run a quick search.' ) }
+						label={ __( 'Icon', 'themezee-icon-block' ) }
+						instructions={ __( 'Browse all icons in the library or run a quick search.', 'themezee-icon-block' ) }
 						className="wp-block-themezee-icon-placeholder has-illustration"
 					>
 						<Icon
@@ -476,13 +470,13 @@ function Edit( {
 							isPrimary
 							onClick={ () => setIconModalOpen( true ) }
 						>
-							{ __( 'Icon Library', 'icon-block' ) }
+							{ __( 'Icon Library', 'themezee-icon-block' ) }
 						</Button>
 						<Button
 							isTertiary
 							onClick={ () => setSearchPopoverOpen( true ) }
 						>
-							{ __( 'Quick Search', 'icon-block' ) }
+							{ __( 'Quick Search', 'themezee-icon-block' ) }
 						</Button>
 					</Placeholder>
 				</div>

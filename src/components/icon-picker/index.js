@@ -6,7 +6,7 @@ import { isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __, _n } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
 import { applyFilters } from '@wordpress/hooks'; 
 
@@ -101,7 +101,7 @@ export default function IconPicker( props ) {
 
 			{ isLoading && (
 				<div className="themezee-icon-picker__is-loading">
-					{ __( 'Icon Sets are loaded...' ) }
+					{ __( 'Icon Sets are loaded...', 'themezee-icon-block' ) }
 				</div>
 			) }
 		</div>

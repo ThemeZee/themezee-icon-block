@@ -1,12 +1,7 @@
 /**
- * External dependencies
- */
-import { isEmpty } from 'lodash';
-
-/**
  * WordPress dependencies
  */
-import { __, _n } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import {
 	BaseControl,
 	CheckboxControl,
@@ -30,9 +25,7 @@ export default function LibrariesControl( props ) {
 	return (
 		<BaseControl
 			className="wp-block-themezee-icon__libraries-control"
-			help={ __(
-				'Choose the available icon sets. For performance reasons, do not enable all of them.'
-			) }
+			help={ __( 'Choose the available icon sets. For performance reasons, do not enable all of them.', 'themezee-icon-block' ) }
 		>
 			{ libraries.map( ( library ) => {
 				// Return early for all icon libraries.
@@ -48,7 +41,7 @@ export default function LibrariesControl( props ) {
 						checked={ enabledLibraries.includes( library.name ) }
 						onChange={ () => onChange( library.name ) }
 						disabled={ isLoading }
-						help={ showLoadingText ? __( 'Icon Set is loaded...' ) : '' }
+						help={ showLoadingText ? __( 'Icon Set is loaded...', 'themezee-icon-block' ) : '' }
 					/>
 				);
 			} ) }

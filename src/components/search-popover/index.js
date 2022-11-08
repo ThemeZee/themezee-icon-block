@@ -6,7 +6,7 @@ import { isEmpty } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { __, _n } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import {
 	Button,
 	Flex,
@@ -91,7 +91,7 @@ export default function SearchPopover( props ) {
 				<div className="block-editor-inserter__quick-inserter-header">
 					<Flex>
 						<SearchControl
-							label={ __( 'Search icons' ) }
+							label={ __( 'Search icons', 'themezee-icon-block' ) }
 							hideLabelFromVision={ true }
 							value={ searchInput }
 							onChange={ ( value ) => setSearchInput( value ) }
@@ -100,7 +100,7 @@ export default function SearchPopover( props ) {
 						<Button
 							isSecondary
 							icon={ cog }
-							label={ __( 'Enable Icon Sets' ) }
+							label={ __( 'Enable Icon Sets', 'themezee-icon-block' ) }
 							onClick={ () => setSettingsOpen( ! isSettingsOpen ) }
 						/>
 					</Flex>
@@ -133,7 +133,7 @@ export default function SearchPopover( props ) {
 
 					{ isEmpty( availableIcons ) && (
 						<div className="block-editor-modal__no-results">
-							<p>{ __( 'No results found.' ) }</p>
+							<p>{ __( 'No results found.', 'themezee-icon-block' ) }</p>
 							<Button
 								variant="primary"
 								onClick={ () => {
@@ -142,7 +142,7 @@ export default function SearchPopover( props ) {
 									setSearchInput( '' );
 								} }
 							>
-								{ __( 'Browse all icons' ) }
+								{ __( 'Browse all icons', 'themezee-icon-block' ) }
 							</Button>
 						</div>
 					) }
