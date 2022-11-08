@@ -13,7 +13,9 @@
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start",
-		"export": "git archive HEAD -9 --prefix themezee-icon-block/ --format=zip > ../../themezee-icon-block.zip"
+		"export": "git archive HEAD -9 --prefix themezee-icon-block/ --format=zip > ../../themezee-icon-block.zip",
+		"make-pot": "wp i18n make-pot ./ languages/themezee-icon-block.pot --slug=themezee-icon-block --domain=themezee-icon-block --exclude=.git,src,node-modules",
+		"make-json": "wp i18n make-json languages --no-purge"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^24.0.0"

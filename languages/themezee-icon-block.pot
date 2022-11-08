@@ -1,0 +1,318 @@
+# Copyright (C) 2022 ThemeZee
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: ThemeZee Icon Block 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/themezee-icon-block\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-11-08T16:16:15+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: themezee-icon-block\n"
+
+#. Plugin Name of the plugin
+msgid "ThemeZee Icon Block"
+msgstr ""
+
+#. Description of the plugin
+msgid "Display a SVG icon."
+msgstr ""
+
+#. Author of the plugin
+msgid "ThemeZee"
+msgstr ""
+
+#: includes/class-themezee-blocks-admin-page.php:37
+#: includes/class-themezee-blocks-admin-page.php:38
+#: includes/class-themezee-blocks-admin-page.php:54
+#: themezee-icon-block.php:59
+msgid "ThemeZee Blocks"
+msgstr ""
+
+#: includes/class-themezee-blocks-admin-page.php:83
+msgid "License Settings"
+msgstr ""
+
+#: includes/class-themezee-blocks-admin-page.php:100
+msgid "An active license key is needed to install updates and receive support."
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:54
+msgid "Icon Block"
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:72
+msgid "Deactivate License"
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:73
+msgid "Active. You are receiving updates."
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:76
+msgid "Activate License"
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:77
+msgid "Inactive. Please enter your license key."
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:138
+#: includes/class-themezee-icon-block-license-settings.php:180
+#: includes/class-themezee-icon-block-license-settings.php:261
+msgid "An error occurred, please try again."
+msgstr ""
+
+#. translators: the license key expiration date
+#: includes/class-themezee-icon-block-license-settings.php:151
+msgid "Your license key expired on %s."
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:158
+msgid "Your license key has been disabled."
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:162
+msgid "Invalid license."
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:167
+msgid "Your license is not active for this URL."
+msgstr ""
+
+#. translators: the plugin name
+#: includes/class-themezee-icon-block-license-settings.php:172
+msgid "This appears to be an invalid license key for %s."
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:176
+msgid "Your license key has reached its activation limit."
+msgstr ""
+
+#: includes/class-themezee-icon-block-license-settings.php:327
+msgid "Please enter your license key for the %1$s in order to receive updates and support. <a href=\"%2$s\">Enter License Key</a>"
+msgstr ""
+
+#. translators: the plugin name.
+#: includes/class-themezee-icon-block-updater.php:262
+msgid "There is a new version of %1$s available."
+msgstr ""
+
+#: includes/class-themezee-icon-block-updater.php:268
+msgid "Contact your network administrator to install the update."
+msgstr ""
+
+#. translators: 1. opening anchor tag, do not translate 2. the new plugin version 3. closing anchor tag, do not translate.
+#: includes/class-themezee-icon-block-updater.php:273
+msgid "%1$sView version %2$s details%3$s."
+msgstr ""
+
+#: includes/class-themezee-icon-block-updater.php:281
+msgid "%1$sView version %2$s details%3$s or %4$supdate now%5$s."
+msgstr ""
+
+#: includes/class-themezee-icon-block-updater.php:292
+msgid "Update now."
+msgstr ""
+
+#: includes/class-themezee-icon-block-updater.php:524
+msgid "You do not have permission to install plugin updates"
+msgstr ""
+
+#: includes/class-themezee-icon-block-updater.php:524
+msgid "Error"
+msgstr ""
+
+#: build/index.js:1
+msgid "All Icons"
+msgstr ""
+
+#: build/index.js:1
+msgid "Font Awesome (Brands)"
+msgstr ""
+
+#: build/index.js:1
+msgid "Font Awesome (Regular)"
+msgstr ""
+
+#: build/index.js:1
+msgid "Font Awesome (Solid)"
+msgstr ""
+
+#: build/index.js:1
+msgid "Material Icons (Filled)"
+msgstr ""
+
+#: build/index.js:1
+msgid "Material Icons (Outlined)"
+msgstr ""
+
+#: build/index.js:1
+msgid "WordPress"
+msgstr ""
+
+#: build/index.js:1
+msgid "Choose the available icon sets. For performance reasons, do not enable all of them."
+msgstr ""
+
+#: build/index.js:1
+msgid "Icon Set is loaded..."
+msgstr ""
+
+#: build/index.js:1
+msgid "Show more"
+msgstr ""
+
+#: build/index.js:1
+msgid "Previous"
+msgstr ""
+
+#: build/index.js:1
+msgid "Next"
+msgstr ""
+
+#: build/index.js:1
+msgid "Icon Sets are loaded..."
+msgstr ""
+
+#: build/index.js:1
+msgid "Icons"
+msgstr ""
+
+#: build/index.js:1
+#: build/index.js:2
+msgid "Search icons"
+msgstr ""
+
+#: build/index.js:1
+msgid "Icon Sets"
+msgstr ""
+
+#: build/index.js:1
+msgid "Settings"
+msgstr ""
+
+#: build/index.js:1
+msgid "Preview Size"
+msgstr ""
+
+#: build/index.js:1
+msgid "Show icon names"
+msgstr ""
+
+#. translators: %1$s: Number of icons returned from search, %2$s: the search input, %3$s: current icon set
+#: build/index.js:2
+msgid "%1$s search result for \"%2$s\" in %3$s. "
+msgid_plural "%1$s search results for \"%2$s\" in %3$s. "
+msgstr[0] ""
+msgstr[1] ""
+
+#: build/index.js:2
+msgid "Search all icon sets"
+msgstr ""
+
+#: build/index.js:2
+msgid "Enable Icon Sets"
+msgstr ""
+
+#: build/index.js:2
+msgid "No results found."
+msgstr ""
+
+#: build/index.js:2
+msgid "Browse all icons"
+msgstr ""
+
+#: build/index.js:2
+msgid "Link"
+msgstr ""
+
+#: build/index.js:2
+msgid "Unlink"
+msgstr ""
+
+#: build/index.js:2
+msgid "Rotate"
+msgstr ""
+
+#: build/index.js:2
+msgid "Flip Horizontal"
+msgstr ""
+
+#: build/index.js:2
+msgid "Flip Vertical"
+msgstr ""
+
+#: build/index.js:2
+msgid "Replace"
+msgstr ""
+
+#: build/index.js:2
+msgid "Search icon"
+msgstr ""
+
+#: build/index.js:2
+msgid "Icon settings"
+msgstr ""
+
+#: build/index.js:2
+msgid "Icon size"
+msgstr ""
+
+#: build/index.js:2
+msgid "Icon label"
+msgstr ""
+
+#: build/index.js:2
+msgid "Briefly describe the icon to help screen reader users."
+msgstr ""
+
+#: build/index.js:2
+msgid "Block width"
+msgstr ""
+
+#: build/index.js:2
+msgid "Link rel"
+msgstr ""
+
+#: build/index.js:2
+msgid "Title attribute"
+msgstr ""
+
+#: build/index.js:2
+msgid "Describe the role of this icon on the page."
+msgstr ""
+
+#: build/index.js:2
+msgid "(Note: many devices and browsers do not display this text.)"
+msgstr ""
+
+#: build/index.js:2
+msgid "Icon"
+msgstr ""
+
+#: build/index.js:2
+msgid "Browse all icons in the library or run a quick search."
+msgstr ""
+
+#: build/index.js:2
+msgid "Icon Library"
+msgstr ""
+
+#: build/index.js:2
+msgid "Quick Search"
+msgstr ""
+
+#: build/block.json
+msgctxt "block title"
+msgid "Icon"
+msgstr ""
+
+#: build/block.json
+msgctxt "block description"
+msgid "Display a SVG icon."
+msgstr ""

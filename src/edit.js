@@ -400,7 +400,7 @@ function Edit( {
 								value={ blockWidth }
 								onChange={ ( value ) => setAttributes( { blockWidth: value } ) }
 							/>
-							<ButtonGroup aria-label={ __( 'Button width', 'themezee-icon-block' ) }>
+							<ButtonGroup aria-label={ __( 'Block width', 'themezee-icon-block' ) }>
 								{ [ "25%", "50%", "75%", "100%" ].map( ( widthValue ) => {
 									return (
 										<Button

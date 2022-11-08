@@ -22,6 +22,12 @@
  */
 function register_themezee_icon_block() {
 	register_block_type( __DIR__ . '/build' );
+
+	// Load translation for PHP files.
+	load_plugin_textdomain( 'themezee-icon-block', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+	// Load translation for JS files.
+	wp_set_script_translations( 'themezee-icon-editor-script', 'themezee-icon-block', plugin_dir_path( __FILE__ ) . 'languages' );
 }
 add_action( 'init', 'register_themezee_icon_block' );
 
