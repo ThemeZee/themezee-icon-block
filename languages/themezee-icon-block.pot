@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-08T16:16:15+00:00\n"
+"POT-Creation-Date: 2022-11-08T17:23:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: themezee-icon-block\n"
@@ -29,7 +29,7 @@ msgstr ""
 #: includes/class-themezee-blocks-admin-page.php:37
 #: includes/class-themezee-blocks-admin-page.php:38
 #: includes/class-themezee-blocks-admin-page.php:54
-#: themezee-icon-block.php:59
+#: themezee-icon-block.php:68
 msgid "ThemeZee Blocks"
 msgstr ""
 
@@ -125,6 +125,18 @@ msgstr ""
 
 #: includes/class-themezee-icon-block-updater.php:524
 msgid "Error"
+msgstr ""
+
+#: themezee-icon-block.php:25
+#: build/block.json
+msgctxt "block title"
+msgid "Icon"
+msgstr ""
+
+#: themezee-icon-block.php:26
+#: build/block.json
+msgctxt "block description"
+msgid "Display a SVG icon."
 msgstr ""
 
 #: build/index.js:1
@@ -305,14 +317,4 @@ msgstr ""
 
 #: build/index.js:2
 msgid "Quick Search"
-msgstr ""
-
-#: build/block.json
-msgctxt "block title"
-msgid "Icon"
-msgstr ""
-
-#: build/block.json
-msgctxt "block description"
-msgid "Display a SVG icon."
 msgstr ""

@@ -21,10 +21,15 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function register_themezee_icon_block() {
-	register_block_type( __DIR__ . '/build' );
 
 	// Load translation for PHP files.
 	load_plugin_textdomain( 'themezee-icon-block', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+	// Register Block.
+	register_block_type( __DIR__ . '/build', [
+		'title'       => _x( 'Icon', 'block title', 'themezee-icon-block' ),
+		'description' => _x( 'Display a SVG icon.', 'block description', 'themezee-icon-block' ),
+	] );
 
 	// Load translation for JS files.
 	wp_set_script_translations( 'themezee-icon-editor-script', 'themezee-icon-block', plugin_dir_path( __FILE__ ) . 'languages' );

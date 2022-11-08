@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Themes + Pro Versions + Add-ons\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/themezee-icon-"
 "block\n"
-"POT-Creation-Date: 2022-11-08T16:16:15+00:00\n"
-"PO-Revision-Date: 2022-11-08 17:18+0100\n"
+"POT-Creation-Date: 2022-11-08T17:23:29+00:00\n"
+"PO-Revision-Date: 2022-11-08 18:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -28,7 +28,7 @@ msgstr "ThemeZee"
 
 #: includes/class-themezee-blocks-admin-page.php:37
 #: includes/class-themezee-blocks-admin-page.php:38
-#: includes/class-themezee-blocks-admin-page.php:54 themezee-icon-block.php:59
+#: includes/class-themezee-blocks-admin-page.php:54 themezee-icon-block.php:68
 msgid "ThemeZee Blocks"
 msgstr "ThemeZee Blocks"
 
@@ -133,6 +133,16 @@ msgstr "Du hast keine Berechtigung zur Installation von Plugin Updates"
 #: includes/class-themezee-icon-block-updater.php:524
 msgid "Error"
 msgstr "Fehler"
+
+#: themezee-icon-block.php:25 build/block.json
+msgctxt "block title"
+msgid "Icon"
+msgstr "Icon"
+
+#: themezee-icon-block.php:26 build/block.json
+msgctxt "block description"
+msgid "Display a SVG icon."
+msgstr "Ein SVG-Icon anzeigen."
 
 #: build/index.js:1
 msgid "All Icons"
@@ -317,13 +327,3 @@ msgstr "Alle Icons"
 #: build/index.js:2
 msgid "Quick Search"
 msgstr "Schnellsuche"
-
-#: build/block.json
-msgctxt "block title"
-msgid "Icon"
-msgstr "Icon"
-
-#: build/block.json
-msgctxt "block description"
-msgid "Display a SVG icon."
-msgstr "Ein SVG-Icon anzeigen."
