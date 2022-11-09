@@ -1,4 +1,6 @@
 /sass export-ignore
+/src export-ignore
+/assets/icons/src export-ignore
 .gitignore export-ignore
 .gitattributes export-ignore
 gulpfile.js export-ignore

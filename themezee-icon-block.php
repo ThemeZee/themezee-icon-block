@@ -11,6 +11,9 @@
  * Text Domain:       themezee-icon-block
  *
  * @package           ThemeZee Icon Block
+ * 
+ * The ThemeZee Icon Block is a derivative work of the Icon Block plugin by Nick Diego (https://github.com/ndiego/icon-block),
+ * which is licensed GPLv2. This code therefore is also licensed under the terms of the GNU Public License, version 2.
  */
 
 /**
